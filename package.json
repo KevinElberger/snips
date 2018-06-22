@@ -1,0 +1,21 @@
+{
+  "name": "snips",
+  "version": "1.0.0",
+  "description": "An application to manage code snippets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron main.js"
+  },
+  "keywords": [],
+  "author": "Kevin Elberger",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^5.1.0",
+    "jquery": "^3.3.1",
+    "vue": "^2.5.16"
+  },
+  "devDependencies": {
+    "electron": "^2.0.3"
+  }
+}
