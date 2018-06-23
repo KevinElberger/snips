@@ -31,6 +31,6 @@
   position: absolute;
 }
 
-.titlebar:before {
-  background: none !important;
+#title-wrapper {
+  /* width: 9rem; */
 }
