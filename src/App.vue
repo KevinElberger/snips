@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <h1>This is not an IDE!</h1>
+    <sidebar />
   </div>
 </template>
 
@@ -17,3 +18,15 @@ html {
   margin-top: 60px;
 }
 </style>
+
+<script>
+  import Sidebar from './components/Sidebar/Sidebar.vue';
+
+
+export default {
+  name: 'App',
+  components: {
+    Sidebar
+  }
+};
+</script>
