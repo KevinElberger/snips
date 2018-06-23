@@ -1,0 +1,13 @@
+#header {
+  top: 0;
+  height: 15rem;
+  margin-left: 25rem;
+  position: absolute;
+  width: calc(100% - 25rem);
+  border-bottom: 1px solid rgba(34,36,38,.15);
+}
+
+#header-menu {
+  border-left: 0;
+  border-radius: 0;
+}

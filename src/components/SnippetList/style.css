@@ -1,6 +1,7 @@
 #snippet-list {
   height: 100%;
   box-shadow: none;
+  border-radius: 0;
   margin: 0 0 0 12.5rem;
   width: 12.5rem !important;
 }

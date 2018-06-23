@@ -2,6 +2,7 @@
   <div id="app">
     <sidebar />
     <snippet-list />
+    <header-panel />
   </div>
 </template>
 
@@ -26,13 +27,15 @@ html, body {
 
 <script>
   import Sidebar from './components/Sidebar/Sidebar.vue';
+  import HeaderPanel from './components/HeaderPanel/HeaderPanel.vue';
   import SnippetList from './components/SnippetList/SnippetList.vue';
 
   export default {
     name: 'App',
     components: {
       Sidebar,
-      SnippetList
+      SnippetList,
+      HeaderPanel
     }
   };
 </script>
