@@ -11,7 +11,7 @@ const store = new Vuex.Store({
   },
   mutations: {
     addSnippet (state, payload) {
-      this.snippets.push(payload);
+      state.snippets.push(payload);
     }
   }
 });

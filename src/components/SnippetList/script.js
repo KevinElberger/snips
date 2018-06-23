@@ -1,3 +1,8 @@
 export default {
-  name: 'SnippetList'
+  name: 'SnippetList',
+  computed: {
+    snippets() {
+      return this.$store.state.snippets;
+    }
+  }
 };

@@ -27,17 +27,25 @@ export default {
 
   methods: {
     save() {
-      const editor = ace.edit('editor');      
+      const editor = ace.edit('editor');
+
       const snippet = {
-        id: this._uid,
         content: editor.getValue(),
         title: this.title || 'No Title',
-        language: this.language || 'text'
+        language: this.language || 'text',
+        id: Math.random().toString(36).replace(/[^a-z]+/g, '')
       };
 
       if (snippet.content === '') return;
 
       this.$store.commit('addSnippet', snippet);
+
+      editor.setOptions({ readOnly: true });
+    },
+    edit() {
+      const editor = ace.edit('editor');
+
+      editor.setOptions({ readOnly: false });
     }
   }
 };
