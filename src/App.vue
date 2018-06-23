@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <sidebar />
+    <snippet-list />
   </div>
 </template>
 
@@ -10,6 +11,7 @@ html, body {
   padding: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 #app {
   width: 100%;
@@ -24,11 +26,13 @@ html, body {
 
 <script>
   import Sidebar from './components/Sidebar/Sidebar.vue';
+  import SnippetList from './components/SnippetList/SnippetList.vue';
 
   export default {
     name: 'App',
     components: {
-      Sidebar
+      Sidebar,
+      SnippetList
     }
   };
 </script>
