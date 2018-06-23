@@ -9,9 +9,21 @@ const store = new Vuex.Store({
     snippets: [],
     activeSnippet: null
   },
+
   mutations: {
     addSnippet (state, payload) {
       state.snippets.push(payload);
+      state.activeSnippet = payload;
+    },
+
+    updateSnippet (state, payload) {
+      let idx = state.snippets.findIndex(snip => snip.id === payload.id);
+
+      state.snippets[idx] = payload;
+    },
+    
+    setActiveSnippet (state, payload) {
+      state.activeSnippet = payload;
     }
   }
 });

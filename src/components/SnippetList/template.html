@@ -1,6 +1,6 @@
 <div id="snippet-list" class="ui vertical menu">
   <div v-for="(snippet) in snippets">
-    <a class="item">
+    <a @click.end="viewSnippet(snippet)" class="item">
       <div class="header snippet-title">{{ snippet.title }}</div>
       <small class="description snippet-content">{{ snippet.content }}</small>
     </a>
