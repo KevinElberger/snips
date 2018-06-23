@@ -1,0 +1,42 @@
+.header {
+  background: 0 0;
+  color: rgba(255,255,255,.9);
+}
+
+.languages {
+  padding-top: 0;
+  height: 10.5rem;
+  overflow-y: scroll;
+}
+
+.languages::before {
+  background: none !important;
+}
+
+.languages-wrapper {
+  height: 12.5rem;
+  padding: 1rem 0 0 0 !important;
+}
+
+#new::before {
+  background: none !important;
+}
+
+.new-icon {
+  float: none !important;
+}
+
+.ui.vertical.menu {
+  width: 12.5rem !important;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  /* border-radius: 5px; */
+  background-color: rgba(255,255,255,.9);
+}
