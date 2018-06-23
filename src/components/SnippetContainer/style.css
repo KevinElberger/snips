@@ -15,4 +15,9 @@
   margin-left: 25rem;
   position: absolute;
   width: calc(100% - 25rem);
+  background-color: #f8f8f8;
+}
+
+.titlebar:before {
+  background: none !important;
 }

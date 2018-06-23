@@ -6,7 +6,8 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    snippets: []
+    snippets: [],
+    activeSnippet: null
   },
   mutations: {
     addSnippet (state, payload) {

@@ -1,3 +1,6 @@
 export default {
-  name: 'SnippetContainer'
+  name: 'SnippetContainer',
+  mounted: function() {
+    $('.ui.dropdown').dropdown(); 
+  }
 };
