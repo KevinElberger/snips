@@ -33,7 +33,6 @@ const store = new Vuex.Store({
 
     updateSnippet (state, payload) {
       const idx = state.snippets.findIndex(snip => snip.id === payload.id);
-      let snippet = state.snippets[idx];
 
       Vue.set(state.snippets, idx, payload);
     },
