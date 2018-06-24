@@ -10,6 +10,15 @@ const store = new Vuex.Store({
     activeSnippet: null
   },
 
+  getters: {
+    getSnippetById: (state) => (id) => {
+      return state.snippets.find(snippet => snippet.id === id);
+    },
+    getActiveSnippet: (state) => {
+      return state.activeSnippet;
+    }
+  },
+
   mutations: {
     addSnippet (state, payload) {
       state.snippets.push(payload);
@@ -21,7 +30,7 @@ const store = new Vuex.Store({
 
       state.snippets[idx] = payload;
     },
-    
+
     setActiveSnippet (state, payload) {
       state.activeSnippet = payload;
     }

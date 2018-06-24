@@ -1,3 +1,5 @@
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'SnippetContainer',
   data() {
@@ -6,8 +8,9 @@ export default {
     return {
       title: active ? active.title : '',
       content: active ? active.content : '',
-      language: active ? active.language : ''
-    }
+      language: active ? active.language : '',
+      languageFormatted: active ? active.languageFormatted : ''
+    };
   },
 
   mounted: function() {
@@ -18,9 +21,9 @@ export default {
 
     $('.ui.dropdown').dropdown({
       onChange: (value, text, item) => {
-        const mode = modelist.modesByName[value].mode;
+        if (! value) return;
 
-        this.language = value;
+        const mode = modelist.modesByName[value].mode;
 
         editor.session.setMode(mode);
       }
@@ -32,17 +35,40 @@ export default {
   computed: {
     activeSnippet() {
       return this.$store.state.activeSnippet;
+    },
+    ...mapGetters([
+      'getActiveSnippet'
+    ])
+  },
+
+  watch: {
+    getActiveSnippet: function(newValue, oldValue) {
+      const select = $('.ui.dropdown');
+      const editor = ace.edit('editor');
+
+      // Reset the content view for new snippet
+      if (newValue && newValue.content === '') {
+        editor.setValue('');
+        select.dropdown('set value', newValue.language);
+        select.dropdown('set text', newValue.languageFormatted);
+      } else if (newValue) {
+        editor.setValue(newValue.content);
+        select.dropdown('set value', newValue.language);
+        select.dropdown('set text', newValue.languageFormatted);
+      }
     }
   },
 
   methods: {
     save() {
+      const select = $('.ui.dropdown');
       const editor = ace.edit('editor');
       const active = this.$store.state.activeSnippet;
       const snippet = {
         content: editor.getValue(),
-        title: this.title || 'No Title',
-        language: this.language || 'text'
+        title: active ? active.title : (this.title || 'No Title'),
+        language: select.dropdown('get value') || 'text',
+        languageFormatted: select.dropdown('get text') || 'Plain Text'
       };
       const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
 
@@ -50,13 +76,15 @@ export default {
         return;
       }
 
-      if (active) {
+      if (active && this.$store.getters.getSnippetById(active.id)) {
         Object.assign(active, snippet);
         this.$store.commit('updateSnippet', active);
         return;
       }
 
-      snippet.id = id;
+      if (! active) {
+        snippet.id = id;
+      }
 
       this.$store.commit('addSnippet', snippet);
     }
