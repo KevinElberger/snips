@@ -48,13 +48,9 @@ export default {
 
       // Reset the content view for new snippet
       if (newValue && newValue.content === '') {
-        editor.setValue('');
-        select.dropdown('set value', newValue.language);
-        select.dropdown('set text', newValue.languageFormatted);
+        this.reset(false);
       } else if (newValue) {
-        editor.setValue(newValue.content);
-        select.dropdown('set value', newValue.language);
-        select.dropdown('set text', newValue.languageFormatted);
+        this.update(newValue);
       }
     }
   },
@@ -64,13 +60,14 @@ export default {
       const select = $('.ui.dropdown');
       const editor = ace.edit('editor');
       const active = this.$store.state.activeSnippet;
+      const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
       const snippet = {
         content: editor.getValue(),
         title: active ? active.title : (this.title || 'No Title'),
         language: select.dropdown('get value') || 'text',
-        languageFormatted: select.dropdown('get text') || 'Plain Text'
+        languageFormatted: select.dropdown('get text') || 'Plain Text',
+        id: (active && active.id) ? active.id : id
       };
-      const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
 
       if (snippet.content === '' && ! active) {
         return;
@@ -82,11 +79,54 @@ export default {
         return;
       }
 
-      if (! active) {
-        snippet.id = id;
+      this.$store.commit('addSnippet', snippet);
+    },
+
+    del() {
+      const editor = ace.edit('editor');
+      const noContent = editor.getValue() === '';
+      const active = this.$store.state.activeSnippet;
+      const isInList = this.$store.getters.getSnippetById(active.id);
+
+      if (noContent && (! active || ! isInList)) {
+        return;
       }
 
-      this.$store.commit('addSnippet', snippet);
+      this.$store.commit('deleteSnippet', active);
+
+      this.reset(true);
+    },
+
+    reset(addSnippet) {
+      const select = $('.ui.dropdown');
+      const editor = ace.edit('editor');
+      const title = $('#title-wrapper input');
+
+      title.val('');
+      editor.setValue('');
+      select.dropdown('set value', 'text');
+      select.dropdown('set text', 'Plain Text');
+
+      if (addSnippet) {
+        this.$store.commit('setActiveSnippet', {
+          title: '',
+          content: '',
+          language: 'text',
+          languageFormatted: 'Plain Text',
+          id: Math.random().toString(36).replace(/[^a-z]+/g, '')
+        }); 
+      }
+    },
+
+    update(newSnippet) {
+      const select = $('.ui.dropdown');
+      const editor = ace.edit('editor');
+
+      this.$store.commit('setActiveSnippet', newSnippet);
+
+      editor.setValue(newSnippet.content);
+      select.dropdown('set value', newSnippet.language);
+      select.dropdown('set text', newSnippet.languageFormatted);
     }
   }
 };

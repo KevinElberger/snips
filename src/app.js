@@ -25,8 +25,14 @@ const store = new Vuex.Store({
       state.activeSnippet = payload;
     },
 
+    deleteSnippet(state, payload) {
+      const idx = state.snippets.findIndex(snip => snip.id === payload.id);
+      
+      state.snippets.splice(idx, 1);
+    },
+
     updateSnippet (state, payload) {
-      let idx = state.snippets.findIndex(snip => snip.id === payload.id);
+      const idx = state.snippets.findIndex(snip => snip.id === payload.id);
 
       state.snippets[idx] = payload;
     },
