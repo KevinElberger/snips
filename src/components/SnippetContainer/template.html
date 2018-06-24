@@ -36,16 +36,16 @@
           </div>
         </div>
 
-        <a @click.end="save" class="item">
+        <a @click.end="save" id="save" class="item">
           <i class="save outline icon"></i>
         </a>
 
-        <a @click.end="del" class="item">
+        <a @click.end="del" id="del" class="item">
           <i class="trash alternative outline icon"></i>
         </a>
 
-        <a class="item">
-          <i class="heart outline icon"></i>
+        <a @click.end="pin" id="pin" class="item">
+          <i :class="{ outline: !activeIsPinned }" class="heart icon"></i>
         </a>
       </div>
     </div>

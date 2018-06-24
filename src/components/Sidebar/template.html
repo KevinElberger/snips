@@ -2,6 +2,19 @@
   <a @click.end="resetSnippetView" id="new" class="item">
     <i class="file icon new-icon"></i> New
   </a>
+
+  <div class="item pinned-snippets-wrapper">
+      <div class="header">Pinned Snippets</div>
+      <div class="pinned-snippets">
+        <div class="menu">
+          <div v-for="(snippet) in pinnedSnippets">
+            <a @click.end="toggleSnippet(snippet)" class="item pinned-item">
+              {{ snippet.title }}
+            </a>
+          </div>
+        </div>
+      </div>
+  </div>
   
   <div class="item languages-wrapper">
     <div class="header">Languages</div>

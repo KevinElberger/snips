@@ -9,6 +9,7 @@ export default {
       title: active ? active.title : '',
       content: active ? active.content : '',
       language: active ? active.language : '',
+      isPinned: active ? active.isPinned : false,
       languageFormatted: active ? active.languageFormatted : ''
     };
   },
@@ -35,6 +36,11 @@ export default {
   computed: {
     activeSnippet() {
       return this.$store.state.activeSnippet;
+    },
+    activeIsPinned() {
+      const active = this.$store.getters.getActiveSnippet;
+
+      return active ? active.isPinned : false;
     },
     ...mapGetters([
       'getActiveSnippet'
@@ -111,6 +117,7 @@ export default {
         this.$store.commit('setActiveSnippet', {
           title: '',
           content: '',
+          isPinned: false,
           language: 'text',
           languageFormatted: 'Plain Text',
           id: Math.random().toString(36).replace(/[^a-z]+/g, '')
@@ -127,6 +134,23 @@ export default {
       editor.setValue(newSnippet.content);
       select.dropdown('set value', newSnippet.language);
       select.dropdown('set text', newSnippet.languageFormatted);
-    }
+    },
+
+    pin() {
+      const editor = ace.edit('editor');
+      const noContent = editor.getValue() === '';
+      let active = this.$store.state.activeSnippet;
+      const isInList = this.$store.getters.getSnippetById(active.id);
+
+      if (! isInList || (noContent && ! active)) {
+        return;
+      } 
+
+      if (! active.isPinned) {
+        this.$store.commit('pinSnippet', true);
+      } else {
+        this.$store.commit('pinSnippet', false);
+      }
+    },
   }
 };

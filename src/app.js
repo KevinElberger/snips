@@ -33,8 +33,13 @@ const store = new Vuex.Store({
 
     updateSnippet (state, payload) {
       const idx = state.snippets.findIndex(snip => snip.id === payload.id);
+      let snippet = state.snippets[idx];
 
-      state.snippets[idx] = payload;
+      Vue.set(state.snippets, idx, payload);
+    },
+
+    pinSnippet (state, payload) {
+      Vue.set(state.activeSnippet, 'isPinned', payload);
     },
 
     setActiveSnippet (state, payload) {
