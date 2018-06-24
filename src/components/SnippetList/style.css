@@ -3,6 +3,7 @@
   box-shadow: none;
   border-radius: 0;
   overflow-y: scroll;
+  overflow-x: hidden;
   margin: 0 0 0 12.5rem;
   width: 12.5rem !important;
   background-color: #f8f8f8;
@@ -22,5 +23,8 @@
 }
 
 .snippet-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   color: rgba(0,0,0,.87);
 }
