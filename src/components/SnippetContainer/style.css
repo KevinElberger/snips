@@ -18,9 +18,9 @@
 #snippet-container {
   top: 0;
   height: 100%;
-  margin-left: 25rem;
+  margin-left: 30rem;
   position: absolute;
-  width: calc(100% - 25rem);
+  width: calc(100% - 30rem);
   background-color: #f8f8f8;
 }
 
