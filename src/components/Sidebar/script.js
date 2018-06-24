@@ -1,5 +1,6 @@
 export default {
   name: 'Sidebar',
+
   computed: {
     snippets() {
       return this.$store.state.snippets;
