@@ -14,12 +14,19 @@
 <body>
   <div id="app"></div>
 
-  <script>window.$ = window.jQuery = require('jquery')</script>
+  <script>window.$ = window.jQuery = require('jquery');</script>
   <script src="static/semantic.min.js"></script>
   <script src="static/ace/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="static/ace/theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>  
   <script src="static/ace/ext-modelist.js" type="text/javascript" charset="utf-8"></script> 
   <script src="dist/main.js" type="text/javascript"></script>
+  <script>
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+
+    if (! isMac) {
+      $('#app').css({ top: 0 });
+    }
+  </script>
 </body>
 
 </html>

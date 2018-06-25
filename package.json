@@ -6,18 +6,19 @@
   "scripts": {
     "serve": "electron main.js",
     "bundle": "webpack --config webpack.config.dev.js",
-    "start": "APP_DEV=true npm-run-all --parallel bundle serve"
+    "start": "npm-run-all --parallel bundle serve"
   },
   "keywords": [],
   "author": "Kevin Elberger",
   "license": "ISC",
   "dependencies": {
+    "electron": "^2.0.3",
+    "electron-titlebar": "0.0.3",
     "firebase": "^5.1.0",
     "jquery": "^3.3.1",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "electron": "^2.0.3"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "css-loader": "^0.28.11",

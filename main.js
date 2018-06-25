@@ -1,19 +1,27 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const reloader = require('electron-reload')(__dirname);
 
 let mainWindow;
+let options = {
+    width: 1200,
+    height: 800
+};
 
-require('electron-reload')(__dirname);
+const platform = process.platform;
 
 function createWindow () {
     // create the browser window
-    mainWindow = new BrowserWindow({
-        width: 1200, 
-        height: 800, 
-        frame: false, 
-        titleBarStyle: 'hidden'
-    });
+
+    if (platform === 'darwin') {
+        options = Object.assign(options, {
+            frame: false,
+            titleBarStyle: 'hidden'
+        });
+    }
+
+    mainWindow = new BrowserWindow(options);
 
     // render index.html which will contain our root Vue component
     mainWindow.loadURL('file://' + __dirname + '/index.html');
