@@ -1,9 +1,11 @@
 #snippet-list {
+  top: 0;
   height: 100%;
   box-shadow: none;
   border-radius: 0;
   overflow-y: scroll;
   overflow-x: hidden;
+  position: absolute;
   margin: 0 0 0 15rem;
   width: 15rem !important;
   background-color: #f8f8f8;
