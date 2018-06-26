@@ -66,10 +66,11 @@ export default {
       const select = $('.ui.dropdown');
       const editor = ace.edit('editor');
       const active = this.$store.state.activeSnippet;
+      const activeHasTitle = active && active.title !== '';
       const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
       const snippet = {
         content: editor.getValue(),
-        title: active ? active.title : (this.title || 'No Title'),
+        title: activeHasTitle ? active.title : this.title,
         language: select.dropdown('get value') || 'text',
         languageFormatted: select.dropdown('get text') || 'Plain Text',
         id: (active && active.id) ? active.id : id
@@ -77,6 +78,10 @@ export default {
 
       if (snippet.content === '' && ! active) {
         return;
+      }
+
+      if (snippet.title === '') {
+        snippet.title = 'Untitled Snippet';
       }
 
       if (active && this.$store.getters.getSnippetById(active.id)) {
