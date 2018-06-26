@@ -30,3 +30,12 @@
   height: 100%;
   position: absolute;
 }
+
+.title {
+  color: #777;
+  font-weight: bold;
+}
+
+.title::-webkit-input-placeholder {
+  font-style: italic;
+}
