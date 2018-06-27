@@ -1,8 +1,0 @@
-#snippet-container {
-  top: 0;
-  height: 100%;
-  margin-left: 30rem;
-  position: absolute;
-  width: calc(100% - 30rem);
-  background-color: #fff;
-}
