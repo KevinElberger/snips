@@ -1,0 +1,36 @@
+#header {
+  top: 0;
+  padding: 10px 0;
+  margin-left: 30rem;
+  position: absolute;
+  background-color: #fff;
+  width: calc(100% - 30rem);
+}
+
+#header-menu {
+  border: none;
+  border-left: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.language-selector:before {
+  background: none !important;
+}
+
+#save:before, #pin:before, #del:before {
+  background: none !important;
+}
+
+.title {
+  color: #777;
+  font-weight: bold;
+}
+
+.title::-webkit-input-placeholder {
+  font-style: italic;
+}
+
+#title-wrapper {
+  margin-left: 30px;
+}

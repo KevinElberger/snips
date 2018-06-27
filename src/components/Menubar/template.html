@@ -1,0 +1,56 @@
+<div id="header">
+
+  <div id="header-menu" class="ui menu">
+    
+    <div id="title-wrapper" class="ui large icon input transparent">
+      <input v-if="activeSnippet" v-model="activeSnippet.title" class="title" type="text" placeholder="Untitled Snippet">
+      <input v-else v-model="title" class="title" type="text" placeholder="Untitled Snippet">
+    </div>
+
+    <div id="snippet-menu" class="right menu">
+      <div class="ui floating dropdown labeled item language-selector">
+        <span class="text chosen-text">Plain Text</span>
+        <div class="menu">
+          <div class="ui icon search input">
+            <i class="search icon"></i>
+            <input type="text" placeholder="Search languages...">
+          </div>
+
+          <div class="scrolling menu">
+            <div class="item" data-value="javascript">JavaScript</div>
+            <div class="item" data-value="c_cpp">C++</div>
+            <div class="item" data-value="java">Java</div>
+            <div class="item" data-value="csharp">C#</div>
+            <div class="item" data-value="css">CSS</div>
+            <div class="item" data-value="html">HTML</div>
+            <div class="item" data-value="swift">Swift</div>
+            <div class="item" data-value="scala">Scala</div>
+            <div class="item" data-value="text">Plain Text</div>
+            <div class="item" data-value="objectivec">Objective-C</div>
+            <div class="item" data-value="golang">Go</div>
+            <div class="item" data-value="php">PHP</div>
+            <div class="item" data-value="ruby">Ruby</div>
+            <div class="item" data-value="perl">Perl</div>
+            <div class="item" data-value="python">Python</div>
+            <div class="item" data-value="vbscript">Visual Basic</div>
+          </div>
+        </div>
+      </div>
+
+      <a @click.end="save" id="save" class="item">
+        <i class="save outline icon"></i>
+      </a>
+
+      <a @click.end="del" id="del" class="item">
+        <i class="trash alternative outline icon"></i>
+      </a>
+
+      <a @click.end="pin" id="pin" class="item">
+        <i :class="{ outline: !activeIsPinned }" class="heart icon"></i>
+      </a>
+
+    </div>
+
+  </div>
+
+</div>

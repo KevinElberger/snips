@@ -1,31 +1,3 @@
-#editor {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-}
-
-#header {
-  top: 0;
-  width: 100%;
-  padding: 10px 0;
-  position: absolute;
-}
-
-#header-menu {
-  border: none;
-  border-left: 0;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.language-selector:before {
-  background: none !important;
-}
-
-#save:before, #pin:before, #del:before {
-  background: none !important;
-}
-
 #snippet-container {
   top: 0;
   height: 100%;
@@ -33,24 +5,4 @@
   position: absolute;
   width: calc(100% - 30rem);
   background-color: #fff;
-}
-
-#snippet-view {
-  top: 62px;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-}
-
-.title {
-  color: #777;
-  font-weight: bold;
-}
-
-.title::-webkit-input-placeholder {
-  font-style: italic;
-}
-
-#title-wrapper {
-  margin-left: 30px;
 }
