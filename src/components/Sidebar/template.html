@@ -1,5 +1,5 @@
 <div id="sidebar" class="ui left fixed vertical menu inverted">
-  <a @click.end="resetSnippetView" id="new" class="item">
+  <a v-on:click="$emit('clicked-new')" id="new" class="item">
     <i class="file icon new-icon"></i> New
   </a>
 
@@ -8,7 +8,7 @@
       <div class="pinned-snippets">
         <div class="menu">
           <div v-for="(snippet) in pinnedSnippets">
-            <a @click.end="toggleSnippet(snippet)" class="item pinned-item">
+            <a v-on:click="$emit('toggleSnippet', snippet)" class="item pinned-item">
               {{ snippet.title }}
             </a>
           </div>

@@ -25,6 +25,7 @@ export default {
         content: '',
         id: getId(),
         language: '',
+        isActive: true,
         isPinned: false,
         languageFormatted: ''
       }
@@ -43,7 +44,7 @@ export default {
       this.resetActiveSnippet();
     },
 
-    pin() {
+    togglePin() {
       this.activeSnippet.isPinned = ! this.activeSnippet.isPinned;
     },
 
@@ -77,8 +78,21 @@ export default {
       });
     },
 
+    displaySnippet(snippet) {
+      Object.assign(this.activeSnippet, snippet);
+    },
+
     resetActiveSnippet() {
+      const language = $('.ui.dropdown');
+
       ace.edit('content').setValue('');
+      language.dropdown('set value', this.text);
+      language.dropdown('set text', this.plainText);
+
+      this.$store.state.snippets.forEach(snippet => {
+        snippet.isActive = false;
+        this.$store.commit('updateSnippet, snippet');
+      });
 
       this.activeSnippet = {
         title: '',

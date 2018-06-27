@@ -1,6 +1,6 @@
 <div id="snippet-list" class="ui vertical menu">
   <div v-for="(snippet) in snippets">
-    <a @click.end="toggleSnippet(snippet)" :class="{ active: activeElm === snippet.id }" class="item">
+    <a v-on:click="$emit('toggleSnippet', snippet)" :class="{ active: snippet.isActive }" class="item">
       <div class="header snippet-title">{{ snippet.title }}</div>
       <small class="description snippet-content">{{ snippet.content }}</small>
     </a>

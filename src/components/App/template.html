@@ -1,11 +1,15 @@
 <div id="app">
-    <sidebar />
-    <snippet-list />
+    <sidebar 
+        @clicked-new="resetActiveSnippet"
+    />
+    <snippet-list 
+        v-bind:activeSnippet="activeSnippet"
+    />
     <menubar 
         v-bind:activeSnippet="activeSnippet" 
         @clicked-save="save"
         @clicked-del="del"
-        @clicked-pin="pin"
+        @clicked-pin="togglePin"
     />
     <snippet v-bind:activeSnippet="activeSnippet" />
 </div>

@@ -11,12 +11,5 @@ export default {
     snippets() {
       return this.$store.state.snippets;
     }
-  },
-
-  methods: {
-    toggleSnippet(snippet) {
-      this.activeElm = snippet.id;
-      this.$store.commit('setActiveSnippet', snippet);
-    }
   }
 };
