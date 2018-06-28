@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       text: 'text',
+      languageFilter: '',
       plainText: 'Plain Text',
       title: 'Untitled Snippet',
       activeSnippet: {
@@ -138,6 +139,10 @@ export default {
         isPinned: false,
         languageFormatted: ''
       };
+    },
+
+    setLanguageFilter(target) {
+      this.language = target.innerText.replace('#', '');
     }
   }
 };

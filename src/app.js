@@ -6,7 +6,8 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    snippets: []
+    snippets: [],
+    languageFilter: 'All'
   },
 
   getters: {
@@ -34,6 +35,10 @@ const store = new Vuex.Store({
       });
 
       Vue.set(state.snippets, idx, payload);
+    }, 
+
+    setLanguageFilter(state, payload) {
+      state.languageFilter = payload;
     }
   }
 });
