@@ -15,6 +15,9 @@ export default {
     SnippetList
   },
 
+  editor: null,
+  language: null,
+
   data() {
     return {
       text: 'text',
@@ -32,10 +35,18 @@ export default {
     }
   },
 
+  mounted() {
+    this.editor = ace.edit('content');
+    this.language = $('.ui.dropdown');
+  },
+
   methods: {
+
+    /**
+     * Removes a snippet from the list
+     */
     del() {
       const { id } = this.activeSnippet;
-      const editor = ace.edit('content');
       const isInList = this.$store.getters.getSnippet(id);
 
       if (! isInList) return;
@@ -44,10 +55,16 @@ export default {
       this.resetActiveSnippet();
     },
 
+    /**
+     * Toggles the pin status of the active snippet
+     */
     togglePin() {
       this.activeSnippet.isPinned = ! this.activeSnippet.isPinned;
     },
 
+    /**
+     * Saves the active snippet
+     */
     save() {
       const { id } = this.activeSnippet;
       const isInList = this.$store.getters.getSnippet(id);
@@ -61,11 +78,13 @@ export default {
       }
     },
 
+    /**
+     * Sets the newest content values for the active snippet
+     */
     updateValues() {
-      const language = $('.ui.dropdown');
-      const content = ace.edit('content').getValue();
-      const newLanguage = language.dropdown('get value') || this.text;
-      const newFullLanguage = language.dropdown('get text') || this.plainText;
+      const content = this.editor.getValue();
+      const newLanguage = this.language.dropdown('get value') || this.text;
+      const newFullLanguage = this.language.dropdown('get text') || this.plainText;
 
       if (this.activeSnippet.title === '') {
         this.activeSnippet.title = this.title;
@@ -78,25 +97,32 @@ export default {
       });
     },
 
+    /**
+     * Displays a new snippet after resetting 
+     * the current active snippet
+     * 
+     * @param {Object} snippet the snippet to display
+     */
     displaySnippet(snippet) {
-      const language = $('.ui.dropdown');
-      const content = ace.edit('content');
-
       this.resetActiveSnippet();
 
       Object.assign(this.activeSnippet, snippet);
 
-      content.setValue(snippet.content);
-      language.dropdown('set value', this.activeSnippet.language);
-      language.dropdown('set text', this.activeSnippet.languageFormatted);
+      this.activeSnippet.isActive = true;
+      this.editor.setValue(snippet.content);
+      this.language.dropdown('set value', this.activeSnippet.language);
+      this.language.dropdown('set text', this.activeSnippet.languageFormatted);
+
+      this.$store.commit('updateSnippet', this.activeSnippet);
     },
 
+    /**
+     * Resets all of the active snippet's values to default values
+     */
     resetActiveSnippet() {
-      const language = $('.ui.dropdown');
-
-      ace.edit('content').setValue('');
-      language.dropdown('set value', this.text);
-      language.dropdown('set text', this.plainText);
+      this.editor.setValue('');
+      this.language.dropdown('set value', this.text);
+      this.language.dropdown('set text', this.plainText);
 
       this.$store.state.snippets.forEach(snippet => {
         snippet.isActive = false;
@@ -108,6 +134,7 @@ export default {
         content: '',
         id: getId(),
         language: '',
+        isActive: true,
         isPinned: false,
         languageFormatted: ''
       };
