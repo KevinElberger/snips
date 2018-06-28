@@ -9,7 +9,14 @@ export default {
 
   computed: {
     snippets() {
-      return this.$store.state.snippets;
+      const snippets = this.$store.state.snippets;
+      const language = this.$store.state.languageFilter;
+
+      if (language === 'All') return snippets;
+
+      return snippets.filter(snippet => {
+        return snippet.languageFormatted === language;
+      });
     },
     
     language() {
