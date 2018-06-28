@@ -79,7 +79,16 @@ export default {
     },
 
     displaySnippet(snippet) {
+      const language = $('.ui.dropdown');
+      const content = ace.edit('content');
+
+      this.resetActiveSnippet();
+
       Object.assign(this.activeSnippet, snippet);
+
+      content.setValue(snippet.content);
+      language.dropdown('set value', this.activeSnippet.language);
+      language.dropdown('set text', this.activeSnippet.languageFormatted);
     },
 
     resetActiveSnippet() {
@@ -91,7 +100,7 @@ export default {
 
       this.$store.state.snippets.forEach(snippet => {
         snippet.isActive = false;
-        this.$store.commit('updateSnippet, snippet');
+        this.$store.commit('updateSnippet', snippet);
       });
 
       this.activeSnippet = {
