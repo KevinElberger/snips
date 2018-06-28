@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import App from './components/App/App.vue';
+import Notifications from 'vue-notification';
 
 Vue.use(Vuex);
+Vue.use(Notifications);
 
 const store = new Vuex.Store({
   state: {

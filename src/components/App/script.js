@@ -3,7 +3,12 @@ import Sidebar from '../Sidebar/Sidebar.vue';
 import Menubar from '../Menubar/Menubar.vue';
 import SnippetList from '../SnippetList/SnippetList.vue';
 
-import { getId } from '../../utils.js';
+import { 
+  getId,
+  notifyPin,
+  notifySave,
+  notifyDelete
+} from '../../utils.js';
 
 export default {
   name: 'App',
@@ -53,6 +58,7 @@ export default {
       if (! isInList) return;
 
       this.$store.commit('deleteSnippet', this.activeSnippet);
+      notifyDelete.bind(this, this.activeSnippet.title)();
       this.resetActiveSnippet();
     },
 
@@ -61,6 +67,8 @@ export default {
      */
     togglePin() {
       this.activeSnippet.isPinned = ! this.activeSnippet.isPinned;
+
+      notifyPin.bind(this, this.activeSnippet.title, this.activeSnippet.isPinned)();
     },
 
     /**
@@ -77,6 +85,8 @@ export default {
       } else {
         this.$store.commit('addSnippet', this.activeSnippet);
       }
+
+      notifySave.bind(this, this.activeSnippet.title)();
     },
 
     /**
