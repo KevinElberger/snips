@@ -3,8 +3,9 @@ import Sidebar from '../Sidebar/Sidebar.vue';
 import Menubar from '../Menubar/Menubar.vue';
 import SnippetList from '../SnippetList/SnippetList.vue';
 
+import { snippet } from '../../defaults.js';
+
 import { 
-  getId,
   notifyPin,
   notifySave,
   notifyDelete
@@ -29,15 +30,7 @@ export default {
       languageFilter: '',
       plainText: 'Plain Text',
       title: 'Untitled Snippet',
-      activeSnippet: {
-        title: '',
-        content: '',
-        id: getId(),
-        language: '',
-        isActive: true,
-        isPinned: false,
-        languageFormatted: ''
-      }
+      activeSnippet: snippet
     }
   },
 
@@ -140,15 +133,7 @@ export default {
         this.$store.commit('updateSnippet', snippet);
       });
 
-      this.activeSnippet = {
-        title: '',
-        content: '',
-        id: getId(),
-        language: '',
-        isActive: true,
-        isPinned: false,
-        languageFormatted: ''
-      };
+      this.activeSnippet = snippet;
     },
 
     setLanguageFilter(target) {
