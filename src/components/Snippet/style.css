@@ -5,10 +5,12 @@
 }
 
 #snippet-container {
-  top: 62px;
+  top: 60px;
+  z-index: 102;
   height: 100%;
   margin-left: 30rem;
   position: absolute;
   width: calc(100% - 30rem);
   background-color: #fff;
+  transition: all .3s ease-out;
 }

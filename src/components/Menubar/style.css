@@ -1,10 +1,12 @@
 #header {
   top: 0;
+  z-index: 102;
   padding: 10px 0;
   margin-left: 30rem;
   position: absolute;
   background-color: #fff;
   width: calc(100% - 30rem);
+  transition: all .3s ease-out;
 }
 
 #header-menu {

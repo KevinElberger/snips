@@ -1,4 +1,25 @@
 export default {
   name: 'Menubar',
-  props: [ 'activeSnippet' ]
+  props: [ 'activeSnippet' ],
+  data() {
+    return {
+      expandedView: false
+    }
+  },
+  methods: {
+    expandSnippetView() {
+      const header = $('#header');
+      const snippetView = $('#snippet-container');
+
+      if (! this.expandedView) {
+        header.css({ marginLeft: '0', width: '100%' });
+        snippetView.css({ marginLeft: '0', width: '100%' });
+      } else {
+        header.css({ marginLeft: '30rem', width: 'calc(100% - 30rem)' });
+        snippetView.css({ marginLeft: '30rem', width: 'calc(100% - 30rem)' });
+      }
+
+      this.expandedView = !this.expandedView;
+    }
+  }
 };

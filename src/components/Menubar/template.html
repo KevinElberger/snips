@@ -48,6 +48,9 @@
         <i :class="{ outline: !activeSnippet.isPinned }" class="heart icon"></i>
       </a>
 
+      <a v-on:click="expandSnippetView()" id="expand" class="item">
+        <i class="expand icon"></i>
+      </a>
     </div>
 
   </div>
