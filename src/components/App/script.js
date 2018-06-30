@@ -125,6 +125,7 @@ export default {
      */
     resetActiveSnippet() {
       this.editor.setValue('');
+      $('input.title').val('');
       this.language.dropdown('set value', this.text);
       this.language.dropdown('set text', this.plainText);
 
