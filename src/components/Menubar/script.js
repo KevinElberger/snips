@@ -19,6 +19,7 @@ export default {
         snippetView.css({ marginLeft: '30rem', width: 'calc(100% - 30rem)' });
       }
 
+      ace.edit('content').focus();
       this.expandedView = !this.expandedView;
     }
   }
