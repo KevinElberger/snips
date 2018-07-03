@@ -6,6 +6,7 @@
         @clicked-language="setLanguageFilter"        
     />
     <snippet-list 
+        v-bind:snippets="snippets"
         v-bind:activeSnippet="activeSnippet"
         @clicked-snippet="displaySnippet"
     />
