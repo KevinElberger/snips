@@ -15,7 +15,6 @@ export function notifyPin(title = 'Untitled Snippet', isPinned) {
 
   this.$notify({
     group: 'alerts',
-    type: 'warn',
     title: 'Snippet Pinned',
     text: `${title} was ${pinned}!`
   });
@@ -24,7 +23,6 @@ export function notifyPin(title = 'Untitled Snippet', isPinned) {
 export function notifyDelete(title) {
   this.$notify({
     group: 'alerts',
-    type: 'success',
     title: 'Snippet Deleted',
     text: `${title} was deleted!`
   });
