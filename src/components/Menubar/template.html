@@ -36,19 +36,19 @@
         </div>
       </div>
 
-      <a v-on:click="$emit('clicked-save')" id="save" class="item">
+      <a v-on:click="$emit('clicked-save')" id="save" class="item menu-item">
         <i class="save outline icon"></i>
       </a>
 
-      <a v-on:click="$emit('clicked-del')" id="del" class="item">
+      <a v-on:click="$emit('clicked-del')" id="del" class="item menu-item">
         <i class="trash alternative outline icon"></i>
       </a>
 
-      <a v-on:click="$emit('clicked-pin')" id="pin" class="item">
+      <a v-on:click="$emit('clicked-pin')" id="pin" class="item menu-item">
         <i :class="{ outline: !activeSnippet.isPinned }" class="heart icon"></i>
       </a>
 
-      <a v-on:click="expandSnippetView()" id="expand" class="item">
+      <a v-on:click="expandSnippetView()" id="expand" class="item menu-item">
         <i class="expand icon"></i>
       </a>
     </div>
