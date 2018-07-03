@@ -1,3 +1,7 @@
+.no-snippets {
+  padding: 20%;
+}
+
 #snippet-list {
   top: 0;
   height: 100%;

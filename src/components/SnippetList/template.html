@@ -1,4 +1,7 @@
 <div id="snippet-list" class="ui vertical menu">
+  <div v-if="snippets.length === 0" class="no-snippets">
+    <p>No saved snippets</p>
+  </div>
   <div v-for="(snippet) in snippets">
     <a v-on:click="$emit('clicked-snippet', snippet)" :class="{ active: snippet.isActive }" class="item">
       <div class="header snippet-title">{{ snippet.title }}</div>
