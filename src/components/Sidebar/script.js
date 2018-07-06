@@ -1,6 +1,12 @@
 export default {
   name: 'Sidebar',
 
+  data() {
+    return {
+      activeEl: 1
+    }
+  },
+
   computed: {
     pinnedSnippets() {
       return this.$store.state.snippets.filter(snip => snip.isPinned);
@@ -9,18 +15,21 @@ export default {
       return this.$store.state.languageFilter;
     }
   },
+
   methods: {
-    setLanguage(target) {
-      const language = $(target).text();
+    setLanguage(el) {
       const languageList = $('.item', $('.language-list'));
 
-      $(target).addClass('active');
-
       languageList.each(function() {
-        if ($(this).text() !== language) $(this).removeClass('active');
+        $(this).removeClass('active');
       });
 
-      this.$store.commit('setLanguageFilter', language);
+      this.activeEl = el;
+
+      const test = $('.item .active', $('.language-list'));
+
+      console.log(test);
+      // this.$store.commit('setLanguageFilter', language);
     }
   }
 };

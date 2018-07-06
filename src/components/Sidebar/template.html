@@ -19,26 +19,121 @@
   <div class="item languages-wrapper">
     <div class="header">Languages</div>
     <div class="item languages">
-      <div v-on:click="setLanguage($event.target)" class="menu language-list">
-        <a class="item active language">All</a>
-        <a class="item language">JavaScript</a>
-        <a class="item language">C++</a>
-        <a class="item language">Java</a>
-        <a class="item language">C#</a>
-        <a class="item language">CSS</a>
-        <a class="item language">HTML</a>
-        <a class="item language">C</a>
-        <a class="item language">Swift</a>
-        <a class="item language">Scala</a>
-        <a class="item language">Plain Text</a>        
-        <a class="item language">Objective-C</a>
-        <a class="item language">Go</a>
-        <a class="item language">PHP</a>
-        <a class="item language">R</a>
-        <a class="item language">Ruby</a>
-        <a class="item language">Perl</a>
-        <a class="item language">Python</a>
-        <a class="item language">Visual Basic</a>
+      <div class="menu language-list">
+        <a 
+          @click="setLanguage(1)" 
+          class="item language" 
+          :class="{ active : activeEl == 1 }">
+            All
+        </a>
+        <a 
+          @click="setLanguage(2)" 
+          class="item language javascript" 
+          :class="{ active : activeEl == 2 }">
+            JavaScript
+        </a>
+        <a 
+          @click="setLanguage(3)" 
+          class="item language cpp" 
+          :class="{ active : activeEl == 3 }">
+            C++
+        </a>
+        <a 
+          @click="setLanguage(4)" 
+          class="item language java" 
+          :class="{ active : activeEl == 4 }">
+            Java
+        </a>
+        <a 
+          @click="setLanguage(5)" 
+          class="item language csharp" 
+          :class="{ active : activeEl == 5 }">
+            C#
+        </a>
+        <a 
+          @click="setLanguage(6)" 
+          class="item language css" 
+          :class="{ active : activeEl == 6 }">
+            CSS
+        </a>
+        <a 
+          @click="setLanguage(7)" 
+          class="item language html" 
+          :class="{ active : activeEl == 7 }">
+            HTML
+        </a>
+        <a 
+          @click="setLanguage(8)" 
+          class="item language c" 
+          :class="{ active : activeEl == 8 }">
+            C
+        </a>
+        <a 
+          @click="setLanguage(9)" 
+          class="item language swift" 
+          :class="{ active : activeEl == 9 }">
+            Swift
+        </a>
+        <a 
+          @click="setLanguage(10)" 
+          class="item language scala" 
+          :class="{ active : activeEl == 10 }">
+            Scala
+        </a>
+        <a 
+          @click="setLanguage(11)" 
+          class="item language text" 
+          :class="{ active : activeEl == 11 }">
+            Plain Text
+        </a>        
+        <a  
+          @click="setLanguage(12)" 
+          class="item language objectivec" 
+          :class="{ active : activeEl == 12 }">
+            Objective-C
+        </a>
+        <a 
+          @click="setLanguage(13)" 
+          class="item language go" 
+          :class="{ active : activeEl == 13 }">
+            Go
+        </a>
+        <a 
+          @click="setLanguage(14)" 
+          class="item language php" 
+          :class="{ active : activeEl == 14 }">
+            PHP
+        </a>
+        <a 
+          @click="setLanguage(15)" 
+          class="item language r" 
+          :class="{ active : activeEl == 15 }">
+            R
+        </a>
+        <a 
+          @click="setLanguage(16)" 
+          class="item language ruby" 
+          :class="{ active : activeEl == 16 }">
+            Ruby
+        </a>
+        <a 
+          @click="setLanguage(17)" 
+          class="item language perl" 
+          :class="{ active : activeEl == 17 }">
+            Perl
+        </a>
+        <a 
+          @click="setLanguage(18)" 
+          class="item language python" 
+          :class="{ active : activeEl == 18 }">
+            Python
+        </a>
+        <a 
+          @click="setLanguage(19)" 
+          class="item language visual-basic" 
+          :class="{ active : activeEl == 19 }">
+            Visual Basic
+        </a>
       </div>
     </div>
   </div>
