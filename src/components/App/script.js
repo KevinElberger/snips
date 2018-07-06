@@ -3,7 +3,7 @@ import Sidebar from '../Sidebar/Sidebar.vue';
 import Menubar from '../Menubar/Menubar.vue';
 import SnippetList from '../SnippetList/SnippetList.vue';
 
-import { snippet } from '../../defaults.js';
+import { getDefaultSnippet } from '../../defaults.js';
 
 import { 
   notifyPin,
@@ -30,7 +30,7 @@ export default {
       languageFilter: '',
       plainText: 'Plain Text',
       title: 'Untitled Snippet',
-      activeSnippet: snippet
+      activeSnippet: getDefaultSnippet()
     }
   },
 
@@ -99,6 +99,8 @@ export default {
         language: newLanguage,
         languageFormatted: newFullLanguage
       });
+
+      return this.activeSnippet;
     },
 
     /**
@@ -113,6 +115,7 @@ export default {
       Object.assign(this.activeSnippet, snippet);
 
       this.activeSnippet.isActive = true;
+      $('input.title').val(this.activeSnippet.title);
       this.editor.setValue(snippet.content);
       this.language.dropdown('set value', this.activeSnippet.language);
       this.language.dropdown('set text', this.activeSnippet.languageFormatted);
@@ -134,7 +137,7 @@ export default {
         this.$store.commit('updateSnippet', snippet);
       });
 
-      this.activeSnippet = snippet;
+      this.activeSnippet = getDefaultSnippet();
     },
 
     setLanguageFilter(target) {

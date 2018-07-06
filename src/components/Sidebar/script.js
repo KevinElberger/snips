@@ -3,7 +3,7 @@ export default {
 
   data() {
     return {
-      activeEl: 1
+      activeEl: 'All'
     }
   },
 
@@ -17,19 +17,12 @@ export default {
   },
 
   methods: {
-    setLanguage(el) {
-      const languageList = $('.item', $('.language-list'));
+    setLanguage(language) {
+      const languageList = $('.item .active', $('.language-list'));
 
-      languageList.each(function() {
-        $(this).removeClass('active');
-      });
+      this.activeEl = language;
 
-      this.activeEl = el;
-
-      const test = $('.item .active', $('.language-list'));
-
-      console.log(test);
-      // this.$store.commit('setLanguageFilter', language);
+      this.$store.commit('setLanguageFilter', language);
     }
   }
 };
