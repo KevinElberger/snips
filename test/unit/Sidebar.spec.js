@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { shallowMount } from '@vue/test-utils';
-import { snippet } from '../../src/defaults.js';
+import { getDefaultSnippet } from '../../src/defaults.js';
 import Sidebar from '../../src/components/Sidebar/Sidebar.vue';
 
 Vue.use(Vuex);
 
-const pinnedSnippet = Object.assign({}, snippet);
+const pinnedSnippet = Object.assign({}, getDefaultSnippet());
 
 pinnedSnippet.isPinned = true;
 

@@ -26,6 +26,7 @@ export default {
 
   data() {
     return {
+      content: '',
       text: 'text',
       languageFilter: '',
       plainText: 'Plain Text',
