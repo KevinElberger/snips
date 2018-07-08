@@ -51,4 +51,23 @@ describe('App', () => {
       expect(wrapper.vm.activeSnippet.title).to.equal('');
     });
   });
+
+  describe('displaySnippet', () => {
+    it('should assign the props of the given snippet to the active snippet', () => {
+      const wrapper = shallowMount(App, {
+        store: new Vuex.Store({
+          state: { snippets: [] },
+          mutations: {
+            setLanguageFilter: () => {}
+          }
+        })
+      });
+      wrapper.vm.editor = { setValue: () => {} };
+      wrapper.vm.language = { dropdown: () => {} };
+      wrapper.vm.displaySnippet({
+        title: 'Test Snippet'
+      });
+      expect(wrapper.vm.activeSnippet.title).to.equal('Test Snippet');
+    });
+  });
 });
