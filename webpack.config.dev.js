@@ -7,6 +7,7 @@ module.exports = {
   entry: [
     './src/app.js'
   ],
+  target: 'electron-renderer',
   module: {
     rules: [
       {

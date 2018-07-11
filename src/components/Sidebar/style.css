@@ -18,11 +18,7 @@
   padding: 1rem 0 0 0 !important;
 }
 
-#new::before {
-  background: none !important;
-}
-
-.new-icon {
+.no-float-icon {
   float: none !important;
 }
 

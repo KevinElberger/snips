@@ -9,6 +9,7 @@ Vue.use(Notifications);
 const store = new Vuex.Store({
   state: {
     snippets: [],
+    loggedIn: false,
     languageFilter: 'All'
   },
 
@@ -19,7 +20,11 @@ const store = new Vuex.Store({
   },
 
   mutations: {
-    addSnippet (state, payload) {
+    loadSnippets(state, payload) {
+      state.snippets = payload;
+    },
+
+    addSnippet(state, payload) {
       state.snippets.push(payload);
     },
 
@@ -31,7 +36,7 @@ const store = new Vuex.Store({
       state.snippets.splice(idx, 1);
     },
 
-    updateSnippet (state, payload) {
+    updateSnippet(state, payload) {
       const idx = state.snippets.findIndex(snip => {
         return snip.id === payload.id;
       });

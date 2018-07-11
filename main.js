@@ -1,7 +1,10 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const ipcMain = electron.ipcMain;
 const reloader = require('electron-reload')(__dirname);
+const Store = require('electron-store');
+const storage = new Store();
 
 let mainWindow;
 let options = {
@@ -11,9 +14,19 @@ let options = {
 
 const platform = process.platform;
 
-function createWindow () {
-    // create the browser window
+if (!storage.get('store')) {
+    storage.set('store', {
+        snippets: []
+    });
+}
 
+ipcMain.on('save-data', (event, data) => {
+    storage.set('store', Object.assign(storage.get('store'), {
+        snippets: data
+    }));
+});
+
+function createWindow () {
     if (platform === 'darwin') {
         options = Object.assign(options, {
             frame: false,
@@ -25,6 +38,11 @@ function createWindow () {
 
     // render index.html which will contain our root Vue component
     mainWindow.loadURL('file://' + __dirname + '/index.html');
+
+    // send previously stored data to window
+    mainWindow.webContents.on('did-finish-load', () => {
+        mainWindow.webContents.send('load-data', storage.get('store'));
+    });
 
     // dereference the mainWindow object when the window is closed
     mainWindow.on('closed', function() {

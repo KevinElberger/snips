@@ -2,8 +2,8 @@ import Snippet from '../Snippet/Snippet.vue';
 import Sidebar from '../Sidebar/Sidebar.vue';
 import Menubar from '../Menubar/Menubar.vue';
 import SnippetList from '../SnippetList/SnippetList.vue';
-
 import { getDefaultSnippet } from '../../defaults.js';
+import { ipcRenderer } from 'electron';
 
 import { 
   notifyPin,
@@ -35,6 +35,12 @@ export default {
     }
   },
 
+  beforeCreate() {
+    ipcRenderer.on('load-data', (event, data) => {
+      this.$store.commit('loadSnippets', data.snippets);
+    });
+  },
+
   mounted() {
     this.editor = ace.edit('content');
     this.language = $('.ui.dropdown');
@@ -54,6 +60,7 @@ export default {
       this.$store.commit('deleteSnippet', this.activeSnippet);
       notifyDelete.bind(this, this.activeSnippet.title)();
       this.resetActiveSnippet();
+      ipcRenderer.send('save-data', this.$store.state.snippets);      
     },
 
     /**
@@ -81,6 +88,7 @@ export default {
       }
 
       notifySave.bind(this, this.activeSnippet.title)();
+      ipcRenderer.send('save-data', this.$store.state.snippets);
     },
 
     /**
