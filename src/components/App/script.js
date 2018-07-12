@@ -2,14 +2,16 @@ import Snippet from '../Snippet/Snippet.vue';
 import Sidebar from '../Sidebar/Sidebar.vue';
 import Menubar from '../Menubar/Menubar.vue';
 import SnippetList from '../SnippetList/SnippetList.vue';
-import { getDefaultSnippet } from '../../defaults.js';
-import { ipcRenderer } from 'electron';
+import { getDefaultSnippet } from '../../utils/defaults.js';
+import isElectron from 'is-electron';
 
 import { 
   notifyPin,
   notifySave,
   notifyDelete
-} from '../../utils.js';
+} from '../../utils/utils.js';
+
+const ipcRenderer = window.ipcRenderer;
 
 export default {
   name: 'App',
@@ -36,9 +38,11 @@ export default {
   },
 
   beforeCreate() {
-    ipcRenderer.on('load-data', (event, data) => {
-      this.$store.commit('loadSnippets', data.snippets);
-    });
+    if (isElectron()) {
+      ipcRenderer.on('load-data', (event, data) => {
+        this.$store.commit('loadSnippets', data.snippets);
+      });
+    }
   },
 
   mounted() {
@@ -60,7 +64,10 @@ export default {
       this.$store.commit('deleteSnippet', this.activeSnippet);
       notifyDelete.bind(this, this.activeSnippet.title)();
       this.resetActiveSnippet();
-      ipcRenderer.send('save-data', this.$store.state.snippets);      
+
+      if (isElectron()) {
+        ipcRenderer.send('save-data', this.$store.state.snippets);              
+      }
     },
 
     /**
@@ -88,7 +95,9 @@ export default {
       }
 
       notifySave.bind(this, this.activeSnippet.title)();
-      ipcRenderer.send('save-data', this.$store.state.snippets);
+      if (isElectron()) {
+        ipcRenderer.send('save-data', this.$store.state.snippets);
+      }
     },
 
     /**

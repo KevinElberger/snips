@@ -30,7 +30,10 @@ function createWindow () {
     if (platform === 'darwin') {
         options = Object.assign(options, {
             frame: false,
-            titleBarStyle: 'hidden'
+            titleBarStyle: 'hidden',
+            webPreferences: {
+                preload: __dirname + '/preload.js'
+            }
         });
     }
 

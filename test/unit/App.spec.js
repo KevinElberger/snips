@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { shallowMount } from '@vue/test-utils';
-import { getDefaultSnippet } from '../../src/defaults.js';
+import { getDefaultSnippet } from '../../src/utils/defaults.js';
 import App from '../../src/components/App/App.vue';
 
 Vue.use(Vuex);

@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import { getDefaultSnippet } from '../../src/defaults.js';
+import { getDefaultSnippet } from '../../src/utils/defaults.js';
 import MenuBar from '../../src/components/Menubar/Menubar.vue';
 
 describe('Menubar', () => {

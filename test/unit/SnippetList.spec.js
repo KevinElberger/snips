@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import { getDefaultSnippet } from '../../src/defaults.js';
+import { getDefaultSnippet } from '../../src/utils/defaults.js';
 import SnippetList from '../../src/components/SnippetList/SnippetList.vue';
 
 const mockSnippets = [

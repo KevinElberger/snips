@@ -1,4 +1,4 @@
-import { getDefaultSnippet } from '../../src/defaults.js';
+import { getDefaultSnippet } from '../../src/utils/defaults.js';
 
 describe('defaults', () => {
   describe('snippet', () => {

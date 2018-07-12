@@ -1,4 +1,4 @@
-import { getId } from '../../src/utils.js';
+import { getId } from '../../src/utils/utils.js';
 
 const chai = require('chai')
 
