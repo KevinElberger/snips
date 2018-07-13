@@ -3,7 +3,7 @@ export default {
 
   AUTH_OPTIONS: {
     hostname: 'github.com',
-    clientId: '',
-    clientSecret: ''
+    clientId: process.env.CLIENT_ID || 'YourClientID',
+    clientSecret: process.env.CLIENT_SECRET || 'YourClientSecret'
   }
 };

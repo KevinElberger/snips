@@ -5,6 +5,7 @@ const ipcMain = electron.ipcMain;
 const reloader = require('electron-reload')(__dirname);
 const Store = require('electron-store');
 const storage = new Store();
+require('dotenv').config();
 
 let mainWindow;
 let options = {

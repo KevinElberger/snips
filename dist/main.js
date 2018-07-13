@@ -669,7 +669,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _nod
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  AUTH_SCOPE: ['gist'],\n\n  AUTH_OPTIONS: {\n    hostname: 'github.com',\n    clientId: '',\n    clientSecret: ''\n  }\n});\n\n//# sourceURL=webpack:///./src/utils/constants.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  AUTH_SCOPE: ['gist'],\n\n  AUTH_OPTIONS: {\n    hostname: 'github.com',\n    clientId: process.env.CLIENT_ID,\n    clientSecret: process.env.CLIENT_SECRET\n  }\n});\n\n//# sourceURL=webpack:///./src/utils/constants.js?");
 
 /***/ }),
 
