@@ -3,6 +3,7 @@ import Sidebar from '../Sidebar/Sidebar.vue';
 import Menubar from '../Menubar/Menubar.vue';
 import SnippetList from '../SnippetList/SnippetList.vue';
 import { getDefaultSnippet } from '../../utils/defaults.js';
+import { authenticateGithub } from '../../utils/utils.js';
 import isElectron from 'is-electron';
 
 import { 
@@ -51,6 +52,9 @@ export default {
   },
 
   methods: {
+    login() {
+      authenticateGithub();
+    },
 
     /**
      * Removes a snippet from the list
