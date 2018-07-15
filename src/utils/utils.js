@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Constants from './constants.js';
+import { store } from '../store.js';
 const electron = require('electron');
 const remote = electron.remote;
 const BrowserWindow = remote.BrowserWindow;
@@ -96,7 +97,7 @@ export function loginUser(authConfig, code) {
 
   return makeRequest(url, method, data)
     .then(function(response) {
-      console.log(response.data);
+      // store.commit('authorize', response.authToken);
     }).catch(function(error) {
       console.log('Login failure: ', error);
     });
