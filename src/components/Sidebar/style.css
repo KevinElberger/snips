@@ -1,3 +1,7 @@
+.avatar {
+  width: 8rem;
+}
+
 .header {
   background: 0 0;
   color: rgba(255,255,255,.9);
@@ -16,6 +20,14 @@
 .languages-wrapper {
   height: 12.5rem;
   padding: 1rem 0 0 0 !important;
+}
+
+.logout:before {
+  background: none !important;
+}
+
+.logout-wrapper {
+  padding-top: 1rem;
 }
 
 .no-float-icon {

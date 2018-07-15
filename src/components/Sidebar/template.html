@@ -1,7 +1,13 @@
 <div id="sidebar" class="ui left fixed vertical menu inverted">
-  <a v-on:click="$emit('clicked-login')" id="login" class="item">
+  <a v-if="!isLoggedIn" v-on:click="$emit('clicked-login')" id="login" class="item">
     <i class="github icon no-float-icon"></i> Login
   </a>
+  <div v-else class="logout-wrapper">
+    <img class="avatar" src="https://avatars1.githubusercontent.com/u/7710149?v=4" />      
+    <a class="item logout">
+      <i class="github icon no-float-icon"></i> Logout
+    </a>
+  </div>
   <a v-on:click="$emit('clicked-new')" id="new" class="item">
     <i class="file icon no-float-icon"></i> New
   </a>

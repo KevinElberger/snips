@@ -17,13 +17,23 @@ const platform = process.platform;
 
 if (!storage.get('store')) {
     storage.set('store', {
+        auth: {
+            avatar: '',
+            token: null
+        },
         snippets: []
     });
 }
 
-ipcMain.on('save-data', (event, data) => {
+ipcMain.on('save-snippets', (event, data) => {
     storage.set('store', Object.assign(storage.get('store'), {
         snippets: data
+    }));
+});
+
+ipcMain.on('save-auth', (event, data) => {
+    storage.set('store', Object.assign(storage.get('store'), {
+        auth: data
     }));
 });
 

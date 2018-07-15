@@ -6,7 +6,9 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     auth: {
+      avatar: '',
       token: null,
+      loggedIn: false
     },
     snippets: [],
     loggedIn: false,
@@ -20,12 +22,22 @@ export const store = new Vuex.Store({
   },
 
   mutations: {
-    login(state, payload) {
-
+    load(state, payload) {
+      state.auth.token = payload.auth.token;
+      state.auth.loggedIn = !!payload.auth.token;
+      state.snippets = payload.snippets;
     },
 
-    loadSnippets(state, payload) {
-      state.snippets = payload;
+    login(state, payload) {
+      state.auth.loggedIn = true;
+      state.auth.token = payload.token;
+      state.auth.avatar = payload.avatar;
+    },
+
+    logout(state, payload) {
+      state.auth.avatar = '';
+      state.auth.token = null;
+      state.auth.loggedIn = false;
     },
 
     addSnippet(state, payload) {

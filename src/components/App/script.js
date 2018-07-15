@@ -41,7 +41,7 @@ export default {
   beforeCreate() {
     if (isElectron()) {
       ipcRenderer.on('load-data', (event, data) => {
-        this.$store.commit('loadSnippets', data.snippets);
+        this.$store.commit('load', data);
       });
     }
   },
@@ -70,7 +70,7 @@ export default {
       this.resetActiveSnippet();
 
       if (isElectron()) {
-        ipcRenderer.send('save-data', this.$store.state.snippets);              
+        ipcRenderer.send('save-snippets', this.$store.state.snippets);              
       }
     },
 
@@ -100,7 +100,7 @@ export default {
 
       notifySave.bind(this, this.activeSnippet.title)();
       if (isElectron()) {
-        ipcRenderer.send('save-data', this.$store.state.snippets);
+        ipcRenderer.send('save-snippets', this.$store.state.snippets);
       }
     },
 

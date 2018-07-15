@@ -13,6 +13,12 @@ export default {
     },
     language() {
       return this.$store.state.languageFilter;
+    },
+    isLoggedIn() {
+      return this.$store.state.auth.loggedIn;
+    },
+    getAvatar() {
+      return this.$store.state.auth.avatar;
     }
   },
 

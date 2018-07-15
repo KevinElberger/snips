@@ -1,9 +1,12 @@
 import axios from 'axios';
 import Constants from './constants.js';
 import { store } from '../store.js';
+import isElectron from 'is-electron';
+
 const electron = require('electron');
 const remote = electron.remote;
 const BrowserWindow = remote.BrowserWindow;
+const ipcRenderer = window.ipcRenderer;
 
 export function getId() {
   return Math.random().toString(36).replace(/[^a-z]+/g, '');
@@ -81,15 +84,15 @@ export function authenticateGithub() {
   });
 }
 
-export function loginUser(authConfig, code) {
+function loginUser(authConfig, code) {
   const { hostname } = authConfig;
   const method = 'POST';
-  const type = 'user_agent';
+  // const type = 'user_agent';
   const url = `https://${hostname}/login/oauth/access_token`;
   const redirect_uri = 'https://github.com/login/oauth/success';
   const data = {
     code: code,
-    type: type,
+    // type: type,
     redirect_uri: redirect_uri,
     client_id: authConfig.clientId,
     client_secret: authConfig.clientSecret
@@ -97,9 +100,30 @@ export function loginUser(authConfig, code) {
 
   return makeRequest(url, method, data)
     .then(function(response) {
-      // store.commit('authorize', response.authToken);
+      getUserAvatar(response.data.access_token);
     }).catch(function(error) {
       console.log('Login failure: ', error);
+    });
+}
+
+function getUserAvatar(token) {
+  const method = 'GET';
+  const url = 'https://api.github.com/user';
+
+  return makeAuthRequest(url, method, token)
+    .then(function(response) {
+      const data = {
+        token: token,
+        avatar: response.data.avatar_url
+      };
+
+      store.commit('login', data);
+
+      if (isElectron()) {
+        ipcRenderer.send('save-auth', data);        
+      }  
+    }).catch(function(error) {
+      console.log('Get user avatar failure: ', error);
     });
 }
 
@@ -107,5 +131,14 @@ export function makeRequest(url, method, data = {}) {
   axios.defaults.headers.common['Accept'] = 'application/json';
   axios.defaults.headers.common['Content-Type'] = 'application/json';
   axios.defaults.headers.common['Cache-Control'] = 'no-cache';
+  return axios({ method, url, data });
+}
+
+export function makeAuthRequest(url, method, token, data = {}) {
+  axios.defaults.headers.common['Accept'] = 'application/json';
+  axios.defaults.headers.common['Authorization'] = `token ${token}`;
+  axios.defaults.headers.common['Content-Type'] = 'application/json';
+  axios.defaults.headers.common['Cache-Control'] = 'no-cache';
+  axios.defaults.headers.common['Content-Type'] = 'application/json';
   return axios({ method, url, data });
 }
