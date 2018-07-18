@@ -87,12 +87,10 @@ export function authenticateGithub() {
 function loginUser(authConfig, code) {
   const { hostname } = authConfig;
   const method = 'POST';
-  // const type = 'user_agent';
   const url = `https://${hostname}/login/oauth/access_token`;
   const redirect_uri = 'https://github.com/login/oauth/success';
   const data = {
     code: code,
-    // type: type,
     redirect_uri: redirect_uri,
     client_id: authConfig.clientId,
     client_secret: authConfig.clientSecret
@@ -104,6 +102,14 @@ function loginUser(authConfig, code) {
     }).catch(function(error) {
       console.log('Login failure: ', error);
     });
+}
+
+export function logoutUser() {
+  store.commit('logout', {
+    avatar: '',
+    token: null,
+    loggedIn: false
+  });
 }
 
 function getUserAvatar(token) {

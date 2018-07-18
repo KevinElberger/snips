@@ -11,3 +11,10 @@ export function getDefaultSnippet() {
     languageFormatted: ''
   }
 };
+
+export const defaultAuth = {
+  auth: {
+    avatar: '',
+    token: null
+  }
+};

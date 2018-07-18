@@ -35,9 +35,7 @@ export const store = new Vuex.Store({
     },
 
     logout(state, payload) {
-      state.auth.avatar = '';
-      state.auth.token = null;
-      state.auth.loggedIn = false;
+      state.auth = payload;
     },
 
     addSnippet(state, payload) {
