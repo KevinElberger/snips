@@ -63,11 +63,13 @@ export default {
     },
 
     logout() {
-      logoutUser();
-      
-      if (isElectron()) {
-        ipcRenderer.send('save-auth', defaultAuth);
-      }
+      $('.mini.modal').modal('show');
+
+      // logoutUser();
+
+      // if (isElectron()) {
+      //   ipcRenderer.send('save-auth', defaultAuth);
+      // }
     },
 
     /**

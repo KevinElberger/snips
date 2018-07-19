@@ -15,8 +15,8 @@ export default {
         header.css({ marginLeft: '0', width: '100%' });
         snippetView.css({ marginLeft: '0', width: '100%', zIndex: '101' });
       } else {
-        header.css({ marginLeft: '30rem', width: 'calc(100% - 30rem)' });
-        snippetView.css({ marginLeft: '30rem', width: 'calc(100% - 30rem)', zIndex: '0' });
+        header.css({ marginLeft: '29.2rem', width: 'calc(100% - 29.2rem)' });
+        snippetView.css({ marginLeft: '29.2rem', width: 'calc(100% - 29.2rem)', zIndex: '0' });
       }
 
       ace.edit('content').focus();
