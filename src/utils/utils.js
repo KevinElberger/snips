@@ -54,21 +54,25 @@ export function authenticateGithub() {
 
   window.loadURL(githubUrl);
 
+  // Force re-authentication
+  window.webContents.session.clearStorageData();
+
   function handleCallback(url) {
     const rawCode = /code=([^&]*)/.exec(url) || null;
     const code = rawCode && rawCode.length > 1 ? rawCode[1] : null;
     const error = /\?error=(.+)$/.exec(url);
 
-    if (code || error) {
+    if (error) {
       window.destroy();
     }
 
     if (code) {
+      window.destroy();
       loginUser(Constants.AUTH_OPTIONS, code);
-    } else {
+    } else if (error) {
       alert(
         "Something went wrong and we couldn't " +
-          "log you into Github. Please try again."
+        "log you into Github. Please try again."
       );
     }
   }
