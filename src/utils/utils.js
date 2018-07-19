@@ -91,8 +91,8 @@ export function authenticateGithub() {
 
 export function logoutUser() {
   store.commit('logout', {
-    id: null,
     avatar: '',
+    name: null,
     token: null,
     loggedIn: false
   });

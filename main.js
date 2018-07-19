@@ -22,8 +22,8 @@ const platform = process.platform;
 if (!storage.get('store')) {
     storage.set('store', {
         auth: {
-            id: null,
             avatar: '',
+            name: null,
             token: null
         },
         snippets: []

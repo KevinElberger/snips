@@ -30,7 +30,7 @@ export function getUser(token) {
     .then(function(response) {
       const data = {
         token: token,
-        id: response.data.id,
+        name: response.data.name,
         avatar: response.data.avatar_url
       };
 
@@ -41,5 +41,17 @@ export function getUser(token) {
       }  
     }).catch(function(error) {
       console.log('Get user avatar failure: ', error);
+    });
+}
+
+export function getGists() {
+  const method = 'GET';
+  const url = 'https://api.github.com/gists';
+
+  return makeAuthRequest(url, method, token)
+    .then(function(response) {
+      // Modify gists here
+    }).catch(function(error) {
+      console.log('Could not get gists: ', error);
     });
 }
