@@ -2,6 +2,7 @@ import axios from 'axios';
 import Constants from './constants.js';
 import { store } from '../store.js';
 import isElectron from 'is-electron';
+import { loginUser } from './githubApi.js';
 
 const electron = require('electron');
 const remote = electron.remote;
@@ -88,53 +89,13 @@ export function authenticateGithub() {
   });
 }
 
-function loginUser(authConfig, code) {
-  const { hostname } = authConfig;
-  const method = 'POST';
-  const url = `https://${hostname}/login/oauth/access_token`;
-  const redirect_uri = 'https://github.com/login/oauth/success';
-  const data = {
-    code: code,
-    redirect_uri: redirect_uri,
-    client_id: authConfig.clientId,
-    client_secret: authConfig.clientSecret
-  };
-
-  return makeRequest(url, method, data)
-    .then(function(response) {
-      getUserAvatar(response.data.access_token);
-    }).catch(function(error) {
-      console.log('Login failure: ', error);
-    });
-}
-
 export function logoutUser() {
   store.commit('logout', {
+    id: null,
     avatar: '',
     token: null,
     loggedIn: false
   });
-}
-
-function getUserAvatar(token) {
-  const method = 'GET';
-  const url = 'https://api.github.com/user';
-
-  return makeAuthRequest(url, method, token)
-    .then(function(response) {
-      const data = {
-        token: token,
-        avatar: response.data.avatar_url
-      };
-
-      store.commit('login', data);
-
-      if (isElectron()) {
-        ipcRenderer.send('save-auth', data);        
-      }  
-    }).catch(function(error) {
-      console.log('Get user avatar failure: ', error);
-    });
 }
 
 export function makeRequest(url, method, data = {}) {

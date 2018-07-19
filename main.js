@@ -19,15 +19,16 @@ let options = {
 
 const platform = process.platform;
 
-//if (!storage.get('store')) {
+if (!storage.get('store')) {
     storage.set('store', {
         auth: {
+            id: null,
             avatar: '',
             token: null
         },
         snippets: []
     });
-//}
+}
 
 ipcMain.on('save-snippets', (event, data) => {
     storage.set('store', Object.assign(storage.get('store'), {
