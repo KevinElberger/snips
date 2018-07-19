@@ -13,10 +13,10 @@ export default {
 
       if (! this.expandedView) {
         header.css({ marginLeft: '0', width: '100%' });
-        snippetView.css({ marginLeft: '0', width: '100%' });
+        snippetView.css({ marginLeft: '0', width: '100%', zIndex: '999' });
       } else {
         header.css({ marginLeft: '30rem', width: 'calc(100% - 30rem)' });
-        snippetView.css({ marginLeft: '30rem', width: 'calc(100% - 30rem)' });
+        snippetView.css({ marginLeft: '30rem', width: 'calc(100% - 30rem)', zIndex: '0' });
       }
 
       ace.edit('content').focus();
