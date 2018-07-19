@@ -65,11 +65,13 @@ export default {
     logout() {
       $('.mini.modal').modal('show');
 
-      // logoutUser();
+      $('.ui.positive').on('click', function() {
+        logoutUser();
 
-      // if (isElectron()) {
-      //   ipcRenderer.send('save-auth', defaultAuth);
-      // }
+        if (isElectron()) {
+          ipcRenderer.send('save-auth', defaultAuth);
+        }
+      });
     },
 
     /**
