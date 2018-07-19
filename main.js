@@ -2,6 +2,7 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
+const path = require('path');
 const reloader = require('electron-reload')(__dirname);
 const Store = require('electron-store');
 const storage = new Store();
@@ -10,7 +11,10 @@ require('dotenv').config();
 let mainWindow;
 let options = {
     width: 1200,
-    height: 800
+    height: 800,
+    webPreferences: {
+        preload: path.join(__dirname, '/preload.js')
+    }
 };
 
 const platform = process.platform;
@@ -41,10 +45,7 @@ function createWindow () {
     if (platform === 'darwin') {
         options = Object.assign(options, {
             frame: false,
-            titleBarStyle: 'hidden',
-            webPreferences: {
-                preload: __dirname + '/preload.js'
-            }
+            titleBarStyle: 'hidden'
         });
     }
 
