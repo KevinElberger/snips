@@ -50,7 +50,7 @@ export function authenticateGithub() {
   });
 
   const rootUrl = 'https://github.com/login/oauth/authorize';
-  const params = '?client_id=' + Constants.AUTH_OPTIONS.clientId + '&scope=["gists"]';
+  const params = '?client_id=' + Constants.AUTH_OPTIONS.clientId + '&scope=gist';
   const githubUrl = rootUrl + params;
 
   window.loadURL(githubUrl);

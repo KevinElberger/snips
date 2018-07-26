@@ -3,7 +3,7 @@
 }
 
 #snippet-list {
-  top: -1px;
+  top: 0;
   height: 100%;
   box-shadow: none;
   border-radius: 0;
