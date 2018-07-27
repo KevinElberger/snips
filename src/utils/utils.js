@@ -72,8 +72,8 @@ export function authenticateGithub() {
       loginUser(Constants.AUTH_OPTIONS, code);
     } else if (error) {
       alert(
-        "Something went wrong and we couldn't " +
-        "log you into Github. Please try again."
+        'Something went wrong and we couldn\'t ' +
+        'log you into Github. Please try again.'
       );
     }
   }

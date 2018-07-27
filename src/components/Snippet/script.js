@@ -1,8 +1,6 @@
 export default {
   name: 'Snippet',
-  props: [
-    'id', 'title', 'content', 'language', 'isPinned', 'languageFormatted'
-  ],
+  props: ['activeSnippet'],
 
   mounted: function() {
     const editor = ace.edit('content');

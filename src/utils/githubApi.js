@@ -57,6 +57,10 @@ export function getGists(token) {
       axios.all(getAllGistsRequests)
         .then(function(result) {
           // Map gists here
+          const gists = result.map(gist => gist.data.files);
+
+          console.log('the gists are: ');
+          console.log(gists);
         });
       
     }).catch(function(error) {
