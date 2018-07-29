@@ -65,6 +65,9 @@ export function getGists(token) {
     const gists = [];
 
     mockGists.forEach(gist => {
+      const owner = gist.owner ? gist.owner.login : 'You';
+      const createdOn = new Date(gist.created_at).toLocaleString();
+      
       Object.keys(gist.files).map(file => {
         const snippet = gist.files[file];
 
@@ -79,7 +82,9 @@ export function getGists(token) {
           content: snippet.content,
           filename: snippet.filename,
           language: snippet.language,
-          description: snippet.description || ''
+          owner: owner,
+          description: gist.description || '',
+          createdOn: createdOn
         });
       });
     });
@@ -125,4 +130,8 @@ export function patchGist(id, token, gists) {
   }
 
   return makeAuthRequest(url, method, token, data);
+}
+
+export function createGist(token, gist) {
+
 }

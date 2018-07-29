@@ -1,8 +1,40 @@
+.bold {
+  color: #24292e !important;
+}
+
+.created-date {
+  float: left;
+}
+
+#created-on {
+  left: 0;
+  margin-left: 30px;
+  position: absolute;
+}
+
+#description-wrapper {
+  padding: 6px;
+  margin-left: 30px;
+  position: absolute;
+  bottom: 0 !important;
+  width: calc(100% - 60px);
+}
+
+#detail {
+  width: 100%;
+  height: 24%;
+  border-bottom: 1px solid #eee;
+}
+
+.field label {
+  float: left;
+}
+
 #header {
   top: 0;
   z-index: 102;
-  height: 12rem;
-  padding: 10px 0;
+  height: 14rem;
+  padding-top: 10px;
   margin-left: 29.2rem;
   position: absolute;
   background-color: #fff;
@@ -21,12 +53,29 @@ i.icon.heart.outline:before {
   content: "\f004";
 }
 
+i.calendar {
+  float: left;
+  margin-top: 5px;
+}
+
 .language-selector:before {
   background: none !important;
 }
 
 #save:before, #pin:before, #del:before {
   background: none !important;
+}
+
+.small {
+  font-size: .85714286em;
+  color: rgba(0,0,0,.5);
+}
+
+textarea {
+  float: left;
+  resize: none !important;  
+  font-size: .85714286em !important;
+  color: rgba(0,0,0,.5) !important;
 }
 
 .title {

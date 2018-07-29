@@ -5,9 +5,11 @@ export function getDefaultSnippet() {
     title: '',
     content: '',
     id: getId(),
+    owner: 'You',
     isGist: false,
     isActive: true,
     isPinned: false,
+    createdOn: new Date().toLocaleString()
   };
 };
 
