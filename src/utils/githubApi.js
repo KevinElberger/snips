@@ -74,8 +74,10 @@ export function getGists(token) {
           gistID: gist.id,
           isActive: false,
           isPinned: false,
+          toDelete: false,
           title: snippet.filename,
           content: snippet.content,
+          filename: snippet.filename,
           language: snippet.language,
           description: snippet.description || ''
         });
@@ -118,11 +120,9 @@ export function patchGist(id, token, gists) {
     };
 
     gists.forEach(gist => {
-      gist.files[gist.title] = gist.toDelete ? null : gist;
+      data.files[gist.title] = gist.toDelete ? null : gist;
     });
   }
-
-  console.log('data is: ', data);
 
   return makeAuthRequest(url, method, token, data);
 }

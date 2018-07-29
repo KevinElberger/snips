@@ -45,17 +45,17 @@ export default {
   },
 
   beforeCreate() {
-    if (isElectron()) {
-      ipcRenderer.on('load-data', (event, data) => {
-        this.$store.commit('load', data);
+    if (! isElectron()) return;
 
-        if (data.auth.token) {
-          getGists(data.auth.token).then(gists => {
-            this.$store.commit('addGists', gists);
-          });
-        }
-      });
-    }
+    ipcRenderer.on('load-data', (event, data) => {
+      this.$store.commit('load', data);
+
+      if (data.auth.token) {
+        getGists(data.auth.token).then(gists => {
+          this.$store.commit('addGists', gists);
+        });
+      }
+    });
   },
 
   mounted() {
@@ -80,14 +80,15 @@ export default {
     },
 
     /**
-     * Removes a snippet from the list
+     * Removes a snippet from the list and
+     * deletes a Gist from GitHub
      */
     del() {
       const { id } = this.activeSnippet;
       const isGist = this.activeSnippet.isGist;
       const token = this.$store.state.auth.token;
       const hasBeenSaved = this.$store.getters.getSnippet(id);
-      const files = isGist ? this.$store.getters.getFiles(this.activeSnippet.gistID) : [];
+      const files = isGist ? this.$store.getters.getFiles(this.activeSnippet.gistID) : null;
 
       if (! hasBeenSaved) return;
       
@@ -95,9 +96,10 @@ export default {
         files.find(file => {
           if (file.id === id) file.toDelete = true;
         });
+      }
+      
+      if (isGist) {
         patchGist(this.activeSnippet.gistID, token, files);
-      } else if (isGist) {
-        patchGist(this.activeSnippet.gistID, token);
       }
 
       this.$store.commit('deleteSnippet', this.activeSnippet);
@@ -123,11 +125,19 @@ export default {
      */
     save() {
       const { id } = this.activeSnippet;
-      const isInList = this.$store.getters.getSnippet(id);
+      const isGist = this.activeSnippet.isGist;      
+      const token = this.$store.state.auth.token;      
+      const hasBeenSaved = this.$store.getters.getSnippet(id);
 
       this.updateValues();
 
-      if (isInList) {
+      if (isGist) {
+        patchGist(this.activeSnippet.gistID, token, [
+          this.activeSnippet
+        ]);
+      }
+
+      if (hasBeenSaved) {
         this.$store.commit('updateSnippet', this.activeSnippet);
       } else {
         this.$store.commit('addSnippet', this.activeSnippet);
@@ -135,7 +145,7 @@ export default {
 
       notifySave.bind(this, this.activeSnippet.title)();
 
-      // Avoid saving GitHub Gists so we can re-sync
+      // Avoid saving GitHub Gists so we can re-sync on new session
       if (isElectron()) {
         ipcRenderer.send('save-snippets', this.$store.state.snippets.filter(snip => {
           return !snip.isGist;
@@ -148,9 +158,15 @@ export default {
      */
     updateValues() {
       const content = this.editor.getValue();
+      const isGist = this.activeSnippet.isGist;
+      const hasTitle = this.activeSnippet.title !== '';
 
-      if (this.activeSnippet.title === '') {
+      if (! hasTitle) {
         this.activeSnippet.title = this.title;
+      }
+
+      if (isGist) {
+        this.activeSnippet.filename = this.activeSnippet.title;
       }
 
       Object.assign(this.activeSnippet, {
