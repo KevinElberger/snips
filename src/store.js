@@ -42,6 +42,10 @@ export const store = new Vuex.Store({
       state.snippets.push(payload);
     },
 
+    addGists(state, payload) {
+      state.snippets.push(...payload);
+    },
+
     deleteSnippet(state, payload) {
       const idx = state.snippets.findIndex(snip => {
         return snip.id === payload.id;

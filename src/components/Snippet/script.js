@@ -4,20 +4,21 @@ export default {
 
   mounted: function() {
     const editor = ace.edit('content');
-    const modelist = ace.require("ace/ext/modelist");
+    const modelist = ace.require('ace/ext/modelist');
+    const title = $('#title-wrapper input');
     
     editor.focus();
 
-    $('.ui.dropdown').dropdown({
-      onChange: (value, text, item) => {
-        if (! value) return;
+    title.on('input', function() {
+      Object.keys(modelist.modesByName).forEach(modename => {
+        const mode = modelist.modesByName[modename];
 
-        const mode = modelist.modesByName[value].mode;
-
-        editor.session.setMode(mode);
-      }
+        if (mode.extRe.test($(this).val())) {
+          editor.session.setMode(mode.mode);
+        }
+      });
     });
 
-    editor.setTheme("ace/theme/tomorrow_night");
+    editor.setTheme('ace/theme/tomorrow_night');
   }
 };

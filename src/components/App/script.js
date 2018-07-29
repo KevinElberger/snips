@@ -31,14 +31,12 @@ export default {
   },
 
   editor: null,
-  language: null,
 
   data() {
     return {
       content: '',
       text: 'text',
       languageFilter: '',
-      plainText: 'Plain Text',
       title: 'Untitled Snippet',
       activeSnippet: getDefaultSnippet()
     }
@@ -54,7 +52,6 @@ export default {
 
   mounted() {
     this.editor = ace.edit('content');
-    this.language = $('.ui.dropdown');
   },
 
   methods: {
@@ -117,6 +114,7 @@ export default {
       }
 
       notifySave.bind(this, this.activeSnippet.title)();
+
       if (isElectron()) {
         ipcRenderer.send('save-snippets', this.$store.state.snippets);
       }
@@ -127,17 +125,13 @@ export default {
      */
     updateValues() {
       const content = this.editor.getValue();
-      const newLanguage = this.language.dropdown('get value') || this.text;
-      const newFullLanguage = this.language.dropdown('get text') || this.plainText;
 
       if (this.activeSnippet.title === '') {
         this.activeSnippet.title = this.title;
       }
 
       Object.assign(this.activeSnippet, {
-        content,
-        language: newLanguage,
-        languageFormatted: newFullLanguage
+        content
       });
 
       return this.activeSnippet;
@@ -157,10 +151,22 @@ export default {
       this.activeSnippet.isActive = true;
       $('input.title').val(this.activeSnippet.title);
       this.editor.setValue(snippet.content);
-      this.language.dropdown('set value', this.activeSnippet.language);
-      this.language.dropdown('set text', this.activeSnippet.languageFormatted);
+
+      this.setEditorMode(this.activeSnippet.title);
 
       this.$store.commit('updateSnippet', this.activeSnippet);
+    },
+
+    setEditorMode(title) {
+      const modelist = ace.require('ace/ext/modelist');
+
+      Object.keys(modelist.modesByName).forEach(modename => {
+        const mode = modelist.modesByName[modename];
+
+        if (mode.extRe.test(title)) {
+          this.editor.session.setMode(mode.mode);
+        }
+      });
     },
 
     /**
@@ -169,9 +175,7 @@ export default {
     resetActiveSnippet() {
       this.editor.setValue('');
       $('input.title').val('');
-      this.language.dropdown('set value', this.text);
-      this.language.dropdown('set text', this.plainText);
-
+ 
       this.$store.state.snippets.forEach(snippet => {
         snippet.isActive = false;
         this.$store.commit('updateSnippet', snippet);

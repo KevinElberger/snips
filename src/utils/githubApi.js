@@ -1,5 +1,6 @@
 import axios from 'axios';
 import isElectron from 'is-electron';
+import { getId } from './utils.js';
 import { store } from '../store.js';
 import mockGists from '../../test/mockGists.js';
 import { makeRequest, makeAuthRequest } from './utils.js';
@@ -17,9 +18,11 @@ export function loginUser(authConfig, code) {
   return makeRequest(url, method, data)
     .then(function(response) {
       getUser(response.data.access_token)
-        .then(function() {
-          console.log(getGists(response.data.access_token));
-        });
+        .then(getGists(response.data.access_token)
+          .then(gists => {
+            console.log(gists);
+            store.commit('addGists', gists);
+          }));
     }).catch(function(error) {
       console.log('Login failure: ', error);
     });
@@ -47,14 +50,41 @@ export function getUser(token) {
     });
 }
 
+/**
+ * Gets all private and public User Gists,
+ * transforms each file in a gist into
+ * a snippet, each of which are tied
+ * together via their Gist ID
+ * 
+ * @param {string} token 
+ */
 export function getGists(token) {
   const method = 'GET';
   const url = 'https://api.github.com/gists';
 
-  console.log('Returning all gists');
-
   return new Promise((resolve, reject) => {
-    setTimeout(resolve, 100, mockGists);
+    const gists = [];
+
+    mockGists.forEach(gist => {
+      Object.keys(gist.files).map(file => {
+        const snippet = gist.files[file];
+
+        gists.push({
+          id: getId(),
+          language: '',          
+          isGist: true,
+          gistID: gist.id,
+          isActive: false,
+          isPinned: false,
+          title: snippet.filename,
+          content: snippet.content,
+          description: snippet.description || '',
+          languageFormatted: snippet.language || ''
+        });
+      });
+    });
+
+    setTimeout(resolve, 100, gists);
   });
 
   // return makeAuthRequest(url, method, token)
