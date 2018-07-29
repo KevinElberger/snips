@@ -10,7 +10,7 @@ import {
   logoutUser,
   authenticateGithub
 } from '../../utils/utils.js';
-import { getGists } from '../../utils/githubApi.js';
+import { getGists, patchGist } from '../../utils/githubApi.js';
 import isElectron from 'is-electron';
 
 import { 
@@ -84,9 +84,21 @@ export default {
      */
     del() {
       const { id } = this.activeSnippet;
-      const isInList = this.$store.getters.getSnippet(id);
+      const isGist = this.activeSnippet.isGist;
+      const token = this.$store.state.auth.token;
+      const hasBeenSaved = this.$store.getters.getSnippet(id);
+      const files = isGist ? this.$store.getters.getFiles(this.activeSnippet.gistID) : [];
 
-      if (! isInList) return;
+      if (! hasBeenSaved) return;
+      
+      if (isGist && files.length) {
+        files.find(file => {
+          if (file.id === id) file.toDelete = true;
+        });
+        patchGist(this.activeSnippet.gistID, token, files);
+      } else if (isGist) {
+        patchGist(this.activeSnippet.gistID, token);
+      }
 
       this.$store.commit('deleteSnippet', this.activeSnippet);
       notifyDelete.bind(this, this.activeSnippet.title)();

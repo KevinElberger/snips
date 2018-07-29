@@ -20,7 +20,6 @@ export function loginUser(authConfig, code) {
       getUser(response.data.access_token)
         .then(getGists(response.data.access_token)
           .then(gists => {
-            console.log(gists);
             store.commit('addGists', gists);
           }));
     }).catch(function(error) {
@@ -106,10 +105,24 @@ export function getGists(token) {
   //   });
 }
 
-export function patchGist(id, token) {
+// Updates or deletes a file from a Gist
+export function patchGist(id, token, gists) {
+  const method = 'PATCH';
+  const url = 'https://api.github.com/gists/' + id;
+  let data = null;
 
-}
+  if (gists) {
+    data = {
+      description: gists[0].description,
+      files: {}
+    };
 
-export function deleteGist(id, token) {
+    gists.forEach(gist => {
+      gist.files[gist.title] = gist.toDelete ? null : gist;
+    });
+  }
 
+  console.log('data is: ', data);
+
+  return makeAuthRequest(url, method, token, data);
 }

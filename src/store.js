@@ -18,6 +18,9 @@ export const store = new Vuex.Store({
   getters: {
     getSnippet: (state) => (id) => {
       return state.snippets.find(snippet => snippet.id === id);
+    },
+    getFiles: (state) => (id) => {
+      return state.snippets.filter(snippet => snippet.gistID === id);
     }
   },
 
