@@ -4,6 +4,7 @@
 
 .created-date {
   float: left;
+  text-align: left;
 }
 
 #created-on {

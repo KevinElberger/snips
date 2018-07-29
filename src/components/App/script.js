@@ -190,6 +190,8 @@ export default {
       this.activeSnippet.isActive = true;
       $('input.title').val(this.activeSnippet.title);
       this.editor.setValue(snippet.content);
+      this.editor.focus();
+      this.editor.navigateFileEnd();
 
       setEditorMode(this.activeSnippet.title);
 
