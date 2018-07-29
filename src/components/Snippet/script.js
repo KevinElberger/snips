@@ -1,3 +1,5 @@
+import { setEditorMode } from '../../utils/utils.js';
+
 export default {
   name: 'Snippet',
   props: ['activeSnippet'],
@@ -10,13 +12,7 @@ export default {
     editor.focus();
 
     title.on('input', function() {
-      Object.keys(modelist.modesByName).forEach(modename => {
-        const mode = modelist.modesByName[modename];
-
-        if (mode.extRe.test($(this).val())) {
-          editor.session.setMode(mode.mode);
-        }
-      });
+      setEditorMode($(this).val());
     });
 
     editor.setTheme('ace/theme/tomorrow_night');

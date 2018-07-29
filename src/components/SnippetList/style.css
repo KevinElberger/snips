@@ -23,6 +23,7 @@
   display: block;
   overflow: hidden;
   position: relative;
+  line-height: 1.1em;
   white-space: nowrap;
   text-overflow: ellipsis;
   color: rgba(0,0,0,.6);

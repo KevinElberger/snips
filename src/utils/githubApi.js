@@ -70,16 +70,15 @@ export function getGists(token) {
         const snippet = gist.files[file];
 
         gists.push({
-          id: getId(),
-          language: '',          
+          id: getId(),    
           isGist: true,
           gistID: gist.id,
           isActive: false,
           isPinned: false,
           title: snippet.filename,
           content: snippet.content,
-          description: snippet.description || '',
-          languageFormatted: snippet.language || ''
+          language: snippet.language,
+          description: snippet.description || ''
         });
       });
     });
@@ -105,4 +104,12 @@ export function getGists(token) {
   //   }).catch(function(error) {
   //     console.log('Could not get gists: ', error);
   //   });
+}
+
+export function patchGist(id, token) {
+
+}
+
+export function deleteGist(id, token) {
+
 }

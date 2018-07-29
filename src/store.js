@@ -36,6 +36,14 @@ export const store = new Vuex.Store({
 
     logout(state, payload) {
       state.auth = payload;
+
+      let i = state.snippets.length;
+
+      while (i--) {
+        if (state.snippets[i].isGist) {
+          state.snippets.splice(i, 1);
+        }
+      }
     },
 
     addSnippet(state, payload) {

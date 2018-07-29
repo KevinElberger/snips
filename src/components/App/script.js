@@ -10,12 +10,14 @@ import {
   logoutUser,
   authenticateGithub
 } from '../../utils/utils.js';
+import { getGists } from '../../utils/githubApi.js';
 import isElectron from 'is-electron';
 
 import { 
   notifyPin,
   notifySave,
-  notifyDelete
+  notifyDelete,
+  setEditorMode
 } from '../../utils/utils.js';
 
 const ipcRenderer = window.ipcRenderer;
@@ -46,6 +48,12 @@ export default {
     if (isElectron()) {
       ipcRenderer.on('load-data', (event, data) => {
         this.$store.commit('load', data);
+
+        if (data.auth.token) {
+          getGists(data.auth.token).then(gists => {
+            this.$store.commit('addGists', gists);
+          });
+        }
       });
     }
   },
@@ -62,7 +70,7 @@ export default {
     logout() {
       $('.mini.modal').modal('show');
 
-      $('.ui.positive').on('click', function() {
+      $('.ui.positive').on('click', () => {
         logoutUser();
 
         if (isElectron()) {
@@ -115,8 +123,11 @@ export default {
 
       notifySave.bind(this, this.activeSnippet.title)();
 
+      // Avoid saving GitHub Gists so we can re-sync
       if (isElectron()) {
-        ipcRenderer.send('save-snippets', this.$store.state.snippets);
+        ipcRenderer.send('save-snippets', this.$store.state.snippets.filter(snip => {
+          return !snip.isGist;
+        }));
       }
     },
 
@@ -152,21 +163,9 @@ export default {
       $('input.title').val(this.activeSnippet.title);
       this.editor.setValue(snippet.content);
 
-      this.setEditorMode(this.activeSnippet.title);
+      setEditorMode(this.activeSnippet.title);
 
       this.$store.commit('updateSnippet', this.activeSnippet);
-    },
-
-    setEditorMode(title) {
-      const modelist = ace.require('ace/ext/modelist');
-
-      Object.keys(modelist.modesByName).forEach(modename => {
-        const mode = modelist.modesByName[modename];
-
-        if (mode.extRe.test(title)) {
-          this.editor.session.setMode(mode.mode);
-        }
-      });
     },
 
     /**

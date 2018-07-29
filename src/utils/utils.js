@@ -98,6 +98,19 @@ export function logoutUser() {
   });
 }
 
+export function setEditorMode(string) {
+  const editor = ace.edit('content');
+  const modelist = ace.require('ace/ext/modelist');
+  
+  Object.keys(modelist.modesByName).forEach(name => {
+    const mode = modelist.modesByName[name];
+
+    if (mode.extRe.test(string)) {
+      editor.session.setMode(mode.mode);
+    }
+  });
+}
+
 export function makeRequest(url, method, data = {}) {
   axios.defaults.headers.common['Accept'] = 'application/json';
   axios.defaults.headers.common['Content-Type'] = 'application/json';
