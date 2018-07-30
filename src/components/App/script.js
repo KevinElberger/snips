@@ -73,6 +73,10 @@ export default {
       $('.ui.positive').on('click', () => {
         logoutUser();
 
+        if (this.activeSnippet.isGist) {
+          this.resetActiveSnippet();
+        }
+
         if (isElectron()) {
           ipcRenderer.send('save-auth', defaultAuth);
         }

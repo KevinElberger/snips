@@ -36,11 +36,12 @@
   z-index: 102;
   height: 14rem;
   padding-top: 10px;
-  margin-left: 29.2rem;
+  margin-left: 30.2rem;
   position: absolute;
   background-color: #fff;
-  width: calc(100% - 29.2rem);
+  width: calc(100% - 30.2rem);
   transition: all .3s ease-out;
+  border-left: 1px solid #eee;
 }
 
 #header-menu {

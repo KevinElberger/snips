@@ -2,8 +2,9 @@
   padding: 20%;
 }
 
-.item.active {
-  border-left: 4px solid #187FE7;
+.ui.vertical.menu .active.item {
+  transition: all .3s;
+  border-left: 6px solid #187FE7;
 }
 
 #snippet-list {
@@ -15,7 +16,7 @@
   overflow-x: hidden;
   position: absolute;
   margin: 0 0 0 15rem;
-  width: 15rem !important;
+  width: 16rem !important;
   background-color: #f8f8f8;
 }
 
@@ -25,6 +26,7 @@
 
 .snippet-content {
   display: block;
+  text-align: left;
   overflow: hidden;
   position: relative;
   line-height: 1.1em;
@@ -35,6 +37,7 @@
 
 .snippet-title {
   overflow: hidden;
+  text-align: left;
   white-space: nowrap;
   text-overflow: ellipsis;
   color: rgba(0,0,0,.87);
