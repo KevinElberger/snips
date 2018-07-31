@@ -34,8 +34,13 @@
   <div class="item languages-wrapper">
     <div class="header">Languages</div>
     <div class="item languages">
+      <div class="menu">
+        <a :class="{ active: activeEl === 'All' }" class="item language" @click="setLanguage('All')">
+          All
+        </a>
+      </div>
       <div v-for="(value, key) in languages" class="menu language-list">
-        <a class="item language">
+        <a :class="{ active: activeEl === key }" class="item language" @click="setLanguage(key)">
           {{ key }}
           <span class="count"> {{ value }}</span>
         </a>

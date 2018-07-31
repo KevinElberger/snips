@@ -41,4 +41,5 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   color: rgba(0,0,0,.87);
+  padding-left: 0 !important;
 }

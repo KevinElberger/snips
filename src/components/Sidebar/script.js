@@ -31,8 +31,6 @@ export default {
 
   methods: {
     setLanguage(language) {
-      const languageList = $('.item .active', $('.language-list'));
-
       this.activeEl = language;
 
       this.$store.commit('setLanguageFilter', language);

@@ -15,7 +15,7 @@ export default {
       if (language === 'All') return snippets;
 
       return snippets.filter(snippet => {
-        return snippet.languageFormatted === language;
+        return snippet.language.toLowerCase() === language.toLowerCase();
       });
     },
     
