@@ -3,7 +3,7 @@
 A desktop application to manage code snippets.
 
 
-![Screenshot](./src/static/img/snips.jpg)
+![Screenshot](./static/img/snips.jpg)
 
 ## Development
 
