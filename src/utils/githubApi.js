@@ -74,17 +74,17 @@ export function getGists(token) {
         gists.push({
           id: getId(),    
           isGist: true,
+          owner: owner,
           gistID: gist.id,
           isActive: false,
           isPinned: false,
           toDelete: false,
+          createdOn: createdOn,
           title: snippet.filename,
           content: snippet.content,
           filename: snippet.filename,
-          language: snippet.language,
-          owner: owner,
           description: gist.description || '',
-          createdOn: createdOn
+          language: snippet.language || 'text'
         });
       });
     });

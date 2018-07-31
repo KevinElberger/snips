@@ -111,6 +111,21 @@ export function setEditorMode(string) {
   });
 }
 
+export function getLanguageByFile(string) {
+  let language = '';
+  const modelist = ace.require('ace/ext/modelist');
+
+  Object.keys(modelist.modesByName).forEach(name => {
+    const mode = modelist.modesByName[name];
+
+    if (mode.extRe.test(string)) {
+      language = mode.name;
+    }
+  });
+
+  return language;
+}
+
 export function makeRequest(url, method, data = {}) {
   axios.defaults.headers.common['Accept'] = 'application/json';
   axios.defaults.headers.common['Content-Type'] = 'application/json';

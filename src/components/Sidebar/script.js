@@ -11,8 +11,9 @@ export default {
     pinnedSnippets() {
       return this.$store.state.snippets.filter(snip => snip.isPinned);
     },
-    language() {
-      return this.$store.state.languageFilter;
+    languages() {
+      const languages = this.$store.state.snippets.map(s => s.language);
+      return Array.from(new Set(languages));
     },
     isLoggedIn() {
       return this.$store.state.auth.loggedIn;

@@ -8,6 +8,7 @@ import {
  } from '../../utils/defaults.js';
 import {
   logoutUser,
+  getLanguageByFile,
   authenticateGithub
 } from '../../utils/utils.js';
 import { getGists, patchGist } from '../../utils/githubApi.js';

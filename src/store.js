@@ -57,6 +57,10 @@ export const store = new Vuex.Store({
       state.snippets.push(...payload);
     },
 
+    addLanguages(state, payload) {
+      state.languages.push(...payload);
+    },
+
     deleteSnippet(state, payload) {
       const idx = state.snippets.findIndex(snip => {
         return snip.id === payload.id;

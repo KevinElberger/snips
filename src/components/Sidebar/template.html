@@ -24,133 +24,20 @@
         </div>
       </div>
   </div>
+
+  <div class="item labels-wrapper">
+    <div class="header">Labels</div>
+    <div class="menu"></div>
+  </div>
   
   <div class="item languages-wrapper">
     <div class="header">Languages</div>
     <div class="item languages">
-      <div class="menu language-list">
-        <a 
-          @click="setLanguage('All')" 
-          class="item language" 
-          :class="{ active : activeEl == 'All' }">
-            All
-        </a>
-        <a 
-          @click="setLanguage('JavaScript')" 
-          class="item language javascript" 
-          :class="{ active : activeEl == 'JavaScript' }">
-            JavaScript
-        </a>
-        <a 
-          @click="setLanguage('C++')" 
-          class="item language cpp" 
-          :class="{ active : activeEl == 'C++' }">
-            C++
-        </a>
-        <a 
-          @click="setLanguage('Java')" 
-          class="item language java" 
-          :class="{ active : activeEl == 'Java' }">
-            Java
-        </a>
-        <a 
-          @click="setLanguage('C#')" 
-          class="item language csharp" 
-          :class="{ active : activeEl == 'C#' }">
-            C#
-        </a>
-        <a 
-          @click="setLanguage('CSS')" 
-          class="item language css" 
-          :class="{ active : activeEl == 'CSS' }">
-            CSS
-        </a>
-        <a 
-          @click="setLanguage('HTML')" 
-          class="item language html" 
-          :class="{ active : activeEl == 'HTML' }">
-            HTML
-        </a>
-        <a 
-          @click="setLanguage('C')" 
-          class="item language c" 
-          :class="{ active : activeEl == 'C' }">
-            C
-        </a>
-        <a 
-          @click="setLanguage('Swift')" 
-          class="item language swift" 
-          :class="{ active : activeEl == 'Swift' }">
-            Swift
-        </a>
-        <a 
-          @click="setLanguage('Scala')" 
-          class="item language scala" 
-          :class="{ active : activeEl == 'Scala' }">
-            Scala
-        </a>
-        <a 
-          @click="setLanguage('Plain Text')" 
-          class="item language text" 
-          :class="{ active : activeEl == 'Plain Text' }">
-            Plain Text
-        </a>        
-        <a  
-          @click="setLanguage('Objective-C')" 
-          class="item language objectivec" 
-          :class="{ active : activeEl == 'Objective-C' }">
-            Objective-C
-        </a>
-        <a 
-          @click="setLanguage('Go')" 
-          class="item language go" 
-          :class="{ active : activeEl == 'Go' }">
-            Go
-        </a>
-        <a 
-          @click="setLanguage('PHP')" 
-          class="item language php" 
-          :class="{ active : activeEl == 'PHP' }">
-            PHP
-        </a>
-        <a 
-          @click="setLanguage('R')" 
-          class="item language r" 
-          :class="{ active : activeEl == 'R' }">
-            R
-        </a>
-        <a 
-          @click="setLanguage('Ruby')" 
-          class="item language ruby" 
-          :class="{ active : activeEl == 'Ruby' }">
-            Ruby
-        </a>
-        <a 
-          @click="setLanguage('Perl')" 
-          class="item language perl" 
-          :class="{ active : activeEl == 'Perl' }">
-            Perl
-        </a>
-        <a 
-          @click="setLanguage('Python')" 
-          class="item language python" 
-          :class="{ active : activeEl == 'Python' }">
-            Python
-        </a>
-        <a 
-          @click="setLanguage('Visual Basic')" 
-          class="item language visual-basic" 
-          :class="{ active : activeEl == 'Visual Basic' }">
-            Visual Basic
+      <div v-for="(language) in languages" class="menu language-list">
+        <a class="item language">
+          {{ language.toLowerCase() }}
         </a>
       </div>
     </div>
-  </div>
-  
-  <br />
-  
-  <div class="item tags-wrapper">
-    <div class="header">Tags</div>
-    <div class="menu"></div>
   </div>
 </div>
