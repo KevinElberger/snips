@@ -12,8 +12,14 @@ export default {
       return this.$store.state.snippets.filter(snip => snip.isPinned);
     },
     languages() {
-      const languages = this.$store.state.snippets.map(s => s.language);
-      return Array.from(new Set(languages));
+      const languages = {};
+      
+      this.$store.state.snippets.map(s => {
+        const lang = s.language.toLowerCase();
+        languages[lang] = languages[lang] ? languages[lang] + 1 : 1;
+      });
+
+      return languages;
     },
     isLoggedIn() {
       return this.$store.state.auth.loggedIn;

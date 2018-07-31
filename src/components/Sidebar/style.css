@@ -3,6 +3,10 @@
   border-radius: 50px;
 }
 
+.count {
+  float: right;
+}
+
 .header {
   background: 0 0;
   text-align: left !important;
@@ -27,6 +31,11 @@
 .languages-wrapper {
   height: 12.5rem;
   padding: 1rem 0 0 0 !important;
+}
+
+.logo {
+  color: white;
+  margin: 10px !important;
 }
 
 .logout-wrapper {
