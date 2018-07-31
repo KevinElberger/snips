@@ -9,6 +9,7 @@ export function getDefaultSnippet() {
     isGist: false,
     isActive: true,
     isPinned: false,
+    language: 'text',
     createdOn: new Date().toLocaleString()
   };
 };

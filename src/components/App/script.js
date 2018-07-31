@@ -170,6 +170,8 @@ export default {
         this.activeSnippet.title = this.title;
       }
 
+      this.activeSnippet.language = getLanguageByFile(this.activeSnippet.title);
+
       if (isGist) {
         this.activeSnippet.filename = this.activeSnippet.title;
       }

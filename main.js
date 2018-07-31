@@ -19,7 +19,7 @@ let options = {
 
 const platform = process.platform;
 
-if (!storage.get('store')) {
+// if (!storage.get('store')) {
     storage.set('store', {
         auth: {
             avatar: '',
@@ -28,7 +28,7 @@ if (!storage.get('store')) {
         },
         snippets: []
     });
-}
+// }
 
 ipcMain.on('save-snippets', (event, data) => {
     storage.set('store', Object.assign(storage.get('store'), {
