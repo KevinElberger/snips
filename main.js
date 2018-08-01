@@ -65,6 +65,9 @@ function createWindow () {
     mainWindow.on('closed', function() {
         mainWindow = null;
     });
+
+    mainWindow.on('enter-full-screen', () => mainWindow.webContents.send('enter-full-screen'));
+    mainWindow.on('leave-full-screen', () => mainWindow.webContents.send('leave-full-screen'));
 }
 
 // call the createWindow() method when Electron has finished initializing
