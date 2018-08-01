@@ -16,7 +16,9 @@ export default {
       
       this.$store.state.snippets.map(s => {
         const lang = s.language.toLowerCase();
-        languages[lang] = languages[lang] ? languages[lang] + 1 : 1;
+        if (lang !== '') {
+          languages[lang] = languages[lang] ? languages[lang] + 1 : 1;
+        }
       });
 
       return languages;

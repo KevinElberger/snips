@@ -7,6 +7,14 @@ export default {
     }
   },
 
+  mounted() {
+    $('#sort').dropdown({
+      onChange: (value, text, item) => {
+        this.$store.commit('sort', value);
+      }
+    });
+  },
+
   computed: {
     snippets() {
       const snippets = this.$store.state.snippets;

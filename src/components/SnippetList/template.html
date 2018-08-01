@@ -1,4 +1,18 @@
 <div id="snippet-list" class="ui vertical menu">
+  <div id="snippet-list-header">
+    <h5 class="ui header">
+      SORT BY
+      <div id="sort" class="ui inline dropdown">
+        <div class="text">Title</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="active item" data-text="Title">Title</div>
+          <div class="item" data-text="Newest">Newest</div>
+          <div class="item" data-text="Last Updated">Last Updated</div>
+        </div>
+      </div>
+    </h5>
+  </div>
   <div v-if="snippets.length === 0" class="no-snippets">
     <p>No saved snippets</p>
   </div>

@@ -75,6 +75,23 @@ export const store = new Vuex.Store({
 
     setLanguageFilter(state, payload) {
       state.languageFilter = payload;
+    },
+
+    sort(state, payload) {
+      const type = payload;
+      const snippets = state.snippets;
+      const alphabetically = (a, b) => {
+        return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
+      };
+      const newest = (a, b) => {
+        return new Date(b.createdOn) - new Date(a.createdOn);
+      };
+
+      if (type === 'title') {
+        snippets.sort(alphabetically);
+      } else if (type === 'newest') {
+        snippets.sort(newest);
+      }
     }
   }
 });
