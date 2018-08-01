@@ -79,14 +79,8 @@ export const store = new Vuex.Store({
 
     sort(state, payload) {
       const type = payload;
-      const alphabetically = (a, b) => {
-        return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
-      };
-      const newest = (a, b) => {
-        const dateA = new Date(a.createdOn);
-        const dateB = new Date(b.createdOn);
-        return dateB - dateA;
-      };
+      const alphabetically = (a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase());
+      const newest = (a, b) => new Date(b.createdOn) - new Date(a.createdOn);
 
       if (type === 'title') {
         state.snippets.sort(alphabetically);

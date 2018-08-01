@@ -14,12 +14,13 @@ let options = {
     height: 800,
     webPreferences: {
         preload: path.join(__dirname, '/preload.js')
-    }
+    },
+    icon: path.join(__dirname, 'static/icons/png/64x64.png')
 };
 
 const platform = process.platform;
 
-if (!storage.get('store')) {
+// if (!storage.get('store')) {
     storage.set('store', {
         auth: {
             avatar: '',
@@ -28,7 +29,7 @@ if (!storage.get('store')) {
         },
         snippets: []
     });
-}
+// }
 
 ipcMain.on('save-snippets', (event, data) => {
     storage.set('store', Object.assign(storage.get('store'), {
