@@ -51,6 +51,12 @@ export default {
     ipcRenderer.on('load-data', (event, data) => {
       this.$store.commit('load', data);
 
+      this.$store.commit('sort', 'title');    
+
+      if (this.$store.state.snippets.length) {
+        this.displaySnippet(this.$store.state.snippets[0]);
+      }
+
       if (data.auth.token) {
         getGists(data.auth.token).then(gists => {
           this.$store.commit('addGists', gists);

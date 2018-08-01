@@ -79,18 +79,21 @@ export const store = new Vuex.Store({
 
     sort(state, payload) {
       const type = payload;
-      const snippets = state.snippets;
       const alphabetically = (a, b) => {
         return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
       };
       const newest = (a, b) => {
-        return new Date(b.createdOn) - new Date(a.createdOn);
+        const dateA = new Date(a.createdOn);
+        const dateB = new Date(b.createdOn);
+        return dateB - dateA;
       };
 
       if (type === 'title') {
-        snippets.sort(alphabetically);
+        state.snippets.sort(alphabetically);
       } else if (type === 'newest') {
-        snippets.sort(newest);
+        state.snippets.sort(newest);
+      } else if (type === 'oldest') {
+        state.snippets.sort(newest).reverse();
       }
     }
   }

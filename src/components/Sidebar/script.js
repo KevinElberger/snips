@@ -13,9 +13,14 @@ export default {
     },
     languages() {
       const languages = {};
-      
-      this.$store.state.snippets.map(s => {
-        const lang = s.language.toLowerCase();
+      const snippets = this.$store.state.snippets;
+      const sortedLanguages = snippets.sort((a, b) => {
+        return a.language > b.language;
+      });
+
+      Object.keys(sortedLanguages).forEach(s => {
+        const lang = sortedLanguages[s].language.toLowerCase();
+
         if (lang !== '') {
           languages[lang] = languages[lang] ? languages[lang] + 1 : 1;
         }
