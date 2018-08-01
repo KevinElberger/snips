@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
       token: null,
       loggedIn: false
     },
+    sort: 'title',
     snippets: [],
     loggedIn: false,
     languageFilter: 'All'
@@ -49,6 +50,11 @@ export const store = new Vuex.Store({
       }
     },
 
+    sort(state, payload) {
+      console.log('state sort to: ', payload);
+      state.sort = payload;
+    },
+  
     addSnippet(state, payload) {
       state.snippets.push(payload);
     },
@@ -75,20 +81,6 @@ export const store = new Vuex.Store({
 
     setLanguageFilter(state, payload) {
       state.languageFilter = payload;
-    },
-
-    sort(state, payload) {
-      const type = payload;
-      const alphabetically = (a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase());
-      const newest = (a, b) => new Date(b.createdOn) - new Date(a.createdOn);
-
-      if (type === 'title') {
-        state.snippets.sort(alphabetically);
-      } else if (type === 'newest') {
-        state.snippets.sort(newest);
-      } else if (type === 'oldest') {
-        state.snippets.sort(newest).reverse();
-      }
     }
   }
 });
