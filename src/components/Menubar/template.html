@@ -26,15 +26,20 @@
     </div>
 
   </div>
-  <div id="detail" class="row">
-    <div id="title-wrapper" class="ui large icon input transparent">         
-      <input v-if="activeSnippet" v-model="activeSnippet.title" class="title" type="text" placeholder="Untitled Snippet">
+  <div id="detail">
+    <div class="row">
+      <div id="title-wrapper" class="ui large icon input transparent">         
+        <input v-if="activeSnippet" v-model="activeSnippet.title" class="title" type="text" placeholder="Untitled Snippet">
+      </div>
     </div>
-    <div id="created-on">
-      <i class="calendar outline icon"></i>
-      <p class="small created-date">
-        Created by <strong class="bold">{{ activeSnippet.owner }}</strong> <br/> <strong>{{ activeSnippet.createdOn }}</strong>
-      </p>
+
+    <div class="row">
+      <div id="created-on">
+        <i class="calendar outline icon"></i>
+        <p class="small created-date">
+          Created by <strong class="bold">{{ activeSnippet.owner }}</strong> <br/> <strong>{{ activeSnippet.createdOn }}</strong>
+        </p>
+      </div>
     </div>
   </div>
   

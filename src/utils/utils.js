@@ -109,6 +109,11 @@ export function setEditorMode(string) {
       editor.session.setMode(mode.mode);
     }
   });
+
+  // Default to text if no filename is present
+  if (! string.includes('.')) {
+    editor.session.setMode(modelist.modesByName['text'].mode);
+  }
 }
 
 export function getLanguageByFile(string) {
@@ -122,6 +127,8 @@ export function getLanguageByFile(string) {
       language = mode.name;
     }
   });
+
+  if (language === '') language = 'text';
 
   return language;
 }
