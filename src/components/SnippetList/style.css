@@ -29,14 +29,22 @@ h5.ui.header {
 }
 
 .snippet-content {
-  display: block;
+  width: 80%;
   text-align: left;
   overflow: hidden;
   position: relative;
   line-height: 1.1em;
   white-space: nowrap;
+  display: inline-block;
   text-overflow: ellipsis;
   color: rgba(0,0,0,.6);
+}
+
+.snippet-icon-type {
+  top: 44%;
+  padding-left: 8px;
+  position: absolute;
+  display: inline-block;
 }
 
 #snippet-list-header {
