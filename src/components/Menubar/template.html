@@ -1,9 +1,9 @@
 <div id="header">
 
   <div id="header-menu" class="ui menu">
-    
-    <div id="title-wrapper" class="ui large icon input transparent">
-        <input v-if="activeSnippet" v-model="activeSnippet.title" class="title" type="text" placeholder="Untitled Snippet">
+    <div id="snippet-search" class="ui icon input">
+      <input type="text" placeholder="Search...">
+      <i class="search icon"></i>
     </div>
 
     <div id="snippet-menu" class="right menu">
@@ -27,6 +27,9 @@
 
   </div>
   <div id="detail" class="row">
+    <div id="title-wrapper" class="ui large icon input transparent">         
+      <input v-if="activeSnippet" v-model="activeSnippet.title" class="title" type="text" placeholder="Untitled Snippet">
+    </div>
     <div id="created-on">
       <i class="calendar outline icon"></i>
       <p class="small created-date">

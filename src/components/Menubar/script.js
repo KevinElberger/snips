@@ -6,6 +6,13 @@ export default {
       expandedView: false
     }
   },
+  mounted() {
+    const store = this.$store;
+    $('#snippet-search input').on('input', function() {
+      const search = $(this).val();
+      store.commit('search', search);
+    });
+  },
   methods: {
     expandSnippetView() {
       const header = $('#header');

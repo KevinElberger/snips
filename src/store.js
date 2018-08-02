@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
       token: null,
       loggedIn: false
     },
+    search: '',
     sort: 'title',
     snippets: [],
     loggedIn: false,
@@ -51,8 +52,11 @@ export const store = new Vuex.Store({
     },
 
     sort(state, payload) {
-      console.log('state sort to: ', payload);
       state.sort = payload;
+    },
+
+    search(state, payload) {
+      state.search = payload;
     },
   
     addSnippet(state, payload) {
