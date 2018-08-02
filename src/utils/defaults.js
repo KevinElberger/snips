@@ -10,6 +10,7 @@ export function getDefaultSnippet() {
     isActive: true,
     isPinned: false,
     language: 'text',
+    lastUpdated: new Date(),
     createdOn: new Date().toLocaleString()
   };
 };

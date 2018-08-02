@@ -191,7 +191,8 @@ export default {
       }
 
       Object.assign(this.activeSnippet, {
-        content
+        content,
+        lastUpdated: new Date()
       });
 
       return this.activeSnippet;

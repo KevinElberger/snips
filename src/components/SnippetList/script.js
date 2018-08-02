@@ -16,8 +16,9 @@ export default {
   },
   methods: {
     sort(snippets, sort) {
-      const alphabetical = (a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase());
       const newest = (a, b) => new Date(b.createdOn) - new Date(a.createdOn);
+      const lastUpdated = (a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated);
+      const alphabetical = (a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase());
 
       if (sort === 'title') {
         snippets.sort(alphabetical);
@@ -25,6 +26,8 @@ export default {
         snippets.sort(newest);
       } else if (sort === 'oldest') {
         snippets.sort(newest).reverse();
+      } else if (sort === 'last updated') {
+        snippets.sort(lastUpdated);
       }
 
       return snippets;
