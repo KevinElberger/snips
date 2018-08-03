@@ -9,9 +9,11 @@ const storage = new Store();
 require('dotenv').config();
 
 let mainWindow;
-let options = {
+const options = {
     width: 1200,
     height: 800,
+    minWidth: 900,
+    minHeight: 650,
     webPreferences: {
         preload: path.join(__dirname, '/preload.js')
     },

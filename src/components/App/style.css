@@ -22,6 +22,16 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.right-panel {
+  height: 100%;
+  display: flex;
+  left: 30.2rem;
+  position: absolute;
+  flex-direction: column;
+  width: calc(100% - 30.2rem);
+  transition: all .3s ease-out;
+}
+
 .ui.negative.button {
   background-color: #1b1c1d;
 }

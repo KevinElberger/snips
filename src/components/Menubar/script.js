@@ -15,15 +15,12 @@ export default {
   },
   methods: {
     expandSnippetView() {
-      const header = $('#header');
-      const snippetView = $('#snippet-container');
+      const rightPanel = $('.right-panel');
 
       if (! this.expandedView) {
-        header.css({ marginLeft: '0', width: '100%' });
-        snippetView.css({ marginLeft: '0', width: '100%', zIndex: '101' });
+        rightPanel.css({ left: '0', width: '100%', zIndex: '200'  });
       } else {
-        header.css({ marginLeft: '30.2rem', width: 'calc(100% - 30.2rem)' });
-        snippetView.css({ marginLeft: '30.2rem', width: 'calc(100% - 30.2rem)', zIndex: '0' });
+        rightPanel.css({ left: '30.2rem', width: 'calc(100% - 30.2rem)' });
       }
 
       ace.edit('content').focus();

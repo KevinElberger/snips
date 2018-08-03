@@ -3,14 +3,10 @@
 }
 
 #header {
-  top: 0;
+  width: 100%;
   z-index: 102;
   padding-top: 10px;
-  position: absolute;
-  margin-left: 30.2rem;
   background-color: #fff;
-  width: calc(100% - 30.2rem);
-  transition: all .3s ease-out;
   border-left: 1px solid #eee;
 }
 
