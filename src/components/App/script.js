@@ -68,12 +68,15 @@ export default {
 
     if (! isElectron()) return;
 
+    // Adjust Ace text editor and hide titlebar
     ipcRenderer.on('enter-full-screen', () => {
       $('#app').css({ 'top': 0 });
+      $('#content').css({ 'height': 'calc(100% - 218px)'});
     });
 
     ipcRenderer.on('leave-full-screen', () => {
       $('#app').css({ 'top': '24px' });
+      $('#content').css({ 'height': 'calc(100% - 240px)'});
     });
   },
 
