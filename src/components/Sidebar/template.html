@@ -42,12 +42,13 @@
       <div class="menu">
         <a :class="{ active: activeEl === 'All' }" class="item language" @click="setLanguage('All')">
           All
+          <span class="count">{{ snippetCount }}</span>
         </a>
       </div>
       <div v-for="(value, key) in languages" class="menu language-list">
         <a :class="{ active: activeEl === key }" class="item language" @click="setLanguage(key)">
           {{ key }}
-          <span class="count"> {{ value }}</span>
+          <span class="count">{{ value }}</span>
         </a>
       </div>
     </div>

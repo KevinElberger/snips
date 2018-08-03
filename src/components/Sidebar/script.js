@@ -11,6 +11,9 @@ export default {
     pinnedSnippets() {
       return this.$store.state.snippets.filter(snip => snip.isPinned);
     },
+    snippetCount() {
+      return this.$store.state.snippets.length;
+    },
     languages() {
       const languages = {};
       const snippets = this.$store.state.snippets;

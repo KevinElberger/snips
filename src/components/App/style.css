@@ -1,6 +1,7 @@
 html {
   margin-top: 32px; 
 }
+
 html, body {
   margin: 0;
   width: 100%;
@@ -8,6 +9,7 @@ html, body {
   overflow: hidden;
   background: #25282c;
 }
+
 #app {
   top: 24px;
   width: 100%;
@@ -18,4 +20,20 @@ html, body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.ui.negative.button {
+  background-color: #1b1c1d;
+}
+
+.ui.negative.button:hover {
+  background-color: #25282c;
+}
+
+.ui.positive.button {
+  background-color: #187FE7;
+}
+
+.ui.positive.button:hover {
+  background-color: #4699ec;
 }
