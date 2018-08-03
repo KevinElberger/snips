@@ -29,10 +29,12 @@ h5.ui.header {
 }
 
 .snippet-content {
+  left: 0;
   width: 80%;
+  margin-left: 16px;
   text-align: left;
   overflow: hidden;
-  position: relative;
+  position: absolute;
   line-height: 1.1em;
   white-space: nowrap;
   display: inline-block;
@@ -42,9 +44,10 @@ h5.ui.header {
 
 .snippet-icon-type {
   top: 44%;
+  right: 8px;
+  display: block;
   padding-left: 8px;
   position: absolute;
-  display: inline-block;
 }
 
 #snippet-list-header {

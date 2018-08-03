@@ -3,6 +3,7 @@ import { getId } from './utils.js';
 export function getDefaultSnippet() {
   return {
     title: '',
+    labels: [],
     content: '',
     id: getId(),
     owner: 'You',

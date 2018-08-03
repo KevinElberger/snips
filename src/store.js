@@ -12,6 +12,7 @@ export const store = new Vuex.Store({
     },
     search: '',
     sort: 'title',
+    labels: [],
     snippets: [],
     loggedIn: false,
     languageFilter: 'All'
