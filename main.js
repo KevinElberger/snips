@@ -47,7 +47,7 @@ ipcMain.on('save-auth', (event, data) => {
 
 function createWindow () {
     if (platform === 'darwin') {
-        options = Object.assign(options, {
+        Object.assign(options, {
             frame: false,
             titleBarStyle: 'hidden'
         });

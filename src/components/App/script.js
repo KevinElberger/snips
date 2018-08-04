@@ -65,17 +65,6 @@ export default {
 
   mounted() {
     this.editor = ace.edit('content');
-
-    if (! isElectron()) return;
-
-    // Toggle titlebar on fullscreen 
-    ipcRenderer.on('enter-full-screen', () => {
-      $('#app').css({ 'top': 0 });
-    });
-
-    ipcRenderer.on('leave-full-screen', () => {
-      $('#app').css({ 'top': '24px' });
-    });
   },
 
   methods: {
