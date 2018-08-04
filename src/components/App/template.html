@@ -12,13 +12,15 @@
         v-bind:activeSnippet="activeSnippet"
         @clicked-snippet="displaySnippet"
     />
-    <menubar 
-        v-bind:activeSnippet="activeSnippet" 
-        @clicked-save="save"
-        @clicked-del="del"
-        @clicked-pin="togglePin"
-    />
-    <snippet v-bind:activeSnippet="activeSnippet" />
+    <div class="right-panel">
+        <menubar 
+            v-bind:activeSnippet="activeSnippet" 
+            @clicked-save="save"
+            @clicked-del="del"
+            @clicked-pin="togglePin"
+        />
+        <snippet v-bind:activeSnippet="activeSnippet" />
+    </div>
     <div class="ui mini modal">
         <div class="header">Logout</div>
         <div class="content">Are you sure you want to logout?</div>
