@@ -76,6 +76,14 @@ export const store = new Vuex.Store({
       state.snippets.push(...payload);
     },
 
+    deleteLabel(state, payload) {
+      const idx = state.labels.findIndex(label => {
+        return label.name === payload;
+      });
+      
+      state.labels.splice(idx, 1);
+    },
+
     deleteSnippet(state, payload) {
       const idx = state.snippets.findIndex(snip => {
         return snip.id === payload.id;

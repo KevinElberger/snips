@@ -19,6 +19,16 @@
   border-radius: 50px;
 }
 
+.close-label-menu {
+  margin: 8px;
+  float: right;
+  cursor: pointer;
+}
+
+.close-label-menu i {
+  color: rgba(0,0,0,.87);
+}
+
 #create-label {
   color: #ffffff;
   background: #187FE7;

@@ -31,6 +31,8 @@ export default {
         labelBtn.toggle();
       }
     });
+
+    $('.close-label-menu').on('click', () => labelBtn.hide());
   },
 
   computed: {
@@ -117,7 +119,6 @@ export default {
       if (! isValidHex(this.color)) {
         colorWarning.show();
       } else if (hasLabel) {
-        console.log(hasLabel);
         labelWarning.show();
       } else {
         this.saveLabel(label);
@@ -127,6 +128,18 @@ export default {
 
     saveLabel(label) {
       this.$store.commit('addLabel', label);
+
+      if (isElectron()) {
+        ipcRenderer.send('save-label', this.$store.state.labels);
+      }
+    },
+
+    deleteLabel(label) {
+      const labelName = $(label.target.parentNode).text().trim();
+
+      console.log(labelName);
+      
+      this.$store.commit('deleteLabel', labelName);
 
       if (isElectron()) {
         ipcRenderer.send('save-label', this.$store.state.labels);

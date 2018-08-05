@@ -32,6 +32,9 @@
       <div id="add-label" class="ui floating labeled icon dropdown button">
         <i class="plus icon"></i>
         <div class="menu label-menu">
+            <div class="close-label-menu">
+              <i class="delete icon"></i>
+            </div>        
             <div class="label-header header">
               Label Name
             </div>
@@ -59,7 +62,10 @@
     </div>
     <div class="menu label-list">
       <div v-for="(label) in labels" class="label-wrapper">
-        <a class="ui label" :style="{ background: label.color }">{{ label.name }}</a>
+        <a class="ui label" :style="{ background: label.color }">
+          {{ label.name }}
+          <i v-on:click="deleteLabel" class="delete icon"></i>
+        </a>
       </div>
     </div>
   </div>
