@@ -46,7 +46,7 @@
                 <i class="icon random"></i>
               </div>
               <div class="ui icon input">
-                <input class="short color" type="text" name="color" v-model="color">
+                <input v-on:keyup="validate" class="short color" type="text" name="color" v-model="color">
               </div>
             </div>
           <div class="header">

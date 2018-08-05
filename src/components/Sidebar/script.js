@@ -1,5 +1,5 @@
 import {
-  validateHex,
+  isValidHex,
   getRandomColor
 } from '../../utils/utils.js';
 
@@ -75,6 +75,19 @@ export default {
       this.color = getRandomColor();
       labelColorInput.val(this.color);
       randomColorBtn.css({ background: this.color });
+    },
+
+    validate(event) {
+      const { target } = event;
+      const { value } = event.target;
+      const randomColorBtn = $('.random-button');
+
+      if (isValidHex(value)) {
+        $(target).css({ color: 'rgba(0,0,0,.87)' });
+        randomColorBtn.css({ background: value });
+      } else {
+        $(target).css({ color: '#db2828' });
+      }
     },
 
     setLanguage(language) {

@@ -15,6 +15,8 @@ export function getId() {
 
 export function getRandomColor() {
   let color = '';
+
+  // Decimal form of #FFFFFF
   const MAX_RGB_COLOR = 16777215;
 
   while (color.length < 6) {
@@ -24,7 +26,7 @@ export function getRandomColor() {
   return '#' + color;
 }
 
-export function validateHex(string) {
+export function isValidHex(string) {
   return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(string);
 }
 
