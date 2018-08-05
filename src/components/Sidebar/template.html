@@ -31,26 +31,28 @@
       Labels
       <div id="add-label" class="ui floating labeled icon dropdown button">
         <i class="plus icon"></i>
-        <div class="menu">
+        <div class="menu label-menu">
             <div class="label-header header">
               Label Name
             </div>
+            <span id="label-warn" class="small hidden">Name already taken</span>
             <div class="ui icon input label-input">
               <input type="text" name="label" placeholder="New label name...">
             </div>
             <div class="label-header header">
                 Color
             </div>
+            <span id="color-warn" class="small hidden">Not a valid color</span>            
             <div class="two fields">
               <div v-on:click="setColor" class="ui button random-button">
                 <i class="icon random"></i>
               </div>
               <div class="ui icon input">
-                <input v-on:keyup="validate" class="short color" type="text" name="color" v-model="color">
+                <input v-on:keyup="validateColor" class="short color" type="text" name="color" v-model="color">
               </div>
             </div>
           <div class="header">
-            <div id="create-label" class="ui button fluid">Create Label</div>                
+            <div v-on:click="validateLabel" id="create-label" class="ui button fluid">Create Label</div>                
           </div>
         </div>
       </div>

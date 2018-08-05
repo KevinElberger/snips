@@ -24,6 +24,9 @@ export const store = new Vuex.Store({
     },
     getFiles: (state) => (id) => {
       return state.snippets.filter(snippet => snippet.gistID === id);
+    },
+    getLabel: (state) => (name) => {
+      return state.labels.filter(label => label.name === name);
     }
   },
 
@@ -62,6 +65,10 @@ export const store = new Vuex.Store({
   
     addSnippet(state, payload) {
       state.snippets.push(payload);
+    },
+
+    addLabel(state, payload) {
+      state.labels.push(payload);
     },
 
     addGists(state, payload) {

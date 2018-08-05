@@ -70,24 +70,65 @@ export default {
   methods: {
     setColor() {
       const labelColorInput = $('.color');
+      const colorWarning = $('#color-warn');
       const randomColorBtn = $('.random-button');
+
+      // Color is now valid, hide warning
+      colorWarning.hide();
 
       this.color = getRandomColor();
       labelColorInput.val(this.color);
       randomColorBtn.css({ background: this.color });
+      labelColorInput.css({ color: 'rgba(0,0,0,.87)' });      
     },
 
-    validate(event) {
+    validateColor(event) {
       const { target } = event;
       const { value } = event.target;
+      const colorWarning = $('#color-warn');      
       const randomColorBtn = $('.random-button');
 
       if (isValidHex(value)) {
+        colorWarning.hide();
         $(target).css({ color: 'rgba(0,0,0,.87)' });
         randomColorBtn.css({ background: value });
       } else {
         $(target).css({ color: '#db2828' });
       }
+    },
+
+    validateLabel() {
+      const name = $('.label-input input').val();
+      const labelWarning = $('#label-warn');
+      const colorWarning = $('#color-warn');
+      const warning = $('.popup');
+      const label = {
+        name: name,
+        color: this.color
+      };
+      const hasLabel = this.$store.getters.getLabel(label.name).length;
+
+      if (name === '') return;
+
+      if (! isValidHex(this.color)) {
+        colorWarning.show();
+      } else if (hasLabel) {
+        console.log(hasLabel);
+        labelWarning.show();
+      } else {
+        this.$store.commit('addLabel', label);
+        this.resetLabelForm();
+      }
+    },
+
+    resetLabelForm() {
+      const name = $('.label-input input');
+      const labelWarning = $('#label-warn');
+      const colorWarning = $('#color-warn');
+
+      name.val('');
+      colorWarning.hide();
+      labelWarning.hide();
     },
 
     setLanguage(language) {

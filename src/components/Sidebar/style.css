@@ -39,6 +39,10 @@
   color: rgba(255,255,255,.9);
 }
 
+.hidden {
+  display: none;
+}
+
 .item.languages {
   padding-top: 0 !important;
 }
@@ -49,6 +53,13 @@
 
 .label-input {
   width: 12em !important;
+  margin-top: 0 !important;  
+}
+
+#label-warn,
+#color-warn {
+  color: #d73a4a;
+  margin-left: .75rem;
 }
 
 .labels-wrapper .header {
@@ -121,7 +132,7 @@
 }
 
 .two.fields {
-  margin: 1.14285714rem .78571429rem !important;
+  margin: .5rem .78571429rem !important;
 }
 
 .random {
