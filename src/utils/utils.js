@@ -13,6 +13,21 @@ export function getId() {
   return Math.random().toString(36).replace(/[^a-z]+/g, '');
 }
 
+export function getRandomColor() {
+  let color = '';
+  const MAX_RGB_COLOR = 16777215;
+
+  while (color.length < 6) {
+    color = Math.floor(Math.random() * MAX_RGB_COLOR).toString(16);
+  }
+
+  return '#' + color;
+}
+
+export function validateHex(string) {
+  return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(string);
+}
+
 export function notifySave(title) {
   this.$notify({
     group: 'alerts',

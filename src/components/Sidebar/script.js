@@ -1,10 +1,35 @@
+import {
+  validateHex,
+  getRandomColor
+} from '../../utils/utils.js';
+
 export default {
   name: 'Sidebar',
 
   data() {
     return {
-      activeEl: 'All'
+      activeEl: 'All',
+      labelMenuOpen: false,
+      color: getRandomColor()
     }
+  },
+
+  mounted() {
+    const labelBtn = $('#add-label .menu');
+
+    // Set randomize button with current color value
+    $('.random-button').css({ background: this.color });
+
+    $('#add-label .plus').on('click', () => labelBtn.toggle());
+
+    // Prevent label menu from closing
+    $('.labels-wrapper').on('click', (e) => e.stopPropagation());
+
+    $('#app').on('click', () => {
+      if (labelBtn.is(':visible')) {
+        labelBtn.toggle();
+      }
+    });
   },
 
   computed: {
@@ -17,10 +42,13 @@ export default {
     languages() {
       const languages = {};
       const snippets = this.$store.state.snippets;
+
+      // Alphabetize all stored snippet languages
       const sortedLanguages = snippets.sort((a, b) => {
         return a.language > b.language;
       });
 
+      // Store the count value of each language
       Object.keys(sortedLanguages).forEach(s => {
         const lang = sortedLanguages[s].language.toLowerCase();
 
@@ -40,6 +68,15 @@ export default {
   },
 
   methods: {
+    setColor() {
+      const labelColorInput = $('.color');
+      const randomColorBtn = $('.random-button');
+
+      this.color = getRandomColor();
+      labelColorInput.val(this.color);
+      randomColorBtn.css({ background: this.color });
+    },
+
     setLanguage(language) {
       this.activeEl = language;
 

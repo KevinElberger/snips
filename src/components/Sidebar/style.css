@@ -1,8 +1,13 @@
-.add-label {
+#add-label {
+  margin: 0;
   float: right;
   cursor: pointer;
   text-decoration: none;
+  color: #eee !important;
   color: rgba(255,255,255,.5);
+  background: none !important;
+  padding-left: 0 !important;
+  padding-right: 2.2em !important;
 }
 
 .add-label:hover {
@@ -12,6 +17,15 @@
 .avatar {
   width: 8rem;
   border-radius: 50px;
+}
+
+#create-label {
+  color: #ffffff;
+  background: #187FE7;
+}
+
+#create-label:hover {
+  background: #4699ec;
 }
 
 .count {
@@ -27,6 +41,19 @@
 
 .item.languages {
   padding-top: 0 !important;
+}
+
+.label-header {
+  margin-left: 1rem !important;
+}
+
+.label-input {
+  width: 12em !important;
+}
+
+.labels-wrapper .header {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .language {
@@ -75,18 +102,50 @@
   text-align: left;
   padding-left: 0 !important;
 }
+
 .pinned-snippets-wrapper .header {
   padding: 0 !important;
   text-align: left !important;
+}
+
+.plus {
+  background: none !important;
+}
+
+.short {
+  width: 8em;
 }
 
 #sidebar {
   position: absolute;
 }
 
-.labels-wrapper .header {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+.two.fields {
+  margin: 1.14285714rem .78571429rem !important;
+}
+
+.random {
+  position: relative;
+  top: 2px !important;
+  margin: 0 !important;
+}
+
+.random-button {
+  padding: .75rem !important;
+}
+
+.random-button i {
+  color: #ffffff;
+}
+
+.two.fields {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ui.button.fluid {
+  width: 90%;
+  margin: 0 auto;
 }
 
 .ui.vertical.menu {

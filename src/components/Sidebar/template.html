@@ -29,11 +29,32 @@
   <div class="item labels-wrapper">
     <div class="header">
       Labels
-      <a class="add-label">
+      <div id="add-label" class="ui floating labeled icon dropdown button">
         <i class="plus icon"></i>
-      </a>
+        <div class="menu">
+            <div class="label-header header">
+              Label Name
+            </div>
+            <div class="ui icon input label-input">
+              <input type="text" name="label" placeholder="New label name...">
+            </div>
+            <div class="label-header header">
+                Color
+            </div>
+            <div class="two fields">
+              <div v-on:click="setColor" class="ui button random-button">
+                <i class="icon random"></i>
+              </div>
+              <div class="ui icon input">
+                <input class="short color" type="text" name="color" v-model="color">
+              </div>
+            </div>
+          <div class="header">
+            <div id="create-label" class="ui button fluid">Create Label</div>                
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="menu"></div>
   </div>
   
   <div class="item languages-wrapper">
