@@ -29,6 +29,7 @@ if (!storage.get('store')) {
             name: null,
             token: null
         },
+        labels: [],
         snippets: []
     });
 }
@@ -43,6 +44,13 @@ ipcMain.on('save-auth', (event, data) => {
     storage.set('store', Object.assign(storage.get('store'), {
         auth: data
     }));
+});
+
+ipcMain.on('save-label', (event, data) => {
+    storage.set('store', Object.assign(storage.get('store'), {
+        labels: data
+    }));
+    storage.set('store', storage.get('store'));
 });
 
 function createWindow () {
@@ -67,9 +75,6 @@ function createWindow () {
     mainWindow.on('closed', function() {
         mainWindow = null;
     });
-
-    mainWindow.on('enter-full-screen', () => mainWindow.webContents.send('enter-full-screen'));
-    mainWindow.on('leave-full-screen', () => mainWindow.webContents.send('leave-full-screen'));
 }
 
 // call the createWindow() method when Electron has finished initializing

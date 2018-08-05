@@ -47,6 +47,10 @@
   padding-top: 0 !important;
 }
 
+.label {
+  color: #FFFFFF !important;
+}
+
 .label-header {
   margin-left: 1rem !important;
 }
@@ -54,6 +58,17 @@
 .label-input {
   width: 12em !important;
   margin-top: 0 !important;  
+}
+
+.label-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.label-wrapper {
+  margin-top: 6px;
+  padding: 0 .75rem;
 }
 
 #label-warn,

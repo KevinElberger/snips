@@ -2,6 +2,7 @@ import {
   isValidHex,
   getRandomColor
 } from '../../utils/utils.js';
+import isElectron from 'is-electron';
 
 export default {
   name: 'Sidebar',
@@ -38,6 +39,9 @@ export default {
     },
     snippetCount() {
       return this.$store.state.snippets.length;
+    },
+    labels() {
+      return this.$store.state.labels;
     },
     languages() {
       const languages = {};
@@ -116,8 +120,16 @@ export default {
         console.log(hasLabel);
         labelWarning.show();
       } else {
-        this.$store.commit('addLabel', label);
+        this.saveLabel(label);
         this.resetLabelForm();
+      }
+    },
+
+    saveLabel(label) {
+      this.$store.commit('addLabel', label);
+
+      if (isElectron()) {
+        ipcRenderer.send('save-label', this.$store.state.labels);
       }
     },
 

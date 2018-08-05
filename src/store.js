@@ -35,6 +35,7 @@ export const store = new Vuex.Store({
       state.auth.token = payload.auth.token;
       state.auth.loggedIn = !!payload.auth.token;
       state.snippets = payload.snippets;
+      state.labels = payload.labels;
     },
 
     login(state, payload) {

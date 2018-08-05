@@ -57,6 +57,11 @@
         </div>
       </div>
     </div>
+    <div class="menu label-list">
+      <div v-for="(label) in labels" class="label-wrapper">
+        <a class="ui label" :style="{ background: label.color }">{{ label.name }}</a>
+      </div>
+    </div>
   </div>
   
   <div class="item languages-wrapper">
