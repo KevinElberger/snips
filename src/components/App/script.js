@@ -54,9 +54,7 @@ export default {
     ipcRenderer.on('load-data', (event, data) => {
       this.$store.commit('load', data);
 
-      if (this.$store.state.snippets.length) {
-        this.displaySnippet(this.$store.state.snippets[0]);
-      }
+      this.$store.state.snippets.forEach(s => s.isActive = false);
 
       if (data.auth.token) {
         getGists(data.auth.token).then(gists => {
@@ -216,9 +214,10 @@ export default {
       this.editor.navigateFileEnd();
 
       setEditorMode(this.activeSnippet.title);
-      setActiveLabels(this.activeSnippet.labels);
 
       this.$store.commit('updateSnippet', this.activeSnippet);
+
+      setActiveLabels(this.activeSnippet.labels);      
     },
 
     /**

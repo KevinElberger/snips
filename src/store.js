@@ -92,6 +92,10 @@ export const store = new Vuex.Store({
       state.snippets.splice(idx, 1);
     },
 
+    updateAllSnippets(state, payload) {
+      state.snippets = payload;
+    },
+
     updateSnippet(state, payload) {
       const idx = state.snippets.findIndex(snip => {
         return snip.id === payload.id;

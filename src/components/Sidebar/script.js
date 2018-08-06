@@ -28,9 +28,7 @@ export default {
     $('.labels-wrapper').on('click', (e) => e.stopPropagation());
 
     $('#app').on('click', () => {
-      if (labelBtn.is(':visible')) {
-        labelBtn.toggle();
-      }
+      if (labelBtn.is(':visible')) labelBtn.toggle();
     });
 
     $('.close-label-menu').on('click', () => labelBtn.hide());
@@ -136,6 +134,7 @@ export default {
     },
 
     deleteLabel(label) {
+      const snippets = this.$store.state.snippets;
       const appliedLabels = $('.label.transition');
       const labelName = $(label.target.parentNode).text().trim();
 
@@ -143,6 +142,17 @@ export default {
 
       // Remove any currently applied labels with same name
       deleteAppliedLabel(labelName);
+
+      // Remove label out of all snippets
+      snippets.forEach(snippet => {
+        const index = snippet.labels.findIndex(label => {
+          return label.name === labelName;
+        });
+        
+        if (index > -1) snippet.labels.splice(index, 1);
+      });
+
+      this.$store.commit('updateAllSnippets', snippets);
 
       if (isElectron()) {
         ipcRenderer.send('save-label', this.$store.state.labels);
