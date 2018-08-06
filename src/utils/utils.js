@@ -38,6 +38,22 @@ export function notifySave(title) {
   });
 }
 
+export function notifyLabelAdd(name) {
+  this.$notify({
+    group: 'alerts',
+    title: 'Label Added',
+    text: `${name} was saved!`
+  });
+}
+
+export function notifyLabelRemoved(name) {
+  this.$notify({
+    group: 'alerts',
+    title: 'Label Removed',
+    text: `${name} was removed!`
+  });
+}
+
 export function deleteAppliedLabel(label, deleteAll) {
   const labelDropdown = $('.multiple.dropdown');
 

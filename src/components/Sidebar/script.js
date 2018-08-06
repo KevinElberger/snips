@@ -1,6 +1,8 @@
 import {
   isValidHex,
   getRandomColor,
+  notifyLabelAdd,
+  notifyLabelRemoved,
   deleteAppliedLabel
 } from '../../utils/utils.js';
 import isElectron from 'is-electron';
@@ -122,6 +124,7 @@ export default {
       } else {
         this.saveLabel(label);
         this.resetLabelForm();
+        notifyLabelAdd.bind(this, label.name)();
       }
     },
 
@@ -142,6 +145,8 @@ export default {
 
       // Remove any currently applied labels with same name
       deleteAppliedLabel(labelName);
+
+      notifyLabelRemoved.bind(this, labelName)();
 
       // Remove label out of all snippets
       snippets.forEach(snippet => {
