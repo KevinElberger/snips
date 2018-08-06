@@ -49,6 +49,10 @@ export function deleteAppliedLabel(label, deleteAll) {
   }
 }
 
+export function getAppliedLabels() {
+  return $('.multiple.dropdown input').val().split(',');
+}
+
 export function notifyPin(title = 'Untitled Snippet', isPinned) {
   const pinned = isPinned ? 'pinned' : 'un-pinned';
 

@@ -19,6 +19,7 @@ import {
   notifySave,
   notifyDelete,
   setEditorMode,
+  getAppliedLabels,
   deleteAppliedLabel
 } from '../../utils/utils.js';
 
@@ -169,19 +170,25 @@ export default {
     updateValues() {
       const content = this.editor.getValue();
       const isGist = this.activeSnippet.isGist;
-      const hasTitle = this.activeSnippet.title !== '';
+      let currentTitle = this.activeSnippet.title;
+      const hasTitle = currentTitle !== '';
 
       if (! hasTitle) {
-        this.activeSnippet.title = this.title;
+        currentTitle = this.title;
       }
 
-      this.activeSnippet.language = getLanguageByFile(this.activeSnippet.title);
+      this.activeSnippet.language = getLanguageByFile(currentTitle);
 
       if (isGist) {
-        this.activeSnippet.filename = this.activeSnippet.title;
+        this.activeSnippet.filename = currentTitle;
       }
 
+      let labels = [].concat.apply([], getAppliedLabels().map(label => {
+        return this.$store.getters.getLabel(label);
+      }));
+
       Object.assign(this.activeSnippet, {
+        labels,
         content,
         lastUpdated: new Date()
       });
@@ -209,8 +216,6 @@ export default {
 
       setEditorMode(this.activeSnippet.title);
 
-      deleteAppliedLabel(null, true);
-
       this.$store.commit('updateSnippet', this.activeSnippet);
     },
 
@@ -220,6 +225,8 @@ export default {
     resetActiveSnippet() {
       this.editor.setValue('');
       $('input.title').val('');
+      
+      deleteAppliedLabel(null, true);      
  
       this.$store.state.snippets.forEach(snippet => {
         snippet.isActive = false;
