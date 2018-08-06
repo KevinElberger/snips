@@ -19,6 +19,7 @@ import {
   notifySave,
   notifyDelete,
   setEditorMode,
+  setActiveLabels,
   getAppliedLabels,
   deleteAppliedLabel
 } from '../../utils/utils.js';
@@ -215,6 +216,7 @@ export default {
       this.editor.navigateFileEnd();
 
       setEditorMode(this.activeSnippet.title);
+      setActiveLabels(this.activeSnippet.labels);
 
       this.$store.commit('updateSnippet', this.activeSnippet);
     },
@@ -225,7 +227,7 @@ export default {
     resetActiveSnippet() {
       this.editor.setValue('');
       $('input.title').val('');
-      
+
       deleteAppliedLabel(null, true);      
  
       this.$store.state.snippets.forEach(snippet => {

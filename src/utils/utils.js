@@ -53,6 +53,14 @@ export function getAppliedLabels() {
   return $('.multiple.dropdown input').val().split(',');
 }
 
+export function setActiveLabels(labels) {
+  const labelDropdown = $('.multiple.dropdown');
+
+  labelDropdown.dropdown('set selected', labels.map(label => {
+    return label.name;
+  }));
+}
+
 export function notifyPin(title = 'Untitled Snippet', isPinned) {
   const pinned = isPinned ? 'pinned' : 'un-pinned';
 
