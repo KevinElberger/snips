@@ -16,5 +16,13 @@ export default {
     });
 
     editor.setTheme('ace/theme/tomorrow_night');
+
+    $('.multiple.dropdown').dropdown();
+  },
+  
+  computed: {
+    labels() {
+      return this.$store.state.labels;
+    }
   }
 };

@@ -24,6 +24,10 @@
   flex-direction: column;
 }
 
+.detail-row {
+  display: flex;
+}
+
 #description-wrapper {
   padding: 6px;
   margin-left: 30px;
@@ -61,6 +65,12 @@ textarea {
   width: 100%;
   margin-left: 34px;
   margin-bottom: 8px;
+}
+
+.ui.multiple.dropdown {
+  margin-left: 30px;
+  font-size: .92857143em;
+  color: rgba(0,0,0,.87);
 }
 
 .ui.tabular.menu+.attached:not(.top).segment {

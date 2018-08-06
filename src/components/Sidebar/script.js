@@ -135,11 +135,20 @@ export default {
     },
 
     deleteLabel(label) {
+      const appliedLabels = $('.label.transition');
       const labelName = $(label.target.parentNode).text().trim();
 
-      console.log(labelName);
-      
       this.$store.commit('deleteLabel', labelName);
+
+      // Remove any currently applied labels with same name
+      appliedLabels.each(function(index, elm) {
+        if ($(this).text().trim() === labelName) $(this).remove();
+      });
+
+      // Prevent Semantic-UI filter from being applied
+      $('.filtered').each(function(index, elm) {
+        $(this).removeClass('filtered active');
+      });
 
       if (isElectron()) {
         ipcRenderer.send('save-label', this.$store.state.labels);

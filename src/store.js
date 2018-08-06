@@ -80,7 +80,7 @@ export const store = new Vuex.Store({
       const idx = state.labels.findIndex(label => {
         return label.name === payload;
       });
-      
+
       state.labels.splice(idx, 1);
     },
 
