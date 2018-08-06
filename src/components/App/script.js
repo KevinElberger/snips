@@ -18,7 +18,8 @@ import {
   notifyPin,
   notifySave,
   notifyDelete,
-  setEditorMode
+  setEditorMode,
+  deleteAppliedLabel
 } from '../../utils/utils.js';
 
 const ipcRenderer = window.ipcRenderer;
@@ -201,11 +202,14 @@ export default {
 
       this.activeSnippet.isActive = true;
       $('input.title').val(this.activeSnippet.title);
+
       this.editor.setValue(snippet.content);
       this.editor.focus();
       this.editor.navigateFileEnd();
 
       setEditorMode(this.activeSnippet.title);
+
+      deleteAppliedLabel(null, true);
 
       this.$store.commit('updateSnippet', this.activeSnippet);
     },

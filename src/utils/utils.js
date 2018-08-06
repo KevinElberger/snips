@@ -38,6 +38,17 @@ export function notifySave(title) {
   });
 }
 
+export function deleteAppliedLabel(label, deleteAll) {
+  const labelDropdown = $('.multiple.dropdown');
+
+  if (deleteAll) {
+    labelDropdown.dropdown('clear');
+    labelDropdown.dropdown('restore default text');
+  } else {
+    labelDropdown.dropdown('remove selected', label);
+  }
+}
+
 export function notifyPin(title = 'Untitled Snippet', isPinned) {
   const pinned = isPinned ? 'pinned' : 'un-pinned';
 

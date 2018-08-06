@@ -1,6 +1,7 @@
 import {
   isValidHex,
-  getRandomColor
+  getRandomColor,
+  deleteAppliedLabel
 } from '../../utils/utils.js';
 import isElectron from 'is-electron';
 
@@ -141,14 +142,7 @@ export default {
       this.$store.commit('deleteLabel', labelName);
 
       // Remove any currently applied labels with same name
-      appliedLabels.each(function(index, elm) {
-        if ($(this).text().trim() === labelName) $(this).remove();
-      });
-
-      // Prevent Semantic-UI filter from being applied
-      $('.filtered').each(function(index, elm) {
-        $(this).removeClass('filtered active');
-      });
+      deleteAppliedLabel(labelName);
 
       if (isElectron()) {
         ipcRenderer.send('save-label', this.$store.state.labels);
