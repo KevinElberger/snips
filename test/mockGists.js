@@ -112,7 +112,7 @@ export default [
         "content": "\n/* \n  ##Device = Desktops\n  ##Screen = 1281px to higher resolution desktops\n*/\n\n@media (min-width: 1281px) {\n  \n  //CSS\n  \n}\n\n/* \n  ##Device = Laptops, Desktops\n  ##Screen = B/w 1025px to 1280px\n*/\n\n@media (min-width: 1025px) and (max-width: 1280px) {\n  \n  //CSS\n  \n}\n\n/* \n  ##Device = Tablets, Ipads (portrait)\n  ##Screen = B/w 768px to 1024px\n*/\n\n@media (min-width: 768px) and (max-width: 1024px) {\n  \n  //CSS\n  \n}\n\n/* \n  ##Device = Tablets, Ipads (landscape)\n  ##Screen = B/w 768px to 1024px\n*/\n\n@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {\n  \n  //CSS\n  \n}\n\n/* \n  ##Device = Low Resolution Tablets, Mobiles (Landscape)\n  ##Screen = B/w 481px to 767px\n*/\n\n@media (min-width: 481px) and (max-width: 767px) {\n  \n  //CSS\n  \n}\n\n/* \n  ##Device = Most of the Smartphones Mobiles (Portrait)\n  ##Screen = B/w 320px to 479px\n*/\n\n@media (min-width: 320px) and (max-width: 480px) {\n  \n  //CSS\n  \n}"
       }
     },
-    "public": true,
+    "public": false,
     "created_at": "2018-07-19T16:12:01Z",
     "updated_at": "2018-07-20T15:49:55Z",
     "description": "Another description for another gist",

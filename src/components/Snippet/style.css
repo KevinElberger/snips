@@ -13,7 +13,7 @@
 }
 
 #created-on {
-  margin-left: 30px;
+  margin-left: 34px;
 }
 
 #detail {
@@ -26,12 +26,19 @@
 
 .detail-row {
   display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 #description-wrapper {
   padding: 6px;
   margin-left: 30px;
   width: calc(100% - 60px);
+}
+
+#gist-privacy {
+  margin-left: 30px;
+  color: rgba(0,0,0,.87);  
 }
 
 #snippet-container {
@@ -53,8 +60,14 @@ textarea {
 }
 
 .title {
+  width: 20em;
   color: #777;
   font-weight: bold;
+}
+
+.title-row {
+  display: flex;
+  margin-left: 34px;
 }
 
 .title::-webkit-input-placeholder {
@@ -63,7 +76,6 @@ textarea {
 
 #title-wrapper {
   width: 100%;
-  margin-left: 34px;
   margin-bottom: 8px;
 }
 

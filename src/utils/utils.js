@@ -65,6 +65,13 @@ export function deleteAppliedLabel(label, deleteAll) {
   }
 }
 
+export function resetPrivacyDropdown() {
+  const privacyDropdown = $('#gist-privacy');
+  const selected = privacyDropdown.dropdown('get value');
+  
+  privacyDropdown.dropdown('remove selected', selected);
+}
+
 export function getAppliedLabels() {
   return $('.multiple.dropdown input').val().split(',');
 }

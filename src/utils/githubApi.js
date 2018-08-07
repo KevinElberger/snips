@@ -79,6 +79,7 @@ export function getGists(token) {
           isActive: false,
           isPinned: false,
           toDelete: false,
+          public: gist.public,
           createdOn: createdOn,
           title: snippet.filename,
           content: snippet.content,
@@ -121,6 +122,7 @@ export function patchGist(id, token, gists) {
   if (gists) {
     data = {
       description: gists[0].description,
+      public: gists[0].public,
       files: {}
     };
 

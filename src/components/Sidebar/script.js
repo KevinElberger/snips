@@ -33,6 +33,7 @@ export default {
       if (labelBtn.is(':visible')) labelBtn.toggle();
     });
 
+    $('#gist-privacy').dropdown();    
     $('.close-label-menu').on('click', () => labelBtn.hide());
   },
 

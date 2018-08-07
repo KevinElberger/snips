@@ -9,7 +9,8 @@ import {
 import {
   logoutUser,
   getLanguageByFile,
-  authenticateGithub
+  authenticateGithub,
+  resetPrivacyDropdown
 } from '../../utils/utils.js';
 import { getGists, patchGist } from '../../utils/githubApi.js';
 import isElectron from 'is-electron';
@@ -170,15 +171,16 @@ export default {
       const content = this.editor.getValue();
       const isGist = this.activeSnippet.isGist;
       let currentTitle = this.activeSnippet.title;
-      const hasTitle = currentTitle !== '';
+      const isPublic = $('#gist-privacy').dropdown('get value') === 'Public';
 
-      if (! hasTitle) {
+      if (currentTitle !== '') {
         currentTitle = this.title;
       }
 
       this.activeSnippet.language = getLanguageByFile(currentTitle);
-
+      
       if (isGist) {
+        this.activeSnippet.public = isPublic;
         this.activeSnippet.filename = currentTitle;
       }
 
@@ -217,7 +219,11 @@ export default {
 
       this.$store.commit('updateSnippet', this.activeSnippet);
 
-      setActiveLabels(this.activeSnippet.labels);      
+      setActiveLabels(this.activeSnippet.labels);
+      
+      if (snippet.isGist) {
+        $('#gist-privacy').dropdown('set selected', snippet.public ? 'Public' : 'Private');
+      }
     },
 
     /**
@@ -227,8 +233,9 @@ export default {
       this.editor.setValue('');
       $('input.title').val('');
 
-      deleteAppliedLabel(null, true);      
- 
+      deleteAppliedLabel(null, true);
+      resetPrivacyDropdown();
+
       this.$store.state.snippets.forEach(snippet => {
         snippet.isActive = false;
         this.$store.commit('updateSnippet', snippet);
