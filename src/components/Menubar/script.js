@@ -12,7 +12,10 @@ export default {
       const search = $(this).val();
       store.commit('search', search);
     });
+
+    this.initPopups();
   },
+
   methods: {
     expandSnippetView() {
       const rightPanel = $('.right-panel');
@@ -25,6 +28,36 @@ export default {
 
       ace.edit('content').focus();
       this.expandedView = !this.expandedView;
+    },
+
+    initPopups() {
+      $('#save').popup({
+        variation: 'inverted',
+        delay: { show: 300 },
+        position : 'bottom center',
+        content  : 'Save this snippet'
+      });
+
+      $('#del').popup({
+        variation: 'inverted',
+        delay: { show: 300 },
+        position : 'bottom center',
+        content  : 'Delete this snippet'
+      });
+
+      $('#pin').popup({
+        variation: 'inverted',
+        delay: { show: 300 },
+        position : 'bottom center',
+        content  : 'Pin this snippet'
+      });
+
+      $('#expand').popup({
+        variation: 'inverted',
+        delay: { show: 300 },
+        position : 'bottom center',
+        content  : 'Expand snippet view'
+      });
     }
   }
 };

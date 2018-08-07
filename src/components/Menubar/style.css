@@ -45,3 +45,7 @@ i.calendar {
 #snippet-search {
   margin-left: 34px;
 }
+
+.ui.popup {
+  padding: .533em 1em !important;
+}
