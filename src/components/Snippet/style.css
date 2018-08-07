@@ -2,6 +2,10 @@
   color: #24292e !important;
 }
 
+.calendar {
+  color: rgba(0,0,0,.87);
+}
+
 #content {
   width: 100%;
   flex-grow: 1;
@@ -50,6 +54,10 @@
   flex-direction: column;
   background-color: #fff;
   transition: all .3s ease-out;
+}
+
+.star {
+  color: rgba(0,0,0,.87);
 }
 
 textarea {

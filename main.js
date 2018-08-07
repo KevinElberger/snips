@@ -14,6 +14,7 @@ const options = {
     height: 800,
     minWidth: 900,
     minHeight: 650,
+    show: false,
     webPreferences: {
         preload: path.join(__dirname, '/preload.js')
     },
@@ -70,6 +71,10 @@ function createWindow () {
     mainWindow.webContents.on('did-finish-load', () => {
         mainWindow.webContents.send('load-data', storage.get('store'));
     });
+
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show();
+    })
 
     // dereference the mainWindow object when the window is closed
     mainWindow.on('closed', function() {
