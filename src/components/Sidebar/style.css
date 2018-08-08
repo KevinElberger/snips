@@ -58,6 +58,8 @@
 }
 
 .label {
+  word-wrap: break-word;
+  max-width: 15em !important; 
   font-weight: 300 !important;
   color: #FFFFFF !important;
 }
