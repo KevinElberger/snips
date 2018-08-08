@@ -15,6 +15,7 @@ export const store = new Vuex.Store({
     labels: [],
     snippets: [],
     loggedIn: false,
+    labelFilter: '',
     languageFilter: 'All'
   },
 
@@ -62,6 +63,10 @@ export const store = new Vuex.Store({
 
     search(state, payload) {
       state.search = payload;
+    },
+
+    filterByLabel(state, payload) {
+      state.labelFilter = payload;
     },
   
     addSnippet(state, payload) {

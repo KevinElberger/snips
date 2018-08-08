@@ -37,6 +37,14 @@ export default {
       return snippets.filter(snippet => {
         return snippet.title.toLowerCase().includes(search.toLowerCase());
       });
+    },
+
+    filterByLabel(snippets, filter) {
+      return snippets.filter(snippet => {
+        return snippet.labels.filter(label => {
+          return label.name.trim() === filter.trim();
+        }).length > 0;
+      });
     }
   },
 
@@ -44,12 +52,17 @@ export default {
     snippets() {
       const sort = this.$store.state.sort;
       const search = this.$store.state.search;
+      const labelFilter = this.$store.state.labelFilter;
       // Store reference so we do not modify the original snippets
       let snippets = this.$store.state.snippets.map(s => s);
       const language = this.$store.state.languageFilter;
 
       this.sort(snippets, sort);
       snippets = this.search(snippets, search);
+
+      if (labelFilter) {
+        snippets = this.filterByLabel(snippets, labelFilter);
+      }
 
       if (language === 'All') return snippets;
 

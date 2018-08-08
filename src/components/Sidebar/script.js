@@ -175,6 +175,26 @@ export default {
       labelWarning.hide();
     },
 
+    setLabelFilter(event) {
+      const store = this.$store;
+      const label = $(event.target);
+      let labelName = label.text().trim();
+      const otherLabels = $('.label-wrapper .label').not(label);
+      
+      if (label.hasClass('active')) {
+        labelName = '';
+        label.removeClass('active');
+      } else {
+        label.addClass('active');
+      }
+
+      otherLabels.each(function(i, label) {
+        $(label).removeClass('active');
+      });
+
+      store.commit('filterByLabel', labelName);
+    },
+
     setLanguage(language) {
       this.activeEl = language;
 

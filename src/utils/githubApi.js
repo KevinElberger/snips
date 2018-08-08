@@ -72,6 +72,7 @@ export function getGists(token) {
         const snippet = gist.files[file];
 
         gists.push({
+          labels: [],
           id: getId(),    
           isGist: true,
           owner: owner,

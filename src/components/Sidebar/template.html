@@ -62,7 +62,7 @@
     </div>
     <div class="menu label-list">
       <div v-for="(label) in labels" class="label-wrapper">
-        <a class="ui label" :style="{ background: label.color }">
+        <a v-on:click="setLabelFilter" class="ui label" :style="{ background: label.color }">
           {{ label.name }}
           <i v-on:click="deleteLabel" class="delete icon"></i>
         </a>
