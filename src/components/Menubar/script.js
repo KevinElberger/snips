@@ -7,12 +7,6 @@ export default {
     }
   },
   mounted() {
-    const store = this.$store;
-    $('#snippet-search input').on('input', function() {
-      const search = $(this).val();
-      store.commit('search', search);
-    });
-
     this.initPopups();
   },
 
@@ -23,11 +17,17 @@ export default {
       if (! this.expandedView) {
         rightPanel.css({ left: '0', width: '100%', zIndex: '200'  });
       } else {
-        rightPanel.css({ left: '30.2rem', width: 'calc(100% - 30.2rem)' });
+        rightPanel.css({ left: '30.2rem', width: 'calc(100% - 30.2rem)' });    
       }
 
       ace.edit('content').focus();
       this.expandedView = !this.expandedView;
+    },
+
+    search(event) {
+      const store = this.$store;      
+      const search = event.target.value;
+      store.commit('search', search);
     },
 
     initPopups() {
