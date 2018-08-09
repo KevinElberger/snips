@@ -1,7 +1,7 @@
 <div id="snippet-container">
     <div id="detail">
       <div class="row title-row">
-        <div id="title-wrapper" class="ui large icon input transparent">      
+        <div id="title-wrapper" class="ui large icon input transparent">    
           <input v-if="activeSnippet" v-model="activeSnippet.title" id="title" type="text" placeholder="Untitled Snippet">
         </div>
       </div>
@@ -13,6 +13,7 @@
             Created by <strong class="bold">{{ activeSnippet.owner }}</strong> <br/> <strong>{{ activeSnippet.createdOn }}</strong>
           </p>
         </div>
+
         <div id="gist-privacy" :class="{ disabled: !activeSnippet.isGist }" class="ui inline dropdown">
             <div v-if="activeSnippet.public" class="text" data-value="Public">
               <i class="eye icon"></i>
@@ -57,6 +58,7 @@
         </div>
       </div>
 
+      <div
 
         <div class="row" id="description-wrapper">
             <div class="ui form">

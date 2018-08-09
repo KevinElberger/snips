@@ -17,16 +17,19 @@
   <div v-if="snippets.length === 0" class="no-snippets">
     <p>No saved snippets</p>
   </div>
-  <div v-for="(snippet) in snippets">
-    <a v-on:click="$emit('clicked-snippet', snippet)" :class="{ active: snippet.isActive }" class="item">
-      <div class="header snippet-title">{{ snippet.title }}</div>
-      <small class="description snippet-content">{{ snippet.content }}</small>
-      <div v-if="snippet.isGist" class="snippet-icon-type">
-        <i class="github icon"></i>
-      </div>
-      <div v-else class="snippet-icon-type">
-        <i class="laptop icon"></i>
-      </div>
-    </a>
+  <div class="spacer"></div>
+  <div class="snippet-list-wrapper">
+    <div v-for="(snippet) in snippets">
+      <a v-on:click="$emit('clicked-snippet', snippet)" :class="{ active: snippet.isActive }" class="item">
+        <div class="header snippet-title">{{ snippet.title }}</div>
+        <small class="description snippet-content">{{ snippet.content }}</small>
+        <div v-if="snippet.isGist" class="snippet-icon-type">
+          <i class="github icon"></i>
+        </div>
+        <div v-else class="snippet-icon-type">
+          <i class="laptop icon"></i>
+        </div>
+      </a>
+    </div>
   </div>
 </div>

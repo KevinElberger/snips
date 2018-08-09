@@ -173,10 +173,6 @@ export default {
       let currentTitle = this.activeSnippet.title;
       const isPublic = $('#gist-privacy').dropdown('get value') === 'Public';
 
-      if (currentTitle !== '') {
-        currentTitle = this.title;
-      }
-
       this.activeSnippet.language = getLanguageByFile(currentTitle);
       
       if (isGist) {

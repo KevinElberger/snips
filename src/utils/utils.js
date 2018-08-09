@@ -182,12 +182,18 @@ export function setEditorMode(string) {
 export function getLanguageByFile(string) {
   let language = '';
   const modelist = ace.require('ace/ext/modelist');
+  const fileName = string.substr(string.indexOf('.'), string.length);  
 
   Object.keys(modelist.modesByName).forEach(name => {
     const mode = modelist.modesByName[name];
 
     if (mode.extRe.test(string)) {
       language = mode.name;
+    }
+
+    // Patch for Django file extensions
+    if (fileName.toLowerCase() === '.html') {
+      language = 'html';
     }
   });
 
