@@ -3,7 +3,10 @@ h5.ui.header {
 }
 
 .no-snippets {
+  top: 60px;
+  width: 100%;
   padding: 20%;
+  position: absolute;
 }
 
 .ui.vertical.menu .active.item {
@@ -81,7 +84,7 @@ h5.ui.header {
 .spacer {
   top: 0;
   width: 100%;
-  height: 78px;
+  height: 62px;
   display: flex;
 }
 

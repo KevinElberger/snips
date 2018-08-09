@@ -30,6 +30,7 @@
 }
 
 .detail-row {
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -41,14 +42,19 @@
   width: calc(100% - 60px);
 }
 
+.gist-item {
+  padding: .8em !important;
+}
+
 #gist-privacy {
   margin-left: 30px;
   color: rgba(0,0,0,.87);  
 }
 
 #gist-stats {
-  align-self: center;
-  margin-right: 68px;
+  box-shadow: none;
+  margin-left: auto;
+  margin-right: 34px;
 }
 
 #snippet-container {
@@ -62,8 +68,10 @@
   transition: all .3s ease-out;
 }
 
-.star {
-  color: rgba(0,0,0,.87);
+#snippet-labels {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 #star-count {

@@ -12,7 +12,7 @@ let mainWindow;
 const options = {
     width: 1200,
     height: 800,
-    minWidth: 900,
+    minWidth: 1100,
     minHeight: 650,
     show: false,
     webPreferences: {
