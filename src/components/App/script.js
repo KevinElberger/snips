@@ -15,10 +15,8 @@ import {
 import { getGists, patchGist } from '../../utils/githubApi.js';
 import isElectron from 'is-electron';
 
-import { 
-  notifyPin,
-  notifySave,
-  notifyDelete,
+import {
+  notify,
   setEditorMode,
   setActiveLabels,
   getAppliedLabels,
@@ -75,6 +73,8 @@ export default {
     },
 
     logout() {
+      let snippets = this.$store.state.snippets;
+
       $('.mini.modal').modal('show');
 
       $('.ui.positive').on('click', () => {
@@ -84,8 +84,14 @@ export default {
           this.resetActiveSnippet();
         }
 
+        // Remove any GitHub Gists since user is logging out
+        snippets = snippets.filter(snippet => {
+          return !snippet.isGist;
+        });
+
         if (isElectron()) {
           ipcRenderer.send('save-auth', defaultAuth);
+          ipcRenderer.send('save-snippets', snippets);
         }
       });
     },
@@ -114,7 +120,11 @@ export default {
       }
 
       this.$store.commit('deleteSnippet', this.activeSnippet);
-      notifyDelete.bind(this, this.activeSnippet.title)();
+      notify.bind(this, {
+        group: 'alerts',
+        title: this.activeSnippet.title,
+        text: `${this.activeSnippet.title} was deleted!`
+      })();
       this.resetActiveSnippet();
 
       if (isElectron()) {
@@ -128,7 +138,11 @@ export default {
     togglePin() {
       this.activeSnippet.isPinned = ! this.activeSnippet.isPinned;
 
-      notifyPin.bind(this, this.activeSnippet.title, this.activeSnippet.isPinned)();
+      notify.bind(this, {
+        group: 'alerts',
+        title: this.activeSnippet.title,
+        text: `${this.activeSnippet.title} was ${this.activeSnippet.isPinned}!`
+      })();
     },
 
     /**
@@ -154,7 +168,11 @@ export default {
         this.$store.commit('addSnippet', this.activeSnippet);
       }
 
-      notifySave.bind(this, this.activeSnippet.title)();
+      notify.bind(this, {
+        group: 'alerts',
+        title: this.activeSnippet.title,
+        text: `${this.activeSnippet.title} was saved!`
+      })();
 
       // Avoid saving GitHub Gists so we can re-sync on new session
       if (isElectron()) {

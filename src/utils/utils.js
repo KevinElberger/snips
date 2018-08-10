@@ -30,27 +30,11 @@ export function isValidHex(string) {
   return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(string);
 }
 
-export function notifySave(title) {
+export function notify(options) {
   this.$notify({
-    group: 'alerts',
-    title: 'Snippet Saved',
-    text: `${title} was saved!`
-  });
-}
-
-export function notifyLabelAdd(name) {
-  this.$notify({
-    group: 'alerts',
-    title: 'Label Added',
-    text: `${name} was saved!`
-  });
-}
-
-export function notifyLabelRemoved(name) {
-  this.$notify({
-    group: 'alerts',
-    title: 'Label Removed',
-    text: `${name} was removed!`
+    group: options.group,
+    title: options.title || 'Untitled Snippet',
+    text: options.text
   });
 }
 
@@ -82,24 +66,6 @@ export function setActiveLabels(labels) {
   labelDropdown.dropdown('set selected', labels.map(label => {
     return label.name;
   }));
-}
-
-export function notifyPin(title = 'Untitled Snippet', isPinned) {
-  const pinned = isPinned ? 'pinned' : 'un-pinned';
-
-  this.$notify({
-    group: 'alerts',
-    title: 'Snippet Pinned',
-    text: `${title} was ${pinned}!`
-  });
-}
-
-export function notifyDelete(title) {
-  this.$notify({
-    group: 'alerts',
-    title: 'Snippet Deleted',
-    text: `${title} was deleted!`
-  });
 }
 
 export function authenticateGithub() {
@@ -214,6 +180,5 @@ export function makeAuthRequest(url, method, token, data = {}) {
   axios.defaults.headers.common['Authorization'] = `token ${token}`;
   axios.defaults.headers.common['Content-Type'] = 'application/json';
   axios.defaults.headers.common['Cache-Control'] = 'no-cache';
-  axios.defaults.headers.common['Content-Type'] = 'application/json';
   return axios({ method, url, data });
 }

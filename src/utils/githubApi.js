@@ -68,30 +68,34 @@ export function getGists(token) {
       const owner = gist.owner ? gist.owner.login : 'You';
       const createdOn = new Date(gist.created_at).toLocaleString();
       
-      Object.keys(gist.files).map(file => {
-        const snippet = gist.files[file];
+      checkIfStarred(gist.id, token).then(response => {
 
-        gists.push({
-          labels: [],
-          id: getId(),    
-          isGist: true,
-          owner: owner,
-          gistID: gist.id,
-          isActive: false,
-          isPinned: false,
-          toDelete: false,
-          public: gist.public,
-          createdOn: createdOn,
-          title: snippet.filename,
-          content: snippet.content,
-          filename: snippet.filename,
-          description: gist.description || '',
-          language: snippet.language || 'text'
+        Object.keys(gist.files).map(file => {
+          const snippet = gist.files[file];
+  
+          gists.push({
+            labels: [],
+            id: getId(),    
+            isGist: true,
+            owner: owner,
+            gistID: gist.id,
+            isActive: false,
+            isPinned: false,
+            toDelete: false,
+            starred: response,
+            public: gist.public,
+            createdOn: createdOn,
+            title: snippet.filename,
+            content: snippet.content,
+            filename: snippet.filename,
+            description: gist.description || '',
+            language: snippet.language || 'text'
+          });
         });
+
+        setTimeout(resolve, 100, gists);        
       });
     });
-
-    setTimeout(resolve, 100, gists);
   });
 
   // return makeAuthRequest(url, method, token)
@@ -112,6 +116,40 @@ export function getGists(token) {
   //   }).catch(function(error) {
   //     console.log('Could not get gists: ', error);
   //   });
+}
+
+export function checkIfStarred(id, token) {
+  const method = 'GET';
+  const url = 'https://api.github.com/gists/' + id + '/star';
+
+  let isStarred = false;
+
+  return makeAuthRequest(url, method, token).then(response => {
+    isStarred = true;
+
+    return isStarred;
+  })
+  .catch(err => {
+    if (err) {
+      isStarred = false;
+    }
+
+    return isStarred;
+  });
+}
+
+export function starGist(id, token) {
+  const method = 'PUT';
+  const url = 'https://api.github.com/gists/' + id + '/star';
+
+  return makeAuthRequest(url, method, token);
+}
+
+export function unstarGist(id, token) {
+  const method = 'DELETE';
+  const url = 'https://api.github.com/gists/' + id + '/star';
+
+  return makeAuthRequest(url, method, token);
 }
 
 // Updates or deletes a file from a Gist

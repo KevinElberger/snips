@@ -1,3 +1,7 @@
+.adjust {
+  margin-left: 34px;
+}
+
 .bold {
   color: #24292e !important;
 }
@@ -32,7 +36,7 @@
 .detail-row {
   width: 100%;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
 }
 
@@ -49,6 +53,17 @@
 #gist-privacy {
   margin-left: 30px;
   color: rgba(0,0,0,.87);  
+}
+
+#gist-stars {
+  width: 37px;
+  height: 40px;
+  display: flex;
+  flex: 0 0 44px;
+  margin-left: 22px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #gist-stats {
@@ -69,14 +84,20 @@
 }
 
 #snippet-labels {
-  width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
+.star {
+  cursor: pointer;
+}
+
 #star-count {
-  display: flex;
-  color: rgba(0,0,0,.87) !important;
+  margin-left: 0;
+  margin-top: 4px;
+  padding: 4px 6px;
+  border-radius: 100px;
+  background: rgb(26, 143, 254);
 }
 
 textarea {
@@ -99,7 +120,6 @@ textarea {
 .title-row {
   width: 100%;
   display: flex;
-  margin-left: 34px;
 }
 
 #title::-webkit-input-placeholder {
@@ -107,7 +127,6 @@ textarea {
 }
 
 #title-wrapper {
-  width: 100%;
   margin-bottom: 8px;
 }
 
