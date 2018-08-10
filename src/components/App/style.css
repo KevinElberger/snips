@@ -25,6 +25,28 @@ input:focus {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#about-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#about-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.close-menu {
+  float: right;
+  cursor: pointer;
+}
+
+.github.icon.big {
+  color: rgba(0, 0, 0, .87);
+}
+
 .right-panel {
   height: 100%;
   display: flex;

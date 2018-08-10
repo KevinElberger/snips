@@ -23,6 +23,7 @@ import {
   deleteAppliedLabel
 } from '../../utils/utils.js';
 
+const shell = require('electron').shell;
 const ipcRenderer = window.ipcRenderer;
 
 export default {
@@ -65,6 +66,10 @@ export default {
 
   mounted() {
     this.editor = ace.edit('content');
+    $(document).on('click', 'a[href^="http"]', function(event) {
+      event.preventDefault();
+      shell.openExternal(this.href);
+  });
   },
 
   methods: {
@@ -260,6 +265,10 @@ export default {
 
     setLanguageFilter(target) {
       this.language = target.innerText.replace('#', '');
+    },
+
+    hideAbout() {
+      $('#about').modal('hide');
     }
   }
 };

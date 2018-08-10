@@ -92,6 +92,10 @@
   cursor: pointer;
 }
 
+.star:not(.outline) {
+  color: #FFD700;
+}
+
 #star-count {
   margin-left: 0;
   margin-top: 4px;

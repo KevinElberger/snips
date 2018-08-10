@@ -8,6 +8,7 @@ export default {
   },
   mounted() {
     this.initPopups();
+    $('#extras').dropdown();
   },
 
   methods: {
@@ -28,6 +29,10 @@ export default {
       const store = this.$store;      
       const search = event.target.value;
       store.commit('search', search);
+    },
+
+    showAboutModal() {
+      $('#about').modal('show');
     },
 
     initPopups() {

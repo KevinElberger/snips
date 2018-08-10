@@ -23,6 +23,14 @@
       <a v-on:click="expandSnippetView()" id="expand" class="item menu-item">
         <i class="expand icon"></i>
       </a>
+
+      <div id="extras" class="ui icon top right dropdown item menu-item">
+          <i class="ellipsis vertical icon"></i>
+          <div class="menu">
+            <div id="settings" class="item">Settings</div>
+            <div v-on:click="showAboutModal" id="about-btn" class="item">About</div>
+          </div>
+      </div>
     </div>
 
   </div>

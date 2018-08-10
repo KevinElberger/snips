@@ -1,3 +1,8 @@
+#expand:before,
+#extras:before {
+  background: none;
+}
+
 .field label {
   float: left;
 }
