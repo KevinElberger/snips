@@ -1,3 +1,4 @@
+import icon from '../../../static/icons/png/48x48.png';
 import Snippet from '../Snippet/Snippet.vue';
 import Sidebar from '../Sidebar/Sidebar.vue';
 import Menubar from '../Menubar/Menubar.vue';
@@ -40,6 +41,7 @@ export default {
 
   data() {
     return {
+      icon: icon,
       content: '',
       text: 'text',
       languageFilter: '',
@@ -66,6 +68,13 @@ export default {
 
   mounted() {
     this.editor = ace.edit('content');
+
+    $('#loader .dimmer').dimmer('show');
+    
+    $('#progress-bar').progress({
+      total: 3
+    });
+
     $(document).on('click', 'a[href^="http"]', function(event) {
       event.preventDefault();
       shell.openExternal(this.href);
@@ -80,7 +89,7 @@ export default {
     logout() {
       let snippets = this.$store.state.snippets;
 
-      $('.mini.modal').modal('show');
+      $('#logout').modal('show');
 
       $('.ui.positive').on('click', () => {
         logoutUser();

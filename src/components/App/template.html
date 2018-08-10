@@ -1,4 +1,12 @@
 <div id="app">
+    <div id="loader">
+        <div class="ui dimmer">
+            <img :src="'./' + icon" >
+            <div id="progress-bar" class="ui tiny blue progress">
+                <div class="bar"></div>
+            </div>
+        </div>
+    </div>
     <notifications group="alerts" position="bottom left" width="250" />
     <sidebar 
         v-bind:languageFilter="languageFilter"
@@ -21,7 +29,7 @@
         />
         <snippet v-bind:activeSnippet="activeSnippet" />
     </div>
-    <div class="ui mini modal">
+    <div id="logout" class="ui mini modal">
         <div class="header">Logout</div>
         <div class="content">Are you sure you want to logout?</div>
         <div class="actions">
