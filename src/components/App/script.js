@@ -3,6 +3,7 @@ import Snippet from '../Snippet/Snippet.vue';
 import Sidebar from '../Sidebar/Sidebar.vue';
 import Menubar from '../Menubar/Menubar.vue';
 import SnippetList from '../SnippetList/SnippetList.vue';
+import constants from '../../utils/constants.js';
 import {
   defaultAuth,
   getDefaultSnippet
@@ -56,12 +57,17 @@ export default {
     ipcRenderer.on('load-data', (event, data) => {
       this.$store.commit('load', data);
 
+      $('#progress-bar').progress('increment');
+
       this.$store.state.snippets.forEach(s => s.isActive = false);
 
       if (data.auth.token) {
         getGists(data.auth.token).then(gists => {
           this.$store.commit('addGists', gists);
+          $('#progress-bar').progress('increment');          
         });
+      } else {
+        $('#progress-bar').progress('increment');
       }
     });
   },
@@ -70,15 +76,24 @@ export default {
     this.editor = ace.edit('content');
 
     $('#loader .dimmer').dimmer('show');
-    
+
     $('#progress-bar').progress({
-      total: 3
+      total: constants.PROGRESS_COUNT
     });
 
-    $(document).on('click', 'a[href^="http"]', function(event) {
+    // Display the app when loading is finished 
+    window.setInterval(() => {
+      if ($('#progress-bar').progress('is complete')) {
+        clearInterval(this);
+        $('#loader').hide();
+        $('#loader .dimmer').dimmer('hide');
+      }
+    }, 500);
+
+    $(document).on('click', 'a[href^="http"]', event => {
       event.preventDefault();
       shell.openExternal(this.href);
-  });
+    });
   },
 
   methods: {

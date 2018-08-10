@@ -5,5 +5,7 @@ export default {
     hostname: 'github.com',
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET
-  }
+  },
+
+  PROGRESS_COUNT: 2
 };
