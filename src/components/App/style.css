@@ -14,6 +14,10 @@ input:focus {
   border: 1px solid #187FE7;
 }
 
+.ace_editor {
+  font: 12px/normal 'Open Sans', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro' !important;
+}
+
 #app {
   width: 100%;
   height: 100%;
@@ -70,7 +74,7 @@ input:focus {
   transition: all .3s ease-out;
 }
 
-.ui.dimmer {
+#loader .ui.dimmer {
   display: flex;
   align-items: center;
   flex-direction: column;

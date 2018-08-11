@@ -90,7 +90,7 @@ export default {
       }
     }, 500);
 
-    $(document).on('click', 'a[href^="http"]', event => {
+    $(document).on('click', 'a[href^="http"]', function(event) {
       event.preventDefault();
       shell.openExternal(this.href);
     });
