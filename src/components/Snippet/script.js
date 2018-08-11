@@ -40,14 +40,12 @@ export default {
       const id = this.activeSnippet.gistID;
       const token = this.$store.state.auth.token;
       const starred = this.activeSnippet.starred;
-      const otherFiles = this.$store.state.snippets.filter(snippet => {
+      const allGistFiles = this.$store.state.snippets.filter(snippet => {
         return snippet.gistID === id;
       });
 
-      this.activeSnippet.starred = ! starred;
-
-      otherFiles.forEach(file => {
-        file.starred = true;
+      allGistFiles.forEach(file => {
+        file.starred = ! starred;
         this.$store.commit('updateSnippet', file);
       });
 
