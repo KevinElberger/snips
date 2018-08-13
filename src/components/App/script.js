@@ -88,7 +88,7 @@ export default {
         $('#loader').hide();
         $('#loader .dimmer').dimmer('hide');
       }
-    }, 500);
+    }, 1000);
 
     $(document).on('click', 'a[href^="http"]', function(event) {
       event.preventDefault();

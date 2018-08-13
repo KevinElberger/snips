@@ -12,6 +12,13 @@ export default {
     
     editor.focus();
 
+    $('.ui.sidebar').sidebar({
+      dimPage: false,
+      context: $('#snippet-container')
+    });
+
+    $('.ui.sidebar').sidebar('show');
+
     // Dynamically set syntax highlighting based on file name
     title.on('input', function() {
       setEditorMode($(this).val());
@@ -36,6 +43,10 @@ export default {
   },
 
   methods: {
+    closeComments() {
+      $('.ui.sidebar').sidebar('hide');
+    },
+
     toggleGistStar() {
       const id = this.activeSnippet.gistID;
       const token = this.$store.state.auth.token;

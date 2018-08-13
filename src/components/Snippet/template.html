@@ -1,80 +1,112 @@
 <div id="snippet-container">
-    <div id="detail">
-      <div class="row title-row">
-        <div v-if="activeSnippet.isGist" id="gist-stars">
-            <i v-on:click="toggleGistStar" :class="{ outline: !starred }" class="star icon"></i>
-            <div v-if="starred" id="star-count" class="ui label mini">+1</div>
+    <div id="gist-comments" class="ui right overlay wide sidebar">
+      <h3 class="ui dividing header">
+        Comments
+        <div v-on:click="closeComments" class="close-menu">
+            <i class="delete small icon"></i>
         </div>
-        <div id="title-wrapper" :class="{ adjust: !activeSnippet.isGist }" class="ui large icon input transparent">    
-          <input v-if="activeSnippet" v-model="activeSnippet.title" id="title" type="text" placeholder="Untitled Snippet">
-        </div>
-      </div>
-  
-      <div class="gist-stats-row">
-
-      </div>
-
-      <div class="row detail-row">
-        <div id="created-on">
-          <i class="calendar outline icon"></i>
-          <p class="small created-date">
-            Created by <strong class="bold">{{ activeSnippet.owner }}</strong> <br/> <strong>{{ activeSnippet.createdOn }}</strong>
-          </p>
-        </div>
-
-        <div id="gist-privacy" :class="{ disabled: !activeSnippet.isGist }" class="ui inline dropdown">
-            <div v-if="activeSnippet.public" class="text" data-value="Public">
-              <i class="eye icon"></i>
-              Public
-            </div>
-            <div v-else class="text" data-value="Private">
-              <i class="eye slash icon"></i>
-              Private
-            </div>
-            <i class="dropdown icon"></i>
-            <div class="menu">
-              <div class="item" data-value="Private">
-                <i class="eye slash icon"></i>
-                Private                
+      </h3>
+      <div class="ui feed">
+        <div v-for="(comment) in activeSnippet.comments" class="event">
+          <div class="label">
+            <img :src="comment.avatar_url" />
+          </div>
+          <div class="content">
+            <div class="summary">
+              <a class="user" :href="comment.url">
+                {{ comment.login }}
+              </a>
+              commented on 
+              <div class="date">
+                {{ comment.created_at }}
               </div>
-              <div class="item" data-value="Public">
+            </div>
+            <div class="extra text">
+              {{ comment.body }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pusher">
+      <div id="detail">
+        <div class="row title-row">
+          <div v-if="activeSnippet.isGist" id="gist-stars">
+              <i v-on:click="toggleGistStar" :class="{ outline: !starred }" class="star icon"></i>
+              <div v-if="starred" id="star-count" class="ui label mini">+1</div>
+          </div>
+          <div id="title-wrapper" :class="{ adjust: !activeSnippet.isGist }" class="ui large icon input transparent">    
+            <input v-if="activeSnippet" v-model="activeSnippet.title" id="title" type="text" placeholder="Untitled Snippet">
+          </div>
+        </div>
+    
+        <div class="gist-stats-row">
+
+        </div>
+
+        <div class="row detail-row">
+          <div id="created-on">
+            <i class="calendar outline icon"></i>
+            <p class="small created-date">
+              Created by <strong class="bold">{{ activeSnippet.owner }}</strong> <br/> <strong>{{ activeSnippet.createdOn }}</strong>
+            </p>
+          </div>
+
+          <div id="gist-privacy" :class="{ disabled: !activeSnippet.isGist }" class="ui inline dropdown">
+              <div v-if="activeSnippet.public" class="text" data-value="Public">
                 <i class="eye icon"></i>
                 Public
               </div>
-            </div>
-        </div>
-
-        <div id="snippet-labels">
-            <div class="ui multiple dropdown">
-                <input type="hidden" name="filters">
-                <i class="tags icon"></i>
-                <span class="text">Add Label</span>
-                <i class="dropdown icon"></i>                
-                <div class="menu">
-                  <div class="ui icon search input">
-                    <i class="search icon"></i>
-                    <input type="text" placeholder="Search tags...">
-                  </div>
-                  <div class="scrolling menu">
-                      <div v-for="(label) in labels" class="item" :data-value="label.name">
-                        <div class="ui empty circular label" :style="{ background: label.color }"></div>
-                        {{ label.name }}
-                      </div>
-                  </div>
+              <div v-else class="text" data-value="Private">
+                <i class="eye slash icon"></i>
+                Private
+              </div>
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <div class="item" data-value="Private">
+                  <i class="eye slash icon"></i>
+                  Private                
                 </div>
-            </div>
+                <div class="item" data-value="Public">
+                  <i class="eye icon"></i>
+                  Public
+                </div>
+              </div>
           </div>
-      </div>
 
-        <div class="row" id="description-wrapper">
-            <div class="ui form">
-              <div class="field">
-                <label>Description <span class="small">(optional)</span></label>
-                <textarea id="description" v-model="activeSnippet.description" rows="2">{{ activeSnippet.description }}</textarea>
+          <div id="snippet-labels">
+              <div class="ui multiple dropdown">
+                  <input type="hidden" name="filters">
+                  <i class="tags icon"></i>
+                  <span class="text">Add Label</span>
+                  <i class="dropdown icon"></i>                
+                  <div class="menu">
+                    <div class="ui icon search input">
+                      <i class="search icon"></i>
+                      <input type="text" placeholder="Search tags...">
+                    </div>
+                    <div class="scrolling menu">
+                        <div v-for="(label) in labels" class="item" :data-value="label.name">
+                          <div class="ui empty circular label" :style="{ background: label.color }"></div>
+                          {{ label.name }}
+                        </div>
+                    </div>
+                  </div>
               </div>
             </div>
         </div>
-    </div>
-  
-  <div id="content"></div>
+
+          <div class="row" id="description-wrapper">
+              <div class="ui form">
+                <div class="field">
+                  <label>Description <span class="small">(optional)</span></label>
+                  <textarea id="description" v-model="activeSnippet.description" rows="2">{{ activeSnippet.description }}</textarea>
+                </div>
+              </div>
+          </div>
+      </div>
+    
+    <div id="content"></div>
+  </div>
 </div>

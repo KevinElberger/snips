@@ -3,6 +3,7 @@ import isElectron from 'is-electron';
 import { getId } from './utils.js';
 import { store } from '../store.js';
 import mockGists from '../../test/mockGists.js';
+import mockComments from '../../test/mockGistComments.js';
 import { makeRequest, makeAuthRequest } from './utils.js';
 
 export function loginUser(authConfig, code) {
@@ -70,30 +71,34 @@ export function getGists(token) {
       
       checkIfStarred(gist.id, token).then(response => {
 
-        Object.keys(gist.files).map(file => {
-          const snippet = gist.files[file];
-  
-          gists.push({
-            labels: [],
-            id: getId(),    
-            isGist: true,
-            owner: owner,
-            gistID: gist.id,
-            isActive: false,
-            isPinned: false,
-            toDelete: false,
-            starred: response,
-            public: gist.public,
-            createdOn: createdOn,
-            title: snippet.filename,
-            content: snippet.content,
-            filename: snippet.filename,
-            description: gist.description || '',
-            language: snippet.language || 'text'
-          });
-        });
+        getGistComments(gist.id, token).then(comments => {
 
-        setTimeout(resolve, 100, gists);        
+          Object.keys(gist.files).map(file => {
+            const snippet = gist.files[file];
+    
+            gists.push({
+              labels: [],
+              id: getId(),
+              isGist: true,
+              owner: owner,
+              gistID: gist.id,
+              isActive: false,
+              isPinned: false,
+              toDelete: false,
+              comments: comments,
+              starred: response,
+              public: gist.public,
+              createdOn: createdOn,
+              title: snippet.filename,
+              content: snippet.content,
+              filename: snippet.filename,
+              description: gist.description || '',
+              language: snippet.language || 'text'
+            });
+          });
+  
+          setTimeout(resolve, 100, gists);   
+        });     
       });
     });
   });
@@ -150,6 +155,29 @@ export function unstarGist(id, token) {
   const url = 'https://api.github.com/gists/' + id + '/star';
 
   return makeAuthRequest(url, method, token);
+}
+
+export function getGistComments(id, token) {
+  const method = 'GET';
+  const url = 'https://api.github.com/gists/' + id + 'comments';
+
+  return new Promise((resolve, reject) => {
+    const comments = [];
+
+    mockComments.forEach(comment => {
+      comments.push({
+        id: comment.id,
+        body: comment.body,
+        login: comment.user.login,
+        url: comment.user.html_url,
+        created_at: comment.created_at,
+        avatar_url: comment.user.avatar_url
+      })
+    });
+
+    setTimeout(resolve, 100, comments);
+  });
+  // return makeAuthRequest(url, method, token);
 }
 
 // Updates or deletes a file from a Gist

@@ -25,6 +25,10 @@
   margin-left: 34px;
 }
 
+.delete.small.icon {
+  margin-right: 0 !important;
+}
+
 #detail {
   width: 100%;
   display: flex;
@@ -44,6 +48,17 @@
   padding: 6px;
   margin-left: 30px;
   width: calc(100% - 60px);
+}
+
+.event {
+  width: 90% !important;
+  margin: 0 10px !important;
+}
+
+#gist-comments {
+  z-index: 200;
+  /* width: 280px; */
+  background: #ffffff;
 }
 
 .gist-item {
@@ -70,6 +85,11 @@
   box-shadow: none;
   margin-left: auto;
   margin-right: 34px;
+}
+
+.pusher {
+  display: flex;
+  flex-direction: column;
 }
 
 #snippet-container {
