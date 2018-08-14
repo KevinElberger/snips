@@ -17,8 +17,6 @@ export default {
       context: $('#snippet-container')
     });
 
-    $('.ui.sidebar').sidebar('show');
-
     // Dynamically set syntax highlighting based on file name
     title.on('input', function() {
       setEditorMode($(this).val());
@@ -33,6 +31,9 @@ export default {
     labels() {
       return this.$store.state.labels;
     },
+    commentsCount() {
+      return this.activeSnippet.comments ? this.activeSnippet.comments.length : 0;
+    },
     starred() {
       const snippet = this.$store.state.snippets.find(snippet => {
         return snippet.id === this.activeSnippet.id;
@@ -45,6 +46,10 @@ export default {
   methods: {
     closeComments() {
       $('.ui.sidebar').sidebar('hide');
+    },
+
+    toggleComments() {
+      $('.ui.sidebar').sidebar('toggle');
     },
 
     toggleGistStar() {

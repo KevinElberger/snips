@@ -249,6 +249,8 @@ export default {
     displaySnippet(snippet) {
       this.resetActiveSnippet();
 
+      $('.ui.sidebar').sidebar('hide');
+      
       Object.assign(this.activeSnippet, snippet);
 
       this.activeSnippet.isActive = true;

@@ -78,8 +78,10 @@
 }
 
 .label-list {
+  height: 8em;
   display: flex;
   flex-wrap: wrap;
+  overflow-y: scroll;
   justify-content: left;
 }
 
@@ -149,6 +151,11 @@
 .pinned-snippets-wrapper .header {
   padding: 0 !important;
   text-align: left !important;
+}
+
+.pinned-snippets {
+  height: 5em;
+  overflow-y: scroll;
 }
 
 .plus {

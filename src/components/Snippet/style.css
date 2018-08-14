@@ -10,6 +10,18 @@
   color: rgba(0,0,0,.87);
 }
 
+#comments-btn {
+  margin-left: 20px;
+  font-weight: normal;
+  background: #ffffff;
+  font-size: .92857143em;
+  color: rgba(0,0,0,.87);
+}
+
+#comments-btn:hover {
+  background: #eeeeee;
+}
+
 #content {
   width: 100%;
   flex-grow: 1;

@@ -1,7 +1,7 @@
 <div id="snippet-container">
     <div id="gist-comments" class="ui right overlay wide sidebar">
       <h3 class="ui dividing header">
-        Comments
+        {{ commentsCount }} Comments
         <div v-on:click="closeComments" class="close-menu">
             <i class="delete small icon"></i>
         </div>
@@ -40,10 +40,6 @@
             <input v-if="activeSnippet" v-model="activeSnippet.title" id="title" type="text" placeholder="Untitled Snippet">
           </div>
         </div>
-    
-        <div class="gist-stats-row">
-
-        </div>
 
         <div class="row detail-row">
           <div id="created-on">
@@ -51,6 +47,11 @@
             <p class="small created-date">
               Created by <strong class="bold">{{ activeSnippet.owner }}</strong> <br/> <strong>{{ activeSnippet.createdOn }}</strong>
             </p>
+          </div>
+
+          <div v-if="activeSnippet.comments" v-on:click="toggleComments" id="comments-btn" class="ui icon button">
+            <i class="comment icon"></i>
+            Comments          
           </div>
 
           <div id="gist-privacy" :class="{ disabled: !activeSnippet.isGist }" class="ui inline dropdown">
