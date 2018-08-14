@@ -278,6 +278,8 @@ export default {
       this.editor.setValue('');
       $('input.title').val('');
 
+      $('#new-snippet').modal('show');
+
       deleteAppliedLabel(null, true);
       resetPrivacyDropdown();
 

@@ -81,6 +81,7 @@ export function getGists(token) {
               id: getId(),
               isGist: true,
               owner: owner,
+              newGist: false,              
               gistID: gist.id,
               isActive: false,
               isPinned: false,

@@ -172,6 +172,10 @@ textarea {
   color: rgba(0,0,0,.87);
 }
 
+.ui.multiple.dropdown .transition {
+  color: rgba(0,0,0,.87) !important;
+}
+
 .ui.tabular.menu+.attached:not(.top).segment {
   margin-left: 0;
   margin-top: 0;
