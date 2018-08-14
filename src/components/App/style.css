@@ -71,7 +71,6 @@ input:focus {
   position: absolute;
   flex-direction: column;
   width: calc(100% - 30.2rem);
-  transition: all .3s ease-out;
 }
 
 #loader .ui.dimmer {

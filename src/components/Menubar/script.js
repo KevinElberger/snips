@@ -17,10 +17,16 @@ export default {
   methods: {
     expandSnippetView() {
       const rightPanel = $('.right-panel');
+      const titlebarLeft = $('#left');
+      const titlebarMid = $('#middle');
 
       if (! this.expandedView) {
+        titlebarLeft.css({ background: '#fff' });
+        titlebarMid.css({ background: '#fff' });
         rightPanel.css({ left: '0', width: '100%', zIndex: '200'  });
       } else {
+        titlebarLeft.css({ background: '#1b1c1d' });
+        titlebarMid.css({ background: '#f8f8f8' });
         rightPanel.css({ left: '30.2rem', width: 'calc(100% - 30.2rem)' });    
       }
 
