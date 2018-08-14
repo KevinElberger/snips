@@ -78,10 +78,8 @@
 }
 
 .label-list {
-  height: 9.5em;
   display: flex;
   flex-wrap: wrap;
-  overflow-y: scroll;
   justify-content: left;
 }
 
@@ -126,7 +124,17 @@
 }
 
 #new {
+  color: #fff;
   text-align: left;
+  margin-top: 10px;
+  padding: 10px 14px;
+  font-weight: normal;
+  background: #187FE7;
+}
+
+#new a:hover {
+  transition: all .3s !important;
+  border-left: 4px solid #187FE7;
 }
 
 .no-float-icon {
@@ -162,18 +170,6 @@
   background: none !important;
 }
 
-.short {
-  width: 8em;
-}
-
-#sidebar {
-  position: absolute;
-}
-
-.two.fields {
-  margin: .5rem .78571429rem !important;
-}
-
 .random {
   position: relative;
   top: 2px !important;
@@ -188,9 +184,23 @@
   color: #ffffff;
 }
 
+.short {
+  width: 8em;
+}
+
+#sidebar {
+  position: absolute;
+}
+
+.sidebar-wrapper {
+  overflow-x: scroll;
+}
+
+
 .two.fields {
   display: flex;
   justify-content: space-between;
+  margin: .5rem .78571429rem !important;
 }
 
 .ui.button.fluid {

@@ -247,7 +247,7 @@ export default {
      * @param {Object} snippet the snippet to display
      */
     displaySnippet(snippet) {
-      this.resetActiveSnippet();
+      this.resetActiveSnippet(true);
 
       $('.ui.sidebar').sidebar('hide');
       
@@ -274,7 +274,10 @@ export default {
     /**
      * Resets all of the active snippet's values to default values
      */
-    resetActiveSnippet() {
+    resetActiveSnippet(ignoreType) {
+      // Grab selected value from the dropdown button
+      const type = $('#new').dropdown('get value');
+
       this.editor.setValue('');
       $('input.title').val('');
 
@@ -286,7 +289,12 @@ export default {
         this.$store.commit('updateSnippet', snippet);
       });
 
-      this.activeSnippet = getDefaultSnippet();
+      if (ignoreType || type.includes('snippet')) {
+        this.activeSnippet = getDefaultSnippet();
+      } else if (type.includes('gist')) {
+        // TODO: Patch with auth user
+        this.activeSnippet = getDefaultGist('You');
+      }
     },
 
     setLanguageFilter(target) {

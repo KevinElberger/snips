@@ -46,6 +46,9 @@ export default {
     labels() {
       return this.$store.state.labels;
     },
+    authenticated() {
+      return this.$store.state.auth.loggedIn;
+    },
     languages() {
       const languages = {};
       const snippets = this.$store.state.snippets;

@@ -9,6 +9,9 @@ export default {
   mounted() {
     this.initPopups();
     $('#extras').dropdown();
+    $('#new').dropdown({
+      action: 'hide'
+    });
   },
 
   methods: {

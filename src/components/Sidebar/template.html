@@ -9,82 +9,91 @@
       <i class="github icon no-float-icon"></i> Logout
     </a>
   </div>
-  <a v-on:click="$emit('clicked-new')" id="new" class="item">
-    <i class="file icon no-float-icon"></i> New
-  </a>
-
-  <div v-if="pinnedSnippets.length > 0" class="item pinned-snippets-wrapper">
-      <div class="header">Pinned Snippets</div>
-      <div class="pinned-snippets">
-        <div class="menu">
-          <div v-for="(snippet) in pinnedSnippets">
-            <a v-on:click="$emit('toggleSnippet', snippet)" class="item pinned-item">
-              {{ snippet.title }}
-            </a>
-          </div>
-        </div>
-      </div>
-  </div>
-
-  <div class="item labels-wrapper">
-    <div class="header">
-      Labels
-      <div id="add-label" class="ui floating labeled icon dropdown button">
-        <i class="plus icon"></i>
-        <div class="menu label-menu">
-            <div class="close-label-menu">
-              <i class="delete icon"></i>
-            </div>        
-            <div class="label-header header">
-              Label Name
-            </div>
-            <span id="label-warn" class="small hidden">Name already taken</span>
-            <div class="ui icon input label-input">
-              <input type="text" name="label" placeholder="New label name...">
-            </div>
-            <div class="label-header header">
-                Color
-            </div>
-            <span id="color-warn" class="small hidden">Not a valid color</span>            
-            <div class="two fields">
-              <div v-on:click="setColor" class="ui button random-button">
-                <i class="icon random"></i>
-              </div>
-              <div class="ui icon input">
-                <input v-on:keyup="validateColor" class="short color" type="text" name="color" v-model="color">
-              </div>
-            </div>
-          <div class="header">
-            <div v-on:click="validateLabel" id="create-label" class="ui button fluid">Create Label</div>                
-          </div>
-        </div>
-      </div>
+  <div class="ui hidden divider"></div>
+  <div id="new" class="ui floating top right pointing dropdown button">
+    <div class="text">
+      <i class="pencil icon"></i>
+      New Snippet
     </div>
-    <div class="menu label-list">
-      <div v-for="(label) in labels" class="label-wrapper">
-        <a v-on:click="setLabelFilter" class="ui label" :style="{ background: label.color }">
-          {{ label.name }}
-          <i v-on:click="deleteLabel" class="delete icon"></i>
-        </a>
-      </div>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <a class="item" :class="{ disabled: !authenticated }" v-on:click="$emit('clicked-new')"><i class="github icon"></i>Gist</a>
+      <a class="item" v-on:click="$emit('clicked-new')"><i class="laptop icon"></i>Local Snippet</a>
     </div>
   </div>
+
+    <div v-if="pinnedSnippets.length > 0" class="item pinned-snippets-wrapper">
+        <div class="header">Pinned Snippets</div>
+        <div class="pinned-snippets">
+          <div class="menu">
+            <div v-for="(snippet) in pinnedSnippets">
+              <a v-on:click="$emit('toggleSnippet', snippet)" class="item pinned-item">
+                {{ snippet.title }}
+              </a>
+            </div>
+          </div>
+        </div>
+    </div>
   
-  <div class="item languages-wrapper">
-    <div class="header">Languages</div>
-    <div class="item languages">
-      <div class="menu">
-        <a :class="{ active: activeEl === 'All' }" class="item language" @click="setLanguage('All')">
-          All
-          <span class="count">{{ snippetCount }}</span>
-        </a>
+    <div class="item labels-wrapper">
+      <div class="header">
+        Labels
+        <div id="add-label" class="ui floating labeled icon dropdown button">
+          <i class="plus icon"></i>
+          <div class="menu label-menu">
+              <div class="close-label-menu">
+                <i class="delete icon"></i>
+              </div>        
+              <div class="label-header header">
+                Label Name
+              </div>
+              <span id="label-warn" class="small hidden">Name already taken</span>
+              <div class="ui icon input label-input">
+                <input type="text" name="label" placeholder="New label name...">
+              </div>
+              <div class="label-header header">
+                  Color
+              </div>
+              <span id="color-warn" class="small hidden">Not a valid color</span>            
+              <div class="two fields">
+                <div v-on:click="setColor" class="ui button random-button">
+                  <i class="icon random"></i>
+                </div>
+                <div class="ui icon input">
+                  <input v-on:keyup="validateColor" class="short color" type="text" name="color" v-model="color">
+                </div>
+              </div>
+            <div class="header">
+              <div v-on:click="validateLabel" id="create-label" class="ui button fluid">Create Label</div>                
+            </div>
+          </div>
+        </div>
       </div>
-      <div v-for="(value, key) in languages" class="menu language-list">
-        <a :class="{ active: activeEl === key }" class="item language" @click="setLanguage(key)">
-          {{ key }}
-          <span class="count">{{ value }}</span>
-        </a>
+      <div class="menu label-list">
+        <div v-for="(label) in labels" class="label-wrapper">
+          <a v-on:click="setLabelFilter" class="ui label" :style="{ background: label.color }">
+            {{ label.name }}
+            <i v-on:click="deleteLabel" class="delete icon"></i>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
+    
+    <div class="item languages-wrapper">
+      <div class="header">Languages</div>
+      <div class="item languages">
+        <div class="menu">
+          <a :class="{ active: activeEl === 'All' }" class="item language" @click="setLanguage('All')">
+            All
+            <span class="count">{{ snippetCount }}</span>
+          </a>
+        </div>
+        <div v-for="(value, key) in languages" class="menu language-list">
+          <a :class="{ active: activeEl === key }" class="item language" @click="setLanguage(key)">
+            {{ key }}
+            <span class="count">{{ value }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
 </div>
