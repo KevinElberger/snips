@@ -6,6 +6,14 @@ import mockGists from '../../test/mockGists.js';
 import mockComments from '../../test/mockGistComments.js';
 import { makeRequest, makeAuthRequest } from './utils.js';
 
+/**
+ * Authenticates a GitHub User with an access token
+ * and subsequently gets the User account and
+ * Gists of the authenticated user
+ * 
+ * @param {object} authConfig 
+ * @param {string} code 
+ */
 export function loginUser(authConfig, code) {
   const { hostname } = authConfig;
   const method = 'POST';
@@ -28,6 +36,11 @@ export function loginUser(authConfig, code) {
     });
 }
 
+/**
+ * Obtains the GitHub User who is currently authenticated
+ * 
+ * @param {string} token the auth token 
+ */
 export function getUser(token) {
   const method = 'GET';
   const url = 'https://api.github.com/user';
@@ -98,6 +111,8 @@ export function getGists(token) {
             });
           });
   
+          console.log(gists);
+
           setTimeout(resolve, 100, gists);   
         });     
       });
@@ -124,6 +139,14 @@ export function getGists(token) {
   //   });
 }
 
+/**
+ * Checks whether or not a Gist has a Star
+ * by the authenticated user
+ * 
+ * @param {string} id the gist ID 
+ * @param {string} token the auth token
+ * @returns {boolean}
+ */
 export function checkIfStarred(id, token) {
   const method = 'GET';
   const url = 'https://api.github.com/gists/' + id + '/star';
@@ -144,6 +167,12 @@ export function checkIfStarred(id, token) {
   });
 }
 
+/**
+ * Adds a Star to a Gist with the given ID
+ * 
+ * @param {string} id the Gist ID 
+ * @param {string} token the auth token
+ */
 export function starGist(id, token) {
   const method = 'PUT';
   const url = 'https://api.github.com/gists/' + id + '/star';
@@ -151,6 +180,12 @@ export function starGist(id, token) {
   return makeAuthRequest(url, method, token);
 }
 
+/**
+ * Removes a Star from a Gist with the given ID
+ * 
+ * @param {string} id the Gist ID 
+ * @param {string} token the auth token
+ */
 export function unstarGist(id, token) {
   const method = 'DELETE';
   const url = 'https://api.github.com/gists/' + id + '/star';
@@ -158,6 +193,12 @@ export function unstarGist(id, token) {
   return makeAuthRequest(url, method, token);
 }
 
+/**
+ * Gets all comments from a Gist with the given ID
+ * 
+ * @param {string} id the Gist ID
+ * @param {string} token the auth token
+ */
 export function getGistComments(id, token) {
   const method = 'GET';
   const url = 'https://api.github.com/gists/' + id + 'comments';
@@ -181,7 +222,15 @@ export function getGistComments(id, token) {
   // return makeAuthRequest(url, method, token);
 }
 
-// Updates or deletes a file from a Gist
+/**
+ * Updates a Gist's content, description, privacy
+ * status, or removes a file, depending on
+ * the provided content.
+ * 
+ * @param {string} id the Gist ID to patch
+ * @param {string} token the auth token
+ * @param {object} gists  the Gist files, description, and privacy status
+ */
 export function patchGist(id, token, gists) {
   const method = 'PATCH';
   const url = 'https://api.github.com/gists/' + id;
@@ -202,6 +251,25 @@ export function patchGist(id, token, gists) {
   return makeAuthRequest(url, method, token, data);
 }
 
-export function createGist(token, gist) {
+/**
+ * Creates a Gist with the provided data
+ * 
+ * @param {string} token the auth token
+ * @param {object} gistData the Gist data to post
+ */
+export function createGist(token, gistData) {
+  const method = 'POST';
+  const url = 'https://api.github.com/gists';
+  const { filename } = gistData;
+  const gist = Object.assign({}, {
+    description: gistData.description,
+    public: gistData.public,
+    files: {
+      filename: {
+        content: gistData.content
+      }
+    }
+  });
 
+  return makeAuthRequest(url, method, token);
 }

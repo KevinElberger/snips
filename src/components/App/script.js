@@ -252,7 +252,7 @@ export default {
      * Displays a new snippet after resetting 
      * the current active snippet
      * 
-     * @param {Object} snippet the snippet to display
+     * @param {object} snippet the snippet to display
      */
     displaySnippet(snippet) {
       this.resetActiveSnippet();
@@ -293,8 +293,6 @@ export default {
         snippet.isActive = false;
         this.$store.commit('updateSnippet', snippet);
       });
-
-      console.log(this.$store.state.auth);
 
       if (!snippetType || snippetType.includes('snippet')) {
         this.activeSnippet = getDefaultSnippet();
