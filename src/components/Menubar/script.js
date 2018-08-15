@@ -9,9 +9,6 @@ export default {
   mounted() {
     this.initPopups();
     $('#extras').dropdown();
-    $('#new').dropdown({
-      action: 'hide'
-    });
   },
 
   methods: {
@@ -22,11 +19,11 @@ export default {
 
       if (! this.expandedView) {
         titlebarLeft.css({ background: '#fff' });
-        titlebarMid.css({ background: '#fff' });
+        titlebarMid.css({ background: '#fff', 'border-right': '1px #fff' });
         rightPanel.css({ left: '0', width: '100%', zIndex: '200'  });
       } else {
         titlebarLeft.css({ background: '#1b1c1d' });
-        titlebarMid.css({ background: '#f8f8f8' });
+        titlebarMid.css({ background: '#f8f8f8', 'border-right': '1px solid #eee' });
         rightPanel.css({ left: '30.2rem', width: 'calc(100% - 30.2rem)' });    
       }
 

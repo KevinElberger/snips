@@ -36,7 +36,7 @@ export function getUser(token) {
     .then(function(response) {
       const data = {
         token: token,
-        name: response.data.name,
+        name: response.data.login,
         avatar: response.data.avatar_url
       };
 

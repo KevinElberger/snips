@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     auth: {
+      name: '',
       avatar: '',
       token: null,
       loggedIn: false
@@ -41,6 +42,7 @@ export const store = new Vuex.Store({
 
     login(state, payload) {
       state.auth.loggedIn = true;
+      state.auth.name = payload.name;      
       state.auth.token = payload.token;
       state.auth.avatar = payload.avatar;
     },

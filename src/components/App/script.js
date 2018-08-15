@@ -6,6 +6,7 @@ import SnippetList from '../SnippetList/SnippetList.vue';
 import constants from '../../utils/constants.js';
 import {
   defaultAuth,
+  getDefaultGist,
   getDefaultSnippet
  } from '../../utils/defaults.js';
 import {
@@ -74,6 +75,13 @@ export default {
 
   mounted() {
     this.editor = ace.edit('content');
+
+    $('#new').dropdown({
+      action: 'hide',
+      onChange: (value, text, selectedItem) => {
+        this.resetActiveSnippet(value);
+      }
+    });
 
     $('#loader .dimmer').dimmer('show');
 
@@ -247,7 +255,7 @@ export default {
      * @param {Object} snippet the snippet to display
      */
     displaySnippet(snippet) {
-      this.resetActiveSnippet(true);
+      this.resetActiveSnippet();
 
       $('.ui.sidebar').sidebar('hide');
       
@@ -274,10 +282,7 @@ export default {
     /**
      * Resets all of the active snippet's values to default values
      */
-    resetActiveSnippet(ignoreType) {
-      // Grab selected value from the dropdown button
-      const type = $('#new').dropdown('get value');
-
+    resetActiveSnippet(snippetType) {
       this.editor.setValue('');
       $('input.title').val('');
 
@@ -289,11 +294,12 @@ export default {
         this.$store.commit('updateSnippet', snippet);
       });
 
-      if (ignoreType || type.includes('snippet')) {
+      console.log(this.$store.state.auth);
+
+      if (!snippetType || snippetType.includes('snippet')) {
         this.activeSnippet = getDefaultSnippet();
-      } else if (type.includes('gist')) {
-        // TODO: Patch with auth user
-        this.activeSnippet = getDefaultGist('You');
+      } else if (snippetType.includes('gist')) {
+        this.activeSnippet = getDefaultGist(this.$store.state.auth.name);
       }
     },
 
