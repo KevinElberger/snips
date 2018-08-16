@@ -15,7 +15,7 @@ import {
   authenticateGithub,
   resetPrivacyDropdown
 } from '../../utils/utils.js';
-import { getGists, patchGist } from '../../utils/githubApi.js';
+import { getGists, patchGist, createGist } from '../../utils/githubApi.js';
 import isElectron from 'is-electron';
 
 import {
@@ -187,16 +187,19 @@ export default {
      */
     save() {
       const { id } = this.activeSnippet;
-      const isGist = this.activeSnippet.isGist;      
+      const { isGist } = this.activeSnippet;
+      const { newGist } = this.activeSnippet;    
       const token = this.$store.state.auth.token;      
       const hasBeenSaved = this.$store.getters.getSnippet(id);
 
       this.updateValues();
 
-      if (isGist) {
+      if (isGist && !newGist) {
         patchGist(this.activeSnippet.gistID, token, [
           this.activeSnippet
         ]);
+      } else if (isGist) {
+        createGist(token, this.activeSnippet);
       }
 
       if (hasBeenSaved) {
@@ -225,7 +228,7 @@ export default {
     updateValues() {
       const content = this.editor.getValue();
       const isGist = this.activeSnippet.isGist;
-      let currentTitle = this.activeSnippet.title;
+      const currentTitle = this.activeSnippet.title;
       const isPublic = $('#gist-privacy').dropdown('get value') === 'Public';
 
       this.activeSnippet.language = getLanguageByFile(currentTitle);

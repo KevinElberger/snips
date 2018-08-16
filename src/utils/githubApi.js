@@ -110,8 +110,6 @@ export function getGists(token) {
               language: snippet.language || 'text'
             });
           });
-  
-          console.log(gists);
 
           setTimeout(resolve, 100, gists);   
         });     
@@ -260,16 +258,16 @@ export function patchGist(id, token, gists) {
 export function createGist(token, gistData) {
   const method = 'POST';
   const url = 'https://api.github.com/gists';
-  const { filename } = gistData;
   const gist = Object.assign({}, {
-    description: gistData.description,
+    files: {},
     public: gistData.public,
-    files: {
-      filename: {
-        content: gistData.content
-      }
-    }
+    description: gistData.description
   });
 
-  return makeAuthRequest(url, method, token);
+  gist.files[gistData.filename] = gistData.content;
+
+  return makeAuthRequest(url, method, token)
+    .then(response => {
+      // Format Gist here
+    });
 }
