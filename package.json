@@ -16,7 +16,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^6.0.0",
-    "electron": "^2.0.4",
+    "electron": "^2.0.8",
     "electron-store": "^2.0.0",
     "electron-titlebar": "0.0.3",
     "is-electron": "^2.1.0",
